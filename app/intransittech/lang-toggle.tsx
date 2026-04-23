@@ -38,7 +38,7 @@ function Option({
       href={href}
       scroll={false}
       aria-current={active ? "true" : undefined}
-      className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md transition ${
+      className={`flex items-center gap-1.5 px-2 sm:px-2.5 py-1 rounded-md transition ${
         active
           ? "bg-primary text-primary-foreground shadow-[0_0_0_1px_var(--color-primary)]"
           : "text-muted hover:text-foreground"
@@ -51,7 +51,7 @@ function Option({
       >
         {code}
       </span>
-      <span className="text-[11px]">{name}</span>
+      <span className="hidden sm:inline text-[11px]">{name}</span>
     </Link>
   );
 }
