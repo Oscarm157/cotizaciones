@@ -320,7 +320,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
                   </div>
                 </div>
                 <div className="text-right shrink-0 tabular-nums">
-                  <div className="text-[12px] text-muted/70 line-through">$2,500 MXN</div>
+                  <div className="text-[12px] text-muted/70 line-through">$140 USD</div>
                   <div className="text-[10px] uppercase tracking-[0.22em] text-accent font-semibold">
                     {t.labels.noCharge}
                   </div>
