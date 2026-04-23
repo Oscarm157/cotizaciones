@@ -1,0 +1,304 @@
+@import "tailwindcss";
+
+:root {
+  /* Inmobiq light palette */
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --primary: #1e293b;
+  --primary-foreground: #ffffff;
+  --accent: #3b82f6;
+  --accent-light: #60a5fa;
+  --muted: #64748b;
+  --muted-light: #94a3b8;
+  --card: #ffffff;
+  --card-border: #e2e8f0;
+  --surface-muted: #f1f5f9;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --violet: #7c3aed;
+  --concrete: #94a3b8;
+}
+
+[data-theme="dark"] {
+  /* Inmobiq dark palette */
+  --background: #0a0a0a;
+  --foreground: #e0e0e0;
+  --primary: #3b82f6;
+  --primary-foreground: #ffffff;
+  --accent: #60a5fa;
+  --accent-light: #93c5fd;
+  --muted: #94a3b8;
+  --muted-light: #64748b;
+  --card: #1e1e2e;
+  --card-border: #2a2a3e;
+  --surface-muted: #16161f;
+  --success: #34d399;
+  --warning: #fbbf24;
+  --danger: #f87171;
+  --violet: #a78bfa;
+  --concrete: #64748b;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-light: var(--accent-light);
+  --color-muted: var(--muted);
+  --color-muted-light: var(--muted-light);
+  --color-card: var(--card);
+  --color-card-border: var(--card-border);
+  --color-surface-muted: var(--surface-muted);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-violet: var(--violet);
+  --color-concrete: var(--concrete);
+
+  --font-sans: "Plus Jakarta Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+html, body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Body / paragraph / data text: sans-serif Plus Jakarta.
+   NOTE: NO span here — span must inherit from parent so headlines keep Playfair when using wrapper spans */
+body, p, div, li, td, th, a, button, input, textarea, select, label, small {
+  font-family: var(--font-sans);
+}
+
+/* Headlines: serif display (Playfair) */
+h1, h2 {
+  font-family: var(--font-display);
+}
+
+/* Force Playfair on italic inside headlines (higher specificity than em, i rule) */
+h1 em, h2 em, h1 i, h2 i, h1 span, h2 span {
+  font-family: var(--font-display);
+}
+
+/* em/i inherit font-family from parent (after specific rules above) */
+em, i {
+  font-style: italic;
+  font-family: inherit;
+}
+
+/* Dark slide container — applies dark tokens to child sections */
+.slide-dark {
+  --background: #0a0a0a;
+  --foreground: #e0e0e0;
+  --primary: #3b82f6;
+  --primary-foreground: #ffffff;
+  --accent: #60a5fa;
+  --accent-light: #93c5fd;
+  --muted: #94a3b8;
+  --muted-light: #64748b;
+  --card: #1e1e2e;
+  --card-border: #2a2a3e;
+  --surface-muted: #16161f;
+  --concrete: #64748b;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.slide-light {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --primary: #1e293b;
+  --primary-foreground: #ffffff;
+  --accent: #3b82f6;
+  --accent-light: #60a5fa;
+  --muted: #64748b;
+  --muted-light: #94a3b8;
+  --card: #ffffff;
+  --card-border: #e2e8f0;
+  --surface-muted: #f1f5f9;
+  --concrete: #94a3b8;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+/* Slide entrance animations */
+.slide-enter { animation: slideEnter 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+@keyframes slideEnter {
+  from { opacity: 0; transform: scale(0.97) translateY(8px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Staggered children */
+.stagger-in > * { opacity: 0; animation: staggerChild 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.stagger-in > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger-in > *:nth-child(2) { animation-delay: 0.18s; }
+.stagger-in > *:nth-child(3) { animation-delay: 0.26s; }
+.stagger-in > *:nth-child(4) { animation-delay: 0.34s; }
+.stagger-in > *:nth-child(5) { animation-delay: 0.42s; }
+.stagger-in > *:nth-child(6) { animation-delay: 0.5s; }
+.stagger-in > *:nth-child(7) { animation-delay: 0.58s; }
+.stagger-in > *:nth-child(8) { animation-delay: 0.66s; }
+.stagger-in > *:nth-child(9) { animation-delay: 0.74s; }
+.stagger-in > *:nth-child(10) { animation-delay: 0.82s; }
+.stagger-in > *:nth-child(11) { animation-delay: 0.9s; }
+.stagger-in > *:nth-child(12) { animation-delay: 0.98s; }
+@keyframes staggerChild {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Counter pop */
+.animate-number {
+  animation: countPop 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+  opacity: 0;
+  transform: scale(0.8);
+}
+@keyframes countPop {
+  from { opacity: 0; transform: scale(0.8) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Bar grow */
+.bar-grow { animation: barGrow 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; transform-origin: bottom; }
+@keyframes barGrow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+
+/* Blue glow — signature Inmobiq accent */
+.glow-accent {
+  box-shadow: 0 0 60px rgba(59, 130, 246, 0.2), 0 0 120px rgba(59, 130, 246, 0.08);
+}
+.glow-accent-subtle {
+  box-shadow: 0 0 40px rgba(59, 130, 246, 0.12);
+}
+
+/* Gradient text — slate to blue */
+.text-gradient-accent {
+  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #1e40af 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.text-gradient-slate {
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Hero fades with staggered delays */
+.hero-fade-in { animation: heroFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards; opacity: 0; }
+.hero-fade-in-delayed { animation: heroFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards; opacity: 0; }
+.hero-fade-in-delayed-2 { animation: heroFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.0s forwards; opacity: 0; }
+.hero-fade-in-delayed-3 { animation: heroFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.4s forwards; opacity: 0; }
+@keyframes heroFadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Scale pop for big numbers */
+.scale-pop {
+  animation: scalePop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s forwards;
+  opacity: 0;
+  transform: scale(0.5);
+}
+@keyframes scalePop {
+  from { opacity: 0; transform: scale(0.5); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Pulse dot */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.5); }
+}
+.pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+
+/* Bar width animation */
+.animate-bar-width {
+  animation: barWidth 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+  width: 0;
+}
+@keyframes barWidth { to { width: var(--target-width); } }
+
+/* Grid bg pattern — dark slides */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Radial spotlight for dark hero */
+.spotlight-accent {
+  background: radial-gradient(ellipse at center, rgba(59,130,246,0.15) 0%, transparent 60%);
+}
+
+/* Hide scrollbar */
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+
+/* Selection */
+::selection { background: rgba(59, 130, 246, 0.3); color: #0f172a; }
+.slide-dark ::selection { color: #e0e0e0; }
+
+/* Material symbols: render inline nicely */
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+}
+
+/* HUD scan line — 3s sweep, 3s pause, 20 iterations */
+@keyframes hudScan {
+  0%   { top: -32px; opacity: 0; }
+  4%   { opacity: 1; }
+  46%  { top: calc(100% + 4px); opacity: 1; }
+  50%  { top: calc(100% + 4px); opacity: 0; }
+  51%  { top: -32px; opacity: 0; }
+  100% { top: -32px; opacity: 0; }
+}
+.hud-scan-line {
+  animation: hudScan 6s linear 20;
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 32px;
+  pointer-events: none;
+  z-index: 30;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(59, 130, 246, 0.25) 40%,
+    rgba(96, 165, 250, 0.5) 50%,
+    rgba(59, 130, 246, 0.25) 60%,
+    transparent 100%
+  );
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .slide-enter, .stagger-in > *, .animate-number, .bar-grow, .hero-fade-in,
+  .hero-fade-in-delayed, .hero-fade-in-delayed-2, .hero-fade-in-delayed-3,
+  .scale-pop, .animate-bar-width {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    width: var(--target-width, auto);
+  }
+}
