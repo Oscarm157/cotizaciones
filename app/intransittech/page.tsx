@@ -392,22 +392,22 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
           </p>
         </section>
 
-        <footer className="mt-8 pt-5 border-t border-card-border flex items-end justify-between gap-6">
-          <div>
+        <footer className="mt-8 pt-5 border-t border-card-border flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 print:flex-row print:items-end print:justify-between">
+          <div className="min-w-0">
             <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-muted">
               {t.labels.acceptance}
             </div>
-            <div className="mt-8 w-60 border-t border-primary/60" />
+            <div className="mt-8 w-full max-w-[240px] sm:w-60 border-t border-primary/60" />
             <div className="mt-1 text-[11.5px] text-muted">
               {t.labels.signatureOf(t.client.short)}
             </div>
           </div>
-          <div className="text-right">
+          <div className="sm:text-right print:text-right min-w-0">
             <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-muted">
               {t.provider.name}
             </div>
             <div className="mt-0.5 text-[13px] text-primary font-semibold">{t.provider.lead}</div>
-            <div className="text-[11.5px] text-muted">{t.provider.email}</div>
+            <div className="text-[11.5px] text-muted break-all sm:break-normal">{t.provider.email}</div>
           </div>
         </footer>
 
@@ -478,16 +478,16 @@ function PhaseBar({
   phases: readonly { num: string; name: string }[];
 }) {
   return (
-    <div className="flex items-center gap-3 w-full">
+    <div className="flex items-center gap-2 sm:gap-3 w-full print:gap-3">
       {phases.map((p, i) => {
         const idx = (i + 1) as 1 | 2 | 3 | 4;
         const done = idx < active;
         const current = idx === active;
         return (
           <Fragment key={p.num}>
-            <div className="flex items-center gap-2 shrink-0">
+            <div className="flex items-center gap-2 shrink-0 min-w-0">
               <div
-                className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-mono font-semibold tabular-nums ${
+                className={`w-6 h-6 shrink-0 rounded-full flex items-center justify-center text-[10px] font-mono font-semibold tabular-nums ${
                   current
                     ? "bg-accent text-white"
                     : done
@@ -498,16 +498,16 @@ function PhaseBar({
                 {p.num}
               </div>
               <span
-                className={`text-[10.5px] uppercase tracking-[0.18em] font-semibold whitespace-nowrap ${
+                className={`text-[10.5px] uppercase tracking-[0.18em] font-semibold truncate sm:whitespace-nowrap sm:inline print:inline ${
                   current ? "text-primary" : done ? "text-accent" : "text-muted"
-                }`}
+                } ${current ? "inline" : "hidden"}`}
               >
                 {p.name}
               </span>
             </div>
             {i < phases.length - 1 && (
               <div
-                className={`h-px flex-1 min-w-[10px] ${
+                className={`h-px flex-1 min-w-[8px] sm:min-w-[10px] ${
                   done ? "bg-accent/40" : "bg-card-border"
                 }`}
               />
