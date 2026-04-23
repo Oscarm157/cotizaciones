@@ -1,6 +1,6 @@
 export type Lang = "es" | "en";
 
-export const FOLIO = "384";
+export const FOLIO = "WB-384";
 export const ISSUED = "2026-04-23";
 export const VALID = "2026-05-15";
 
@@ -316,8 +316,6 @@ export const CONTENT = {
     },
     langToggle: {
       ariaLabel: "Cambiar idioma",
-      es: "ES",
-      en: "EN",
     },
   },
   en: {
@@ -625,8 +623,6 @@ export const CONTENT = {
     },
     langToggle: {
       ariaLabel: "Change language",
-      es: "ES",
-      en: "EN",
     },
   },
 } as const;

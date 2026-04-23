@@ -38,7 +38,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
             {t.labels.toolbarLabel(FOLIO, t.client.short)}
           </div>
           <div className="flex items-center gap-2 shrink-0">
-            <LangToggle current={lang} labels={t.langToggle} />
+            <LangToggle current={lang} ariaLabel={t.langToggle.ariaLabel} />
             <PrintButton label={t.labels.printPdf} />
           </div>
         </div>
