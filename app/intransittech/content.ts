@@ -326,18 +326,18 @@ export const CONTENT = {
       tagline: "Digital strategy and web development.",
       lead: "Oscar Amayoral",
       email: "oscar.amayoral@gmail.com",
-      roleLabel: "Lead",
+      roleLabel: "Project lead",
     },
     client: {
       name: "Intransit Technologies Corp",
       short: "Intransit Tech",
-      descriptor: "Electronic and industrial component distribution",
+      descriptor: "Distributor of electronic and industrial components",
     },
     labels: {
       quote: "Quote",
       quoteNumber: "No.",
       issued: "Issued",
-      validUntil: "Valid until",
+      validUntil: "Valid through",
       from: "From",
       preparedFor: "Prepared for",
       printPdf: "Print / PDF",
@@ -345,140 +345,140 @@ export const CONTENT = {
       toolbarLabel: (folio: string, client: string) =>
         `Quote ${folio} · ${client}`,
       included: "Included",
-      complimentaryBadge: "Complimentary",
+      complimentaryBadge: "Included",
       noCharge: "No charge",
       acceptance: "Acceptance",
-      signatureOf: (name: string) => `Signature of ${name}`,
+      signatureOf: (name: string) => `Signed by ${name}`,
     },
     phases: [
       { num: "01", name: "Proposal" },
-      { num: "02", name: "Transformation" },
+      { num: "02", name: "The site" },
       { num: "03", name: "Content" },
       { num: "04", name: "Investment" },
     ],
     intro: {
-      eyebrow: "Proposal · Website + AI Agent + Bilingual Version",
-      titleLead: "Professional",
+      eyebrow: "Proposal · Website + AI agent + Bilingual version",
+      titleLead: "A professional",
       titleEmphasis: "website",
       titleSuffix: "for",
       paragraph:
-        "Proposal to build a new website that replaces the current one, together with an AI-powered sales agent that handles inquiries 24 hours a day and a bilingual version of the site in Spanish and English.",
+        "This proposal covers a new website to replace the current one, an AI sales agent that handles inquiries around the clock, and a bilingual Spanish–English version of the site.",
     },
     before: {
       heading: "Today",
       items: [
-        "Visitors leave the site without a clear understanding of the services offered.",
-        "Every quote starts from scratch over the phone or by email.",
-        "Information is scattered across email, phone, and the current site.",
-        "There are no metrics to show which products or services are most frequently requested.",
+        "Visitors leave the site without a clear picture of what you offer.",
+        "Every quote has to be built from scratch by phone or email.",
+        "Information is split across email, phone, and the current site.",
+        "There's no data showing which products or services get the most interest.",
       ],
     },
     after: {
       heading: "With the new website",
       items: [
-        "Catalog and services presented clearly from the start.",
-        "Structured requests delivered straight to the sales inbox.",
-        "All information unified in a single place.",
-        "Monthly report on the most requested products and services.",
+        "Catalog and services laid out clearly from the first screen.",
+        "Structured requests that land directly in the sales inbox.",
+        "Everything in one place, easy to point clients to.",
+        "A monthly report on the most-requested products and services.",
       ],
     },
     benefits: {
-      title: "How it simplifies your day to day",
+      title: "What this changes for your team",
       meta: "4 benefits",
       items: [
         {
           icon: "schedule",
-          title: "Less time explaining the basics",
+          title: "Less time spent explaining the basics",
           detail:
-            "The website presents services and categories clearly. Prospects arrive at the call with context, so your team can focus on closing the sale.",
+            "Services and categories are laid out clearly, so prospects arrive to the call with context and your team can focus on closing.",
         },
         {
           icon: "mark_email_read",
-          title: "Structured quote requests",
+          title: "Complete, structured quote requests",
           detail:
-            "Forms capture part number, quantity, industry, and contact details. Every email reaches the sales team complete.",
+            "Forms capture part number, quantity, industry, and contact details — so every lead reaches sales with everything they need.",
         },
         {
           icon: "phone_in_talk",
-          title: "Phone always visible and active",
+          title: "Phone number always one tap away",
           detail:
-            "The number stays fixed in the header. On mobile, a single tap starts the call without the need to copy the number.",
+            "The number stays pinned in the header. On mobile, a single tap starts the call — no copying needed.",
         },
         {
           icon: "insights",
-          title: "Accurate insight into what clients are searching for",
+          title: "A clear view of what clients are looking for",
           detail:
-            "Each month you receive a report of the most requested categories and services. Information that supports well-founded decisions.",
+            "Each month you'll see which categories and services get the most interest — real data to back your decisions.",
         },
       ],
     },
     features: {
-      title: "What the website includes",
+      title: "What's included in the site",
       meta: "7 features",
       items: [
         {
           icon: "design_services",
-          title: "Professional, modern design",
+          title: "Modern, professional design",
           detail:
-            "Optimized for desktop and mobile devices. Conveys the credibility of a global distributor.",
+            "Works cleanly across desktop and mobile. Reflects the credibility of a global distributor.",
         },
         {
           icon: "search",
-          title: "Search connected to the quote form",
+          title: "Search linked to the quote form",
           detail:
-            "The visitor types what they need and the quote form opens with the text pre-filled, ready to send to the sales team.",
+            "The visitor types what they need and the quote form opens with the text already filled in, ready to send to sales.",
         },
         {
           icon: "view_list",
-          title: "Services presented clearly",
+          title: "Services, clearly presented",
           detail:
-            "A dedicated section for each service (hard-to-find components, obsolete parts, inspection, repair) with its explanation and a quote button.",
+            "A dedicated section for each service — hard-to-find components, obsolete parts, inspection, repair — each with a short explanation and a quote button.",
         },
         {
           icon: "description",
           title: "Quote request form",
           detail:
-            "Data arrives structured for the sales team, enabling a fast response.",
+            "Structured data reaches the sales team, making fast replies easier.",
         },
         {
           icon: "inventory_2",
           title: "Inventory intake form",
           detail:
-            "A dedicated section for suppliers who want to offer excess inventory to Intransit Tech.",
+            "A dedicated section for suppliers looking to offer excess inventory to Intransit Tech.",
         },
         {
           icon: "call",
-          title: "Phone and email visible at all times",
+          title: "Phone and email always visible",
           detail:
-            "Phone (949) 481-7935 stays fixed in the site header. The business depends on handling inquiries without delay.",
+            "The number (949) 481-7935 stays pinned in the site header. Your business depends on answering inquiries without delay.",
         },
         {
           icon: "monitoring",
           title: "Visitor tracking from day one",
           detail:
-            "Lets you see how many visitors the site receives, which channels they come from, and what content they view.",
+            "See how many visitors the site gets, where they come from, and what they look at.",
         },
       ],
     },
     pages: {
-      title: "Website pages",
+      title: "Pages on the site",
       meta: "7 sections",
       items: [
         { name: "Home", detail: "Search, value proposition, and featured brands." },
-        { name: "About", detail: "Company story, experience, and differentiators." },
+        { name: "About", detail: "Company story, experience, and what sets you apart." },
         {
           name: "Services",
           detail:
-            "All specialized services grouped into sections within a single page.",
+            "All specialized services, grouped by section on a single page.",
         },
         { name: "Products", detail: "Base catalog organized by category." },
         {
           name: "Industries",
-          detail: "Sectors served, each presented as a section within a single page.",
+          detail: "The sectors you serve, each as its own section on a single page.",
         },
         {
           name: "Sell Inventory",
-          detail: "Dedicated form for suppliers with excess inventory.",
+          detail: "A dedicated form for suppliers with excess inventory.",
         },
         { name: "Contact", detail: "Quote form, map, phone numbers, and emails." },
       ],
@@ -487,76 +487,76 @@ export const CONTENT = {
       title: "Product catalog · by category",
       meta: "8 families",
       intro:
-        "A base catalog with the product families Intransit Tech distributes most frequently. Visitors identify the category they need and move to the quote form.",
+        "A base catalog covering the product families Intransit Tech distributes most often. Visitors find their category and go straight to the quote form.",
       items: [
-        { icon: "memory", name: "Electronic components", detail: "Semiconductors, passives, discretes, and board-level." },
+        { icon: "memory", name: "Electronic components", detail: "Semiconductors, passives, discretes, and board-level parts." },
         { icon: "settings_input_component", name: "Motors and control", detail: "Servomotors, encoders, and industrial controllers." },
         { icon: "sensors", name: "Sensors and instrumentation", detail: "Sensors, switches, meters, and transducers." },
         { icon: "water_drop", name: "Pneumatics and hydraulics", detail: "Valves, pumps, actuators, and accessories." },
         { icon: "precision_manufacturing", name: "Industrial robotics", detail: "Parts for Fanuc, Kuka, Yaskawa, and similar robots." },
         { icon: "flight", name: "Aerospace and automotive", detail: "Certified components for both sectors." },
-        { icon: "construction", name: "Tools and adhesives", detail: "Industrial tools, technical adhesives, and consumables." },
+        { icon: "construction", name: "Tools and adhesives", detail: "Industrial tooling, technical adhesives, and consumables." },
         { icon: "hub", name: "Communication and data", detail: "Networking modules, connectivity, and industrial data transmission." },
       ],
     },
     agent: {
-      titleLead: "AI-powered sales",
+      titleLead: "AI sales",
       titleEmphasis: "agent",
       meta: "Included",
       intro:
-        "A virtual assistant integrated into the website that engages visitors, identifies the category they need, shares the brands Intransit Tech distributes, and records contact information so a team member can close the sale.",
+        "A virtual assistant built into the site that engages visitors, identifies the category they're after, shares the brands Intransit Tech carries, and captures their contact info so a sales rep can take it from there.",
       features: [
         {
           icon: "support_agent",
-          title: "Available 24 hours",
+          title: "Available around the clock",
           detail:
-            "Responds to initial inquiries immediately, regardless of the visitor's time zone or schedule.",
+            "Replies to first-touch inquiries right away, no matter the time zone or business hours.",
         },
         {
           icon: "category",
           title: "Recognizes categories",
           detail:
-            "Visitors ask about a category and the agent responds with the brands Intransit Tech distributes.",
+            "When a visitor asks about a category, the agent replies with the brands Intransit Tech distributes.",
         },
         {
           icon: "contact_mail",
-          title: "Captures prospect information",
+          title: "Captures prospect details",
           detail:
-            "Requests name, company, and email address to deliver a qualified prospect to the sales team.",
+            "Collects name, company, and email so sales gets a qualified lead, not a cold one.",
         },
         {
           icon: "forward_to_inbox",
-          title: "Notifies the team immediately",
+          title: "Notifies the team right away",
           detail:
-            "When a prospect is captured, it sends a notification to the sales inbox for timely follow-up.",
+            "Every new prospect triggers an alert to the sales inbox for quick follow-up.",
         },
       ],
     },
     chatHeader: {
       title: "Intransit Tech Assistant",
       status: "Online · replies in seconds",
-      badge: "Example",
+      badge: "Sample",
       placeholder: "Type your message…",
     },
     chat: [
       {
         from: "client",
         text:
-          "Good afternoon. I need servomotors for a new assembly line. Do you distribute them?",
+          "Hello. We're sourcing servomotors for a new assembly line — do you carry them?",
       },
       {
         from: "agent",
         text:
-          "Good afternoon. Yes, we distribute servomotors from Fanuc, Yaskawa, Allen Bradley, and Kuka, among other brands. Do you have a preferred brand or power rating?",
+          "Hello. Yes — we carry servomotors from Fanuc, Yaskawa, Allen Bradley, and Kuka, among others. Any preference on brand or power rating?",
       },
       {
         from: "client",
-        text: "We haven't chosen a brand yet. We would need around 10 units.",
+        text: "We haven't settled on a brand yet. We'd need around 10 units.",
       },
       {
         from: "agent",
         text:
-          "Glad to help. So an Intransit Tech advisor can share options with lead times and pricing, could you share your name, company, and email?",
+          "Happy to help. So one of our advisors can send options with lead times and pricing, could I get your name, company, and email?",
       },
       {
         from: "client",
@@ -565,61 +565,61 @@ export const CONTENT = {
       {
         from: "agent",
         text:
-          "Thank you, Luis. An advisor will contact you within the next few hours. Is there anything else I can help you with in the meantime?",
+          "Thank you, Luis. An advisor will reach out within the next few hours. Anything else I can help with in the meantime?",
       },
     ] as const,
     requisite: {
       label: "Requirement:",
-      before: "the agent must be linked to a",
+      before: "the agent needs to be connected to a",
       or: "or",
       middle:
-        " account. The monthly cost of that account is estimated at 10 to 30 USD with regular inquiry traffic and is covered by Intransit Tech. The agent's setup and training are included in this quote.",
+        " account. That account runs an estimated 10–30 USD per month under regular traffic and is covered by Intransit Tech. Setup and training of the agent are included in this quote.",
     },
     investment: {
       title: "Investment",
       oneTimeLabel: "One-time payment · Full delivery",
       totalFootnote:
-        "No additional fees. Visitor tracking, team training, and one year of website hosting are included from day one.",
+        "No additional fees. Visitor tracking, team training, and one full year of hosting are included from day one.",
       totalCaption: "USD · total",
       depositLabel: "Deposit · on approval",
-      depositCaption: "50% to start",
-      finalLabel: "Final payment · on delivery",
+      depositCaption: "50% to get started",
+      finalLabel: "Balance · on delivery",
       finalCaption: "50% once everything is live",
       lines: {
         sitio: {
           title: "Professional website",
           detail:
-            "Design, development, and launch of the website. Includes the 7 features, the 7 pages, and the base catalog organized by category.",
+            "Design, development, and launch of the site. Includes all 7 features, the 7 pages, and the base catalog organized by category.",
         },
         agente: {
           title: "AI sales agent",
           detail:
-            "Agent setup, training with Intransit Tech's categories and brands, and integration with the website.",
+            "Agent setup, training on Intransit Tech's categories and brands, and integration with the site.",
         },
         bilingue: {
           title: "Bilingual version",
           detail:
-            "Site content available in Spanish and English, language selector, and synchronization of both versions.",
+            "Site content in Spanish and English, a language selector, and both versions kept in sync.",
         },
         hosting: {
-          title: "One year of website hosting",
+          title: "One year of hosting",
           detail:
-            "is the service that keeps the site published and accessible online 24 hours a day. Included during the first 12 months; renewal from the second year onward is handled by Bravo Publicidad under an annual rate.",
+            "is what keeps the site online and reachable 24/7. Included for the first 12 months; starting in year two, renewal is handled by Bravo Publicidad at an annual rate.",
           hostingWord: "Hosting",
         },
       },
       notes: [
         "Prices in US dollars (USD).",
-        "Payment methods: wire transfer or card.",
-        "Invoice available upon request.",
+        "Payment: wire transfer or card.",
+        "Invoice available on request.",
       ],
-      validityNote: (date: string) => `Quote valid until ${date}.`,
+      validityNote: (date: string) => `Quote valid through ${date}.`,
     },
     nextStep: {
       label: "Next step",
-      textBefore: "Approve this quote and cover the deposit of",
+      textBefore: "Approve this quote and send the deposit of",
       textAfter:
-        "to schedule the kickoff meeting. At that meeting we will define access credentials, priority services and categories, available assets (logo, photos, and copy), and the delivery calendar with specific dates per milestone.",
+        "to lock in the kickoff meeting. In that meeting we'll confirm access credentials, priority services and categories, available assets (logo, photos, and copy), and the delivery calendar with specific dates per milestone.",
     },
     langToggle: {
       ariaLabel: "Change language",
