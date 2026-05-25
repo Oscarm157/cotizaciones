@@ -155,17 +155,32 @@ export default function Page() {
 
         <section className="mt-7">
           <SectionTitle icon="menu_book" title={t.pages.title} meta={t.pages.meta} />
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {t.pages.items.map((p) => (
-              <li
-                key={p.name}
-                className="rounded-lg bg-card border border-card-border border-l-4 border-l-accent px-3 py-2.5"
-              >
-                <div className="text-[13px] font-semibold text-foreground">{p.name}</div>
-                <div className="text-[11.5px] text-muted mt-0.5 leading-snug">{p.detail}</div>
-              </li>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-x-5 gap-y-6">
+            {t.pages.groups.map((g) => (
+              <div key={g.label}>
+                <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-accent pb-1.5 border-b border-accent/30 mb-3">
+                  {g.label}
+                </div>
+                <ul className="space-y-3">
+                  {g.items.map((p) => (
+                    <li key={p.name} className="flex gap-3">
+                      <span className="font-mono text-[15px] font-semibold text-accent tabular-nums shrink-0 leading-none pt-0.5">
+                        {p.num}
+                      </span>
+                      <div className="min-w-0">
+                        <div className="text-[13px] font-semibold text-foreground leading-tight">
+                          {p.name}
+                        </div>
+                        <div className="text-[11.5px] text-muted mt-0.5 leading-snug">
+                          {p.detail}
+                        </div>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             ))}
-          </ul>
+          </div>
         </section>
 
         <PageFooter label={t.labels.pageOf(2, 5)} />

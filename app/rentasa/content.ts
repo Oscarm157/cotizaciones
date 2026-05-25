@@ -154,17 +154,32 @@ export const CONTENT = {
   pages: {
     title: "Páginas del portal",
     meta: "10 secciones",
-    items: [
-      { name: "Inicio", detail: "Hero, propuesta de valor, propiedades destacadas y accesos al catálogo." },
-      { name: "Nosotros", detail: "Historia del grupo, trayectoria, filosofía y estructura operativa." },
-      { name: "Portafolio", detail: "Vista panorámica de los activos agrupados por categoría." },
-      { name: "Propiedades", detail: "Catálogo completo con filtros por tipo, uso, estado y ciudad." },
-      { name: "Ficha individual", detail: "Plantilla por propiedad: galería, ficha técnica, mapa y contacto." },
-      { name: "Inversión", detail: "Track record del grupo, diversificación y oportunidades vigentes." },
-      { name: "Modelo PropTech", detail: "Cómo opera el grupo con tecnología, datos y automatización." },
-      { name: "Contacto", detail: "Formulario general, mapa, WhatsApp y datos de oficinas." },
-      { name: "Blog / Insights", detail: "Artículos por categorías: inversión, mercado, plusvalía, industrial." },
-      { name: "Landings Ads", detail: "2 plantillas base para campañas Meta Ads y Google Ads." },
+    groups: [
+      {
+        label: "Presentación",
+        items: [
+          { num: "01", name: "Inicio", detail: "Hero, propuesta de valor, propiedades destacadas y accesos al catálogo." },
+          { num: "02", name: "Nosotros", detail: "Historia del grupo, trayectoria, filosofía y estructura operativa." },
+          { num: "03", name: "Portafolio", detail: "Vista panorámica de los activos agrupados por categoría." },
+          { num: "04", name: "Modelo PropTech", detail: "Cómo opera el grupo con tecnología, datos y automatización." },
+        ],
+      },
+      {
+        label: "Catálogo y oferta",
+        items: [
+          { num: "05", name: "Propiedades", detail: "Catálogo completo con filtros por tipo, uso, estado y ciudad." },
+          { num: "06", name: "Ficha individual", detail: "Plantilla por propiedad: galería, ficha técnica, mapa y contacto." },
+          { num: "07", name: "Inversión", detail: "Track record del grupo, diversificación y oportunidades vigentes." },
+        ],
+      },
+      {
+        label: "Comunicación y captación",
+        items: [
+          { num: "08", name: "Contacto", detail: "Formulario general, mapa, WhatsApp y datos de oficinas." },
+          { num: "09", name: "Blog / Insights", detail: "Artículos por categorías: inversión, mercado, plusvalía, industrial." },
+          { num: "10", name: "Landings Ads", detail: "2 plantillas base para campañas Meta Ads y Google Ads." },
+        ],
+      },
     ],
   },
   categories: {
