@@ -3,7 +3,6 @@ export const ISSUED = "2026-05-25";
 export const VALID = "2026-06-09";
 
 export const PRICE_SITIO: number | null = null;
-export const PRICE_PORTAL: number | null = null;
 export const PRICE_AGENTE: number | null = null;
 export const PRICE_AUTOADMIN: number | null = null;
 export const PRICE_HOSTING: number | null = null;
@@ -54,12 +53,12 @@ export const CONTENT = {
     titleEmphasis: "profesional",
     titleSuffix: "para",
     paragraph:
-      "Propuesta para construir el portal inmobiliario de Rentasa: 10 páginas con catálogo de propiedades filtrable, ficha individual por activo, agente de ventas con inteligencia artificial que atiende consultas 24 horas y un módulo autoadministrable para que el equipo actualice contenido, catálogo, landings y blog sin depender de un desarrollador.",
+      "Propuesta para construir el portal inmobiliario de Rentasa: 10 páginas con catálogo de propiedades filtrable, ficha individual por activo, agente de ventas con inteligencia artificial que atiende consultas 24 horas y un módulo autoadministrable para que el equipo actualice contenido, catálogo y blog sin depender de un desarrollador.",
   },
   before: {
     heading: "Hoy",
     items: [
-      "El catálogo de propiedades vive en hojas de cálculo y correos. Cada actualización requiere coordinación interna.",
+      "El catálogo de propiedades vive en un PDF. No hay un sitio web que lo presente con imágenes, ficha técnica y filtros.",
       "Cada solicitud de información se atiende manualmente, sin captura estructurada en un formulario.",
       "El sitio actual no comunica con claridad el portafolio ni la trayectoria del grupo.",
       "No hay métricas que indiquen qué propiedades o categorías generan más interés.",
@@ -100,7 +99,7 @@ export const CONTENT = {
         icon: "insights",
         title: "Datos sobre qué propiedades interesan más",
         detail:
-          "Reporte mensual con las categorías, zonas y propiedades con mayor número de consultas. Información para tomar decisiones de adquisición e inversión.",
+          "Acceso a Google Analytics para que el equipo revise en cualquier momento las categorías, zonas y propiedades con más visitas. Información para respaldar decisiones de adquisición e inversión.",
       },
     ],
   },
@@ -134,15 +133,15 @@ export const CONTENT = {
       },
       {
         icon: "search",
-        title: "Buscador en home",
+        title: "Buscador en Inicio",
         detail:
           "El visitante escribe lo que busca desde la portada y aterriza en el catálogo con los filtros precargados.",
       },
       {
         icon: "call",
-        title: "Teléfono y WhatsApp visibles",
+        title: "Medios de contacto visibles",
         detail:
-          "Los canales directos permanecen fijos en el encabezado. Desde móvil basta un toque para llamar o abrir la conversación.",
+          "Teléfono, WhatsApp y correo permanecen fijos en el encabezado del portal. Desde móvil basta un toque para activarlos.",
       },
       {
         icon: "monitoring",
@@ -156,7 +155,7 @@ export const CONTENT = {
     title: "Páginas del portal",
     meta: "10 secciones",
     items: [
-      { name: "Home", detail: "Hero, propuesta de valor, propiedades destacadas y accesos al catálogo." },
+      { name: "Inicio", detail: "Hero, propuesta de valor, propiedades destacadas y accesos al catálogo." },
       { name: "Nosotros", detail: "Historia del grupo, trayectoria, filosofía y estructura operativa." },
       { name: "Portafolio", detail: "Vista panorámica de los activos agrupados por categoría." },
       { name: "Propiedades", detail: "Catálogo completo con filtros por tipo, uso, estado y ciudad." },
@@ -274,12 +273,6 @@ export const CONTENT = {
           "Alta, baja y edición de propiedades. Cada ficha incluye fotos, ficha técnica, ubicación, asesor asignado y estado (disponible, vendida o rentada).",
       },
       {
-        icon: "campaign",
-        title: "Landing pages nuevas",
-        detail:
-          "Crear landings desde plantillas para campañas Meta Ads y Google Ads. Cada landing tiene URL propia y formulario de captura.",
-      },
-      {
         icon: "article",
         title: "Blog e insights",
         detail:
@@ -303,14 +296,9 @@ export const CONTENT = {
     finalCaption: "50% con todo publicado",
     lines: {
       sitio: {
-        title: "Sitio web profesional",
+        title: "Sitio web y portal de propiedades",
         detail:
-          "Diseño, desarrollo y publicación. Incluye las 10 páginas del portal con jerarquía consistente.",
-      },
-      portal: {
-        title: "Portal de propiedades",
-        detail:
-          "Catálogo con filtros, plantilla reutilizable para ficha individual, formulario de contacto por propiedad y migración del catálogo existente.",
+          "Diseño, desarrollo y publicación del portal de 10 páginas. Incluye catálogo con filtros, plantilla reutilizable para ficha individual, formulario de contacto por propiedad y migración del catálogo existente.",
       },
       agente: {
         title: "Agente de ventas con IA",
@@ -320,7 +308,7 @@ export const CONTENT = {
       autoadmin: {
         title: "Módulo autoadministrable",
         detail:
-          "Panel con edición de páginas, catálogo, landings y blog. Capacitación inicial del equipo incluida.",
+          "Panel con edición de páginas, catálogo y blog. Capacitación inicial del equipo incluida.",
       },
       hosting: {
         title: "Hosting del portal (año 1)",
@@ -332,7 +320,6 @@ export const CONTENT = {
       "Precios en dólares americanos (USD).",
       "Formas de pago: transferencia o tarjeta.",
       "Factura disponible a solicitud.",
-      "Landings Ads adicionales se generan desde el módulo autoadministrable sin costo extra.",
     ],
     validityNote: (date: string) => `Vigencia de la cotización: hasta el ${date}.`,
   },

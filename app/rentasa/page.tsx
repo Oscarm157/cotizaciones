@@ -5,7 +5,6 @@ import {
   ISSUED,
   VALID,
   PRICE_SITIO,
-  PRICE_PORTAL,
   PRICE_AGENTE,
   PRICE_AUTOADMIN,
   PRICE_HOSTING,
@@ -16,7 +15,7 @@ import { PrintButton } from "./print-button";
 
 const t = CONTENT;
 
-const PRICES = [PRICE_SITIO, PRICE_PORTAL, PRICE_AGENTE, PRICE_AUTOADMIN, PRICE_HOSTING];
+const PRICES = [PRICE_SITIO, PRICE_AGENTE, PRICE_AUTOADMIN, PRICE_HOSTING];
 const HAS_PENDING = PRICES.some((p) => p === null);
 const USD_TOTAL: number | null = HAS_PENDING
   ? null
@@ -270,7 +269,7 @@ export default function Page() {
             {t.autoadmin.intro}
           </p>
 
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <ul className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {t.autoadmin.features.map((a) => (
               <li
                 key={a.title}
@@ -326,16 +325,10 @@ export default function Page() {
           <div className="rounded-xl border border-card-border bg-card overflow-hidden">
             <div className="divide-y divide-card-border">
               <InvestmentRow
-                icon="language"
+                icon="domain"
                 title={t.investment.lines.sitio.title}
                 detail={t.investment.lines.sitio.detail}
                 price={PRICE_SITIO}
-              />
-              <InvestmentRow
-                icon="domain"
-                title={t.investment.lines.portal.title}
-                detail={t.investment.lines.portal.detail}
-                price={PRICE_PORTAL}
               />
               <InvestmentRow
                 icon="support_agent"
