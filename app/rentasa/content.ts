@@ -176,7 +176,7 @@ export const CONTENT = {
         label: "Comunicación y captación",
         items: [
           { num: "08", name: "Contacto", detail: "Formulario general, mapa, WhatsApp y datos de oficinas." },
-          { num: "09", name: "Blog / Insights", detail: "Artículos por categorías: inversión, mercado, plusvalía, industrial." },
+          { num: "09", name: "Blog / Insights", detail: "Arranca con 8 artículos precargados organizados por categorías: inversión, mercado, plusvalía, industrial." },
           { num: "10", name: "Landings Ads", detail: "2 plantillas base para campañas Meta Ads y Google Ads." },
         ],
       },
