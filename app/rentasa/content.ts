@@ -261,22 +261,22 @@ export const CONTENT = {
       "Un panel de administración con usuario y contraseña que permite al equipo de Rentasa mantener el portal al día sin depender de un desarrollador. Capacitación inicial incluida.",
     features: [
       {
-        icon: "edit_document",
-        title: "Edición de textos e imágenes",
-        detail:
-          "Modificar el copy y las fotografías de las páginas existentes: Home, Nosotros, Inversión, Modelo PropTech y Contacto.",
-      },
-      {
         icon: "real_estate_agent",
-        title: "Catálogo de propiedades",
+        title: "Alta y baja de propiedades",
         detail:
-          "Alta, baja y edición de propiedades. Cada ficha incluye fotos, ficha técnica, ubicación, asesor asignado y estado (disponible, vendida o rentada).",
+          "Alta, baja y edición del catálogo. Cada ficha incluye fotos, ficha técnica, ubicación, asesor asignado y estado (disponible, vendida o rentada).",
       },
       {
         icon: "article",
-        title: "Blog e insights",
+        title: "Alta y baja de artículos del blog",
         detail:
-          "Publicar y editar artículos del blog organizados por categorías: inversión, mercado, plusvalía, industrial, automatización.",
+          "Publicar, editar y retirar artículos del blog organizados por categorías: inversión, mercado, plusvalía, industrial, automatización.",
+      },
+      {
+        icon: "edit_document",
+        title: "Edición de textos e imágenes",
+        detail:
+          "Modificar el copy y las fotografías de las páginas existentes: Inicio, Nosotros, Inversión, Modelo PropTech y Contacto.",
       },
     ],
     training:
