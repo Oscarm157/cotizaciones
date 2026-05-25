@@ -335,7 +335,7 @@ export const CONTENT = {
       hosting: {
         title: "Hosting del portal (pago anual)",
         detail:
-          "Servicio que mantiene el portal publicado y accesible las 24 horas, cobrado en cuotas anuales. El monto cubre el primer año; la renovación a partir del segundo año se gestiona con Bravo Publicidad bajo la misma tarifa.",
+          "Servicio que mantiene el portal publicado y accesible las 24 horas, cobrado en cuotas anuales.",
       },
     },
     notes: [
