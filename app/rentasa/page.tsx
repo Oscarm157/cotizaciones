@@ -12,6 +12,7 @@ import {
   fmtDate,
 } from "./content";
 import { PrintButton } from "./print-button";
+import { Slideshow } from "./slideshow";
 
 const t = CONTENT;
 
@@ -126,7 +127,7 @@ export default function Page() {
           </ul>
         </section>
 
-        <PageFooter label={t.labels.pageOf(1, 5)} />
+        <PageFooter label={t.labels.pageOf(1, 6)} />
       </article>
 
       {/* ─────────── PÁGINA 2 · EL PORTAL ─────────── */}
@@ -183,7 +184,7 @@ export default function Page() {
           </div>
         </section>
 
-        <PageFooter label={t.labels.pageOf(2, 5)} />
+        <PageFooter label={t.labels.pageOf(2, 6)} />
       </article>
 
       {/* ─────────── PÁGINA 3 · CONTENIDO ─────────── */}
@@ -266,7 +267,7 @@ export default function Page() {
           </div>
         </section>
 
-        <PageFooter label={t.labels.pageOf(3, 5)} />
+        <PageFooter label={t.labels.pageOf(3, 6)} />
       </article>
 
       {/* ─────────── PÁGINA 4 · AUTOADMINISTRACIÓN ─────────── */}
@@ -327,12 +328,25 @@ export default function Page() {
           </div>
         </section>
 
-        <PageFooter label={t.labels.pageOf(4, 5)} />
+        <PageFooter label={t.labels.pageOf(4, 6)} />
       </article>
 
-      {/* ─────────── PÁGINA 5 · INVERSIÓN ─────────── */}
+      {/* ─────────── PÁGINA 5 · PREVISUALIZACIÓN ─────────── */}
       <article className="doc-page relative max-w-[900px] mx-auto px-8 sm:px-12 py-8 text-[14px] leading-relaxed page-break">
         <PhaseBar active={5} />
+
+        <section className="mt-6">
+          <SectionTitle icon="slideshow" title={t.preview.title} meta={t.preview.meta} />
+          <p className="text-[12px] text-muted leading-relaxed max-w-2xl mb-4">{t.preview.intro}</p>
+          <Slideshow />
+        </section>
+
+        <PageFooter label={t.labels.pageOf(5, 6)} />
+      </article>
+
+      {/* ─────────── PÁGINA 6 · INVERSIÓN ─────────── */}
+      <article className="doc-page relative max-w-[900px] mx-auto px-8 sm:px-12 py-8 text-[14px] leading-relaxed page-break">
+        <PhaseBar active={6} />
 
         <section className="mt-6">
           <SectionTitle icon="payments" title={t.investment.title} />
@@ -449,13 +463,17 @@ export default function Page() {
           </div>
         </footer>
 
-        <PageFooter label={t.labels.pageOf(5, 5)} />
+        <PageFooter label={t.labels.pageOf(6, 6)} />
       </article>
 
       <style>{`
         @page { size: Letter; margin: 10mm 12mm; }
+        @media screen {
+          .print-only { display: none !important; }
+        }
         @media print {
           .no-print { display: none !important; }
+          .screen-only { display: none !important; }
           html, body {
             background: #ffffff !important;
             -webkit-print-color-adjust: exact;
@@ -508,11 +526,11 @@ function IconBadge({ icon, small = false }: { icon: string; small?: boolean }) {
   );
 }
 
-function PhaseBar({ active }: { active: 1 | 2 | 3 | 4 | 5 }) {
+function PhaseBar({ active }: { active: 1 | 2 | 3 | 4 | 5 | 6 }) {
   return (
     <div className="flex items-center gap-3 w-full">
       {t.phases.map((p, i) => {
-        const idx = (i + 1) as 1 | 2 | 3 | 4 | 5;
+        const idx = (i + 1) as 1 | 2 | 3 | 4 | 5 | 6;
         const done = idx < active;
         const current = idx === active;
         return (

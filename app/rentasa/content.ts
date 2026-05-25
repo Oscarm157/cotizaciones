@@ -45,8 +45,15 @@ export const CONTENT = {
     { num: "02", name: "El portal" },
     { num: "03", name: "Contenido" },
     { num: "04", name: "Autoadministración" },
-    { num: "05", name: "Inversión" },
+    { num: "05", name: "Previsualización" },
+    { num: "06", name: "Inversión" },
   ],
+  preview: {
+    title: "Previsualización del Proyecto",
+    meta: "4 vistas",
+    intro:
+      "Vistas preliminares de las pantallas principales del portal: Inicio, Portal de propiedades, Detalle de propiedad y Contacto.",
+  },
   intro: {
     eyebrow: "Propuesta · Portal inmobiliario + Agente IA + Módulo autoadministrable",
     titleLead: "Portal inmobiliario",
