@@ -53,7 +53,7 @@ export const CONTENT = {
     titleEmphasis: "profesional",
     titleSuffix: "para",
     paragraph:
-      "Propuesta para construir el portal inmobiliario de Rentasa: 10 páginas con catálogo de propiedades filtrable, ficha individual por activo, agente de ventas con inteligencia artificial que atiende consultas 24 horas y un módulo autoadministrable para que el equipo actualice contenido, catálogo y blog sin depender de un desarrollador.",
+      "Propuesta para construir el portal inmobiliario de Rentasa: 10 páginas con catálogo de propiedades filtrable, ficha individual por activo, agente de ventas conversacional con inteligencia artificial que atiende consultas 24 horas y un módulo autoadministrable para que el equipo actualice contenido, catálogo y blog sin depender de un desarrollador.",
   },
   before: {
     heading: "Hoy",
@@ -196,7 +196,7 @@ export const CONTENT = {
     ],
   },
   agent: {
-    titleLead: "Agente de ventas con",
+    titleLead: "Agente de ventas conversacional con",
     titleEmphasis: "inteligencia artificial",
     meta: "Incluido",
     intro:
@@ -316,7 +316,7 @@ export const CONTENT = {
           "Diseño, desarrollo y publicación del portal de 10 páginas. Incluye catálogo con filtros, plantilla reutilizable para ficha individual, formulario de contacto por propiedad y migración del catálogo existente.",
       },
       agente: {
-        title: "Agente de ventas con IA 24/7",
+        title: "Agente de ventas conversacional con IA 24/7",
         detail:
           "Configuración del agente, entrenamiento con categorías y zonas de Rentasa, integración al portal.",
       },
