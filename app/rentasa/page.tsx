@@ -8,7 +8,7 @@ import {
   PRICE_AGENTE,
   PRICE_AUTOADMIN,
   PRICE_HOSTING,
-  fmtUsd,
+  fmtMxn,
   fmtDate,
 } from "./content";
 import { PrintButton } from "./print-button";
@@ -17,12 +17,12 @@ const t = CONTENT;
 
 const PRICES = [PRICE_SITIO, PRICE_AGENTE, PRICE_AUTOADMIN, PRICE_HOSTING];
 const HAS_PENDING = PRICES.some((p) => p === null);
-const USD_TOTAL: number | null = HAS_PENDING
+const TOTAL_MXN: number | null = HAS_PENDING
   ? null
   : (PRICES as number[]).reduce((a, b) => a + b, 0);
-const USD_DEPOSIT: number | null = USD_TOTAL === null ? null : Math.round(USD_TOTAL * 0.5);
-const USD_FINAL: number | null =
-  USD_TOTAL === null || USD_DEPOSIT === null ? null : USD_TOTAL - USD_DEPOSIT;
+const DEPOSIT_MXN: number | null = TOTAL_MXN === null ? null : Math.round(TOTAL_MXN * 0.5);
+const FINAL_MXN: number | null =
+  TOTAL_MXN === null || DEPOSIT_MXN === null ? null : TOTAL_MXN - DEPOSIT_MXN;
 
 export default function Page() {
   return (
@@ -361,7 +361,7 @@ export default function Page() {
               </div>
               <div className="text-right shrink-0">
                 <div className="text-3xl font-semibold tabular-nums text-accent-light">
-                  {fmtUsd(USD_TOTAL)}
+                  {fmtMxn(TOTAL_MXN)}
                 </div>
                 <div className="text-[10px] uppercase tracking-[0.2em] text-white/60">
                   {t.investment.totalCaption}
@@ -375,10 +375,7 @@ export default function Page() {
                   {t.investment.depositLabel}
                 </div>
                 <div className="mt-0.5 text-lg font-semibold tabular-nums text-foreground">
-                  {fmtUsd(USD_DEPOSIT)}{" "}
-                  {USD_DEPOSIT !== null && (
-                    <span className="text-[10px] text-muted font-normal">USD</span>
-                  )}
+                  {fmtMxn(DEPOSIT_MXN)}
                 </div>
                 <div className="text-[11px] text-muted">{t.investment.depositCaption}</div>
               </div>
@@ -387,10 +384,7 @@ export default function Page() {
                   {t.investment.finalLabel}
                 </div>
                 <div className="mt-0.5 text-lg font-semibold tabular-nums text-foreground">
-                  {fmtUsd(USD_FINAL)}{" "}
-                  {USD_FINAL !== null && (
-                    <span className="text-[10px] text-muted font-normal">USD</span>
-                  )}
+                  {fmtMxn(FINAL_MXN)}
                 </div>
                 <div className="text-[11px] text-muted">{t.investment.finalCaption}</div>
               </div>
@@ -411,10 +405,10 @@ export default function Page() {
           </div>
           <p className="text-[13px] text-foreground/90 leading-relaxed">
             {t.nextStep.textBefore}
-            {USD_DEPOSIT !== null && (
+            {DEPOSIT_MXN !== null && (
               <>
                 {" "}
-                <span className="font-semibold text-foreground">{fmtUsd(USD_DEPOSIT)} USD</span>
+                <span className="font-semibold text-foreground">{fmtMxn(DEPOSIT_MXN)}</span>
               </>
             )}{" "}
             {t.nextStep.textAfter}
@@ -724,11 +718,8 @@ function InvestmentRow({
               : "text-lg font-semibold text-foreground"
           }
         >
-          {fmtUsd(price)}
+          {fmtMxn(price)}
         </div>
-        {price !== null && (
-          <div className="text-[10px] uppercase tracking-[0.2em] text-muted">USD</div>
-        )}
       </div>
     </div>
   );

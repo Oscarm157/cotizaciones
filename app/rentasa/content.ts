@@ -2,10 +2,10 @@ export const FOLIO = "WB-133";
 export const ISSUED = "2026-05-25";
 export const VALID = "2026-06-09";
 
-export const PRICE_SITIO: number | null = null;
-export const PRICE_AGENTE: number | null = null;
-export const PRICE_AUTOADMIN: number | null = null;
-export const PRICE_HOSTING: number | null = null;
+export const PRICE_SITIO: number | null = 17000;
+export const PRICE_AGENTE: number | null = 3300;
+export const PRICE_AUTOADMIN: number | null = 3000;
+export const PRICE_HOSTING: number | null = 2000;
 
 export const CONTENT = {
   locale: "es-MX",
@@ -288,36 +288,36 @@ export const CONTENT = {
     title: "Inversión",
     oneTimeLabel: "Pago único · Entrega completa",
     totalFootnote:
-      "Medición de visitas, capacitación del equipo y migración del catálogo existente incluidas desde el primer día. Hosting cobrado por separado el primer año.",
-    totalCaption: "USD · total",
+      "Medición de visitas, capacitación del equipo y migración del catálogo existente incluidas desde el primer día.",
+    totalCaption: "MXN · total",
     depositLabel: "Anticipo · al aprobar",
     depositCaption: "50% para iniciar",
     finalLabel: "Liquidación · al entregar",
     finalCaption: "50% con todo publicado",
     lines: {
       sitio: {
-        title: "Sitio web y portal de propiedades",
+        title: "Sitio web general y portal de propiedades",
         detail:
           "Diseño, desarrollo y publicación del portal de 10 páginas. Incluye catálogo con filtros, plantilla reutilizable para ficha individual, formulario de contacto por propiedad y migración del catálogo existente.",
       },
       agente: {
-        title: "Agente de ventas con IA",
+        title: "Agente de ventas con IA 24/7",
         detail:
           "Configuración del agente, entrenamiento con categorías y zonas de Rentasa, integración al portal.",
       },
       autoadmin: {
-        title: "Módulo autoadministrable",
+        title: "Módulo sitio web autoadministrable",
         detail:
-          "Panel propio para que el equipo de Rentasa actualice el catálogo de propiedades, los artículos del blog y los textos e imágenes del sitio sin depender de un desarrollador. Capacitación inicial incluida.",
+          "Panel propio para que el equipo de Rentasa actualice el catálogo de propiedades, los artículos del blog y los textos e imágenes del sitio sin depender de un desarrollador, lo que reduce los costos por actualizaciones y mantenimiento a futuro. Capacitación inicial incluida.",
       },
       hosting: {
-        title: "Hosting del portal (año 1)",
+        title: "Hosting del portal (pago anual)",
         detail:
-          "Servicio que mantiene el portal publicado y accesible las 24 horas. La renovación a partir del segundo año se gestiona con Bravo Publicidad bajo tarifa anual.",
+          "Servicio que mantiene el portal publicado y accesible las 24 horas, cobrado en cuotas anuales. El monto cubre el primer año; la renovación a partir del segundo año se gestiona con Bravo Publicidad bajo la misma tarifa.",
       },
     },
     notes: [
-      "Precios en dólares americanos (USD).",
+      "Precios en pesos mexicanos (MXN).",
       "Formas de pago: transferencia o tarjeta.",
       "Factura disponible a solicitud.",
     ],
@@ -325,19 +325,15 @@ export const CONTENT = {
   },
   nextStep: {
     label: "Siguiente paso",
-    textBefore: "Aprobar la presente cotización y cubrir el anticipo correspondiente",
+    textBefore: "Aprobar la presente cotización y cubrir el anticipo de",
     textAfter:
       "para agendar la reunión de arranque. En dicha reunión se definirán los accesos, las categorías y propiedades prioritarias, los materiales disponibles (logotipo, fotografías y textos), la forma de entrega del catálogo existente y el calendario con fechas específicas por entrega.",
   },
 } as const;
 
-export const fmtUsd = (n: number | null) => {
+export const fmtMxn = (n: number | null) => {
   if (n === null) return CONTENT.labels.pendingPrice;
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    maximumFractionDigits: 0,
-  }).format(n);
+  return `$${n.toLocaleString("es-MX", { maximumFractionDigits: 0 })} MXN`;
 };
 
 export const fmtDate = (iso: string) => {
