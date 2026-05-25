@@ -308,7 +308,7 @@ export const CONTENT = {
       autoadmin: {
         title: "Módulo autoadministrable",
         detail:
-          "Panel con edición de páginas, catálogo y blog. Capacitación inicial del equipo incluida.",
+          "Panel propio para que el equipo de Rentasa actualice el catálogo de propiedades, los artículos del blog y los textos e imágenes del sitio sin depender de un desarrollador. Capacitación inicial incluida.",
       },
       hosting: {
         title: "Hosting del portal (año 1)",
