@@ -534,16 +534,16 @@ function IconBadge({ icon, small = false }: { icon: string; small?: boolean }) {
 
 function PhaseBar({ active }: { active: 1 | 2 | 3 | 4 | 5 | 6 }) {
   return (
-    <div className="flex items-center gap-3 w-full">
+    <div className="flex items-center gap-1.5 w-full">
       {t.phases.map((p, i) => {
         const idx = (i + 1) as 1 | 2 | 3 | 4 | 5 | 6;
         const done = idx < active;
         const current = idx === active;
         return (
           <Fragment key={p.num}>
-            <div className="flex items-center gap-2 shrink-0">
+            <div className="flex items-center gap-1.5 shrink-0">
               <div
-                className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-mono font-semibold tabular-nums ${
+                className={`w-5 h-5 rounded-full flex items-center justify-center text-[9px] font-mono font-semibold tabular-nums ${
                   current
                     ? "bg-accent text-white"
                     : done
@@ -554,7 +554,7 @@ function PhaseBar({ active }: { active: 1 | 2 | 3 | 4 | 5 | 6 }) {
                 {p.num}
               </div>
               <span
-                className={`text-[10.5px] uppercase tracking-[0.18em] font-semibold whitespace-nowrap ${
+                className={`text-[9.5px] uppercase tracking-[0.08em] font-semibold whitespace-nowrap ${
                   current ? "text-primary" : done ? "text-accent" : "text-muted"
                 }`}
               >
@@ -563,7 +563,7 @@ function PhaseBar({ active }: { active: 1 | 2 | 3 | 4 | 5 | 6 }) {
             </div>
             {i < t.phases.length - 1 && (
               <div
-                className={`h-px flex-1 min-w-[10px] ${
+                className={`h-px flex-1 min-w-[6px] ${
                   done ? "bg-accent/40" : "bg-card-border"
                 }`}
               />
