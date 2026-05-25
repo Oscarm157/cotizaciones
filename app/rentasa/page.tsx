@@ -393,7 +393,7 @@ export default function Page() {
                   {fmtMxn(TOTAL_MXN)}
                 </div>
                 <div className="text-[10px] uppercase tracking-[0.2em] text-white/60">
-                  {t.investment.totalCaption}
+                  {t.investment.totalCaption} · {t.labels.plusVat}
                 </div>
               </div>
             </div>
@@ -404,7 +404,10 @@ export default function Page() {
                   {t.investment.depositLabel}
                 </div>
                 <div className="mt-0.5 text-lg font-semibold tabular-nums text-foreground">
-                  {fmtMxn(DEPOSIT_MXN)}
+                  {fmtMxn(DEPOSIT_MXN)}{" "}
+                  <span className="text-[10px] uppercase tracking-[0.2em] text-muted font-normal">
+                    {t.labels.plusVat}
+                  </span>
                 </div>
                 <div className="text-[11px] text-muted">{t.investment.depositCaption}</div>
               </div>
@@ -413,7 +416,10 @@ export default function Page() {
                   {t.investment.finalLabel}
                 </div>
                 <div className="mt-0.5 text-lg font-semibold tabular-nums text-foreground">
-                  {fmtMxn(FINAL_MXN)}
+                  {fmtMxn(FINAL_MXN)}{" "}
+                  <span className="text-[10px] uppercase tracking-[0.2em] text-muted font-normal">
+                    {t.labels.plusVat}
+                  </span>
                 </div>
                 <div className="text-[11px] text-muted">{t.investment.finalCaption}</div>
               </div>
@@ -753,6 +759,11 @@ function InvestmentRow({
         >
           {fmtMxn(price)}
         </div>
+        {price !== null && (
+          <div className="text-[10px] uppercase tracking-[0.2em] text-muted mt-0.5">
+            {t.labels.plusVat}
+          </div>
+        )}
       </div>
     </div>
   );

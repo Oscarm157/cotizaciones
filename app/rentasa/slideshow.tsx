@@ -13,17 +13,23 @@ const INTERVAL_MS = 3000;
 
 export function Slideshow() {
   const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
 
   useEffect(() => {
+    if (paused) return;
     const timer = setInterval(() => {
       setIndex((i) => (i + 1) % SLIDES.length);
     }, INTERVAL_MS);
     return () => clearInterval(timer);
-  }, []);
+  }, [paused]);
 
   return (
     <div>
-      <div className="screen-only relative w-full aspect-[16/10] rounded-xl overflow-hidden border border-card-border bg-primary/95">
+      <div
+        className="screen-only relative w-full aspect-[16/10] rounded-xl overflow-hidden border border-card-border bg-primary/95"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
         {SLIDES.map((slide, i) => (
           <div
             key={slide.src}

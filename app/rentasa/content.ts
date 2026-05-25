@@ -38,6 +38,7 @@ export const CONTENT = {
     noCharge: "Sin costo",
     acceptance: "Aceptación",
     pendingPrice: "Por definir",
+    plusVat: "+ IVA",
     signatureOf: (name: string) => `Firma de ${name}`,
   },
   phases: [
@@ -67,7 +68,7 @@ export const CONTENT = {
     items: [
       "El catálogo de propiedades vive en un PDF. No hay un sitio web que lo presente con imágenes, ficha técnica y filtros.",
       "Cada solicitud de información se atiende manualmente, sin captura estructurada en un formulario.",
-      "El sitio actual no comunica con claridad el portafolio ni la trayectoria del grupo.",
+      "La trayectoria de más de 30 años no llega a los prospectos por un canal digital propio.",
       "No hay métricas que indiquen qué propiedades o categorías generan más interés.",
     ],
   },
@@ -77,7 +78,7 @@ export const CONTENT = {
       "Catálogo de propiedades en línea, actualizable por el equipo de Rentasa en cualquier momento.",
       "Solicitudes estructuradas con datos del prospecto, propiedad de interés y forma de contacto.",
       "Sitio que presenta al grupo, el portafolio y el modelo de operación con claridad.",
-      "Reporte mensual con las propiedades y categorías más consultadas.",
+      "Métricas accesibles en Google Analytics con las propiedades y categorías más consultadas.",
     ],
   },
   benefits: {
@@ -272,10 +273,9 @@ export const CONTENT = {
     before: "el agente debe vincularse con una cuenta de",
     or: "o",
     middle:
-      ". El costo mensual de dicha cuenta se estima entre 10 y 30 USD mensuales con un tráfico regular de consultas, y corre por parte de Rentasa. La configuración y el entrenamiento del agente están incluidos en la presente cotización.",
+      ". El costo mensual de dicha cuenta se estima entre 10 y 30 USD (aproximadamente 180 a 550 MXN) con un tráfico regular de consultas, y corre por parte de Rentasa. La configuración y el entrenamiento del agente están incluidos en la presente cotización.",
   },
   autoadmin: {
-    title: "Módulo autoadministrable",
     titleLead: "Módulo",
     titleEmphasis: "autoadministrable",
     meta: "Panel propio",
@@ -304,7 +304,7 @@ export const CONTENT = {
     training:
       "Capacitación inicial del equipo incluida: una sesión guiada por el panel y manual breve con los procedimientos más usados.",
     migration:
-      "Migración del catálogo existente: el equipo de Rentasa entrega el listado actual (Excel, hoja de cálculo o sistema anterior) y Bravo Publicidad lo carga en el módulo antes de salir a producción.",
+      "Migración del catálogo existente: el equipo de Rentasa entrega el listado actual (PDF, Excel u otro sistema) y Bravo Publicidad lo carga en el módulo antes de salir a producción.",
   },
   investment: {
     title: "Inversión",
@@ -320,7 +320,7 @@ export const CONTENT = {
       sitio: {
         title: "Sitio web general y portal de propiedades",
         detail:
-          "Diseño, desarrollo y publicación del portal de 10 páginas. Incluye catálogo con filtros, plantilla reutilizable para ficha individual, formulario de contacto por propiedad y migración del catálogo existente.",
+          "Diseño, desarrollo y publicación del portal de 10 páginas. Incluye catálogo con filtros, plantilla reutilizable para ficha individual y formulario de contacto por propiedad.",
       },
       agente: {
         title: "Agente de ventas conversacional con IA 24/7",
@@ -339,6 +339,7 @@ export const CONTENT = {
       },
     },
     notes: [
+      "Todos los precios son más IVA (16%).",
       "Precios en pesos mexicanos (MXN).",
       "Formas de pago: transferencia o tarjeta.",
       "Factura disponible a solicitud.",
