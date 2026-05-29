@@ -28,12 +28,12 @@ export default function Page() {
         </div>
       </div>
 
-      {/* ─────────── PÁGINA 1 · PROPUESTA ─────────── */}
-      <article className="doc-page relative max-w-[900px] mx-auto px-8 sm:px-12 py-8 text-[14px] leading-relaxed">
+      {/* ─────────── PÁGINA 1 · PROPUESTA Y ALCANCE ─────────── */}
+      <article className="doc-page relative max-w-[900px] mx-auto px-8 sm:px-12 py-7 text-[14px] leading-relaxed">
         <PhaseBar active={1} phases={t.phases} />
 
         {/* Encabezado */}
-        <header className="flex items-start justify-between gap-6 pb-5 border-b border-card-border mt-5">
+        <header className="flex items-start justify-between gap-6 pb-4 border-b border-card-border mt-4">
           <div>
             <div className="flex items-center gap-2">
               <span className="text-xl font-semibold tracking-tight text-primary">
@@ -62,7 +62,7 @@ export default function Page() {
         </header>
 
         {/* Partes */}
-        <section className="grid grid-cols-1 sm:grid-cols-2 gap-6 py-5 border-b border-card-border">
+        <section className="grid grid-cols-1 sm:grid-cols-2 gap-6 py-4 border-b border-card-border">
           <div>
             <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-muted mb-1">
               {t.labels.from}
@@ -72,6 +72,7 @@ export default function Page() {
               {t.provider.roleLabel} · {t.provider.lead}
             </div>
             <div className="text-[12px] text-muted">{t.provider.email}</div>
+            <div className="text-[12px] text-accent">{t.provider.site}</div>
           </div>
           <div>
             <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-muted mb-1">
@@ -83,100 +84,123 @@ export default function Page() {
         </section>
 
         {/* Intro */}
-        <section className="pt-6">
+        <section className="pt-4">
           <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-accent">
             {t.intro.eyebrow}
           </div>
-          <h1 className="mt-1.5 text-[28px] sm:text-[32px] font-bold leading-[1.08] tracking-[-0.015em] text-primary">
+          <h1 className="mt-1 text-[24px] sm:text-[26px] font-bold leading-[1.1] tracking-[-0.015em] text-primary">
             {t.intro.titleLead}{" "}
             <em className="italic text-gradient-accent">{t.intro.titleEmphasis}</em>{" "}
             {t.intro.titleSuffix} {t.client.short}
           </h1>
-          <p className="mt-2 text-[13px] text-muted leading-relaxed max-w-2xl">
+          <p className="mt-1.5 text-[12.5px] text-muted leading-snug max-w-3xl">
             {t.intro.paragraph}
           </p>
         </section>
 
         {/* Antes / Después */}
-        <BeforeAfter />
-
-        <PageFooter label={t.labels.pageOf(1, 3)} />
-      </article>
-
-      {/* ─────────── PÁGINA 2 · SITIO Y REDES ─────────── */}
-      <article className="doc-page relative max-w-[900px] mx-auto px-8 sm:px-12 py-8 text-[14px] leading-relaxed page-break">
-        <PhaseBar active={2} phases={t.phases} />
-
-        <section className="mt-6">
-          <SectionTitle icon="check_circle" title={t.features.title} meta={t.features.meta} />
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-            {t.features.items.map((f) => (
-              <li
-                key={f.title}
-                className="rounded-xl border border-card-border bg-card p-3 flex gap-3"
+        <section className="mt-4 grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-2.5 items-stretch">
+          <div className="rounded-xl border border-card-border bg-surface-muted/70 p-3">
+            <div className="flex items-center gap-2 mb-1.5">
+              <span
+                className="material-symbols-outlined text-muted"
+                style={{ fontSize: 18, fontVariationSettings: "'wght' 500" }}
               >
-                <IconBadge icon={f.icon} />
-                <div className="min-w-0">
-                  <div className="text-[13px] font-semibold text-foreground leading-tight">
-                    {f.title}
-                  </div>
-                  <div className="text-[11.5px] text-muted mt-0.5 leading-snug">{f.detail}</div>
-                </div>
-              </li>
+                remove_circle
+              </span>
+              <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-muted">
+                {t.before.heading}
+              </div>
+            </div>
+            <ul className="space-y-1">
+              {t.before.items.map((text) => (
+                <li key={text} className="text-[11.5px] text-muted leading-snug flex gap-2">
+                  <span className="text-muted/50 mt-0.5">·</span>
+                  <span>{text}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="hidden md:flex items-center justify-center px-1">
+            <span
+              className="material-symbols-outlined text-accent"
+              style={{ fontSize: 24, fontVariationSettings: "'wght' 500" }}
+            >
+              arrow_forward
+            </span>
+          </div>
+          <div className="rounded-xl border border-primary bg-primary text-primary-foreground p-3">
+            <div className="flex items-center gap-2 mb-1.5">
+              <span
+                className="material-symbols-outlined text-accent-light"
+                style={{ fontSize: 18, fontVariationSettings: "'wght' 600" }}
+              >
+                check_circle
+              </span>
+              <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-accent-light">
+                {t.after.heading}
+              </div>
+            </div>
+            <ul className="space-y-1">
+              {t.after.items.map((text) => (
+                <li key={text} className="text-[11.5px] text-white/90 leading-snug flex gap-2">
+                  <span className="text-accent-light mt-0.5">+</span>
+                  <span>{text}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        {/* Qué incluye el sitio */}
+        <section className="mt-5">
+          <SectionTitle icon="check_circle" title={t.features.title} meta={t.features.meta} />
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {t.features.items.map((f) => (
+              <CompactItem key={f.title} icon={f.icon} title={f.title} detail={f.detail} />
             ))}
           </ul>
         </section>
 
-        <section className="mt-7">
+        {/* Páginas del sitio */}
+        <section className="mt-5">
           <SectionTitle icon="menu_book" title={t.pages.title} meta={t.pages.meta} />
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
             {t.pages.items.map((p) => (
               <li
                 key={p.name}
-                className="rounded-lg bg-card border border-card-border border-l-4 border-l-accent px-3 py-2.5"
+                className="rounded-lg bg-card border border-card-border border-l-4 border-l-accent px-3 py-1.5"
               >
-                <div className="text-[13px] font-semibold text-foreground">{p.name}</div>
-                <div className="text-[11.5px] text-muted mt-0.5 leading-snug">{p.detail}</div>
+                <div className="text-[12.5px] font-semibold text-foreground">{p.name}</div>
+                <div className="text-[11px] text-muted leading-snug">{p.detail}</div>
               </li>
             ))}
           </ul>
         </section>
 
-        <section className="mt-7">
-          <SectionTitle icon="share" title={t.social.title} meta={t.social.meta} />
-          <p className="text-[12px] text-muted leading-relaxed max-w-2xl mb-3">
-            {t.social.intro}
-          </p>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-            {t.social.items.map((s) => (
-              <li
-                key={s.title}
-                className="rounded-xl border border-card-border bg-card p-3 flex gap-3"
-              >
-                <IconBadge icon={s.icon} />
-                <div className="min-w-0">
-                  <div className="text-[13px] font-semibold text-foreground leading-tight">
-                    {s.title}
-                  </div>
-                  <div className="text-[11.5px] text-muted mt-0.5 leading-snug">{s.detail}</div>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        <PageFooter label={t.labels.pageOf(2, 3)} />
+        <PageFooter label={t.labels.pageOf(1, 2)} />
       </article>
 
-      {/* ─────────── PÁGINA 3 · INVERSIÓN ─────────── */}
-      <article className="doc-page relative max-w-[900px] mx-auto px-8 sm:px-12 py-8 text-[14px] leading-relaxed page-break">
-        <PhaseBar active={3} phases={t.phases} />
+      {/* ─────────── PÁGINA 2 · REDES E INVERSIÓN ─────────── */}
+      <article className="doc-page relative max-w-[900px] mx-auto px-8 sm:px-12 py-7 text-[14px] leading-relaxed page-break">
+        <PhaseBar active={2} phases={t.phases} />
 
-        <section className="mt-6">
+        {/* Redes sociales */}
+        <section className="mt-5">
+          <SectionTitle icon="share" title={t.social.title} meta={t.social.meta} />
+          <p className="text-[12px] text-muted leading-snug max-w-3xl mb-2.5">{t.social.intro}</p>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {t.social.items.map((s) => (
+              <CompactItem key={s.title} icon={s.icon} title={s.title} detail={s.detail} />
+            ))}
+          </ul>
+        </section>
+
+        {/* Inversión */}
+        <section className="mt-5">
           <SectionTitle icon="payments" title={t.investment.title} />
 
           <div className="rounded-xl border border-card-border bg-card overflow-hidden">
-            {/* Renglones */}
             <div className="divide-y divide-card-border">
               <InvestmentRow
                 icon="language"
@@ -191,7 +215,7 @@ export default function Page() {
                 price={fmtMxn(PRICE_REDES)}
               />
               {/* Hosting · cortesía */}
-              <div className="flex items-start gap-4 p-4 bg-accent/5">
+              <div className="flex items-start gap-4 p-3 bg-accent/5">
                 <IconBadge icon="dns" />
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
@@ -202,7 +226,7 @@ export default function Page() {
                       {t.labels.complimentaryBadge}
                     </span>
                   </div>
-                  <div className="text-[11.5px] text-muted mt-0.5 leading-snug max-w-md">
+                  <div className="text-[11px] text-muted mt-0.5 leading-snug max-w-md">
                     {t.investment.lines.hosting.detail}
                   </div>
                 </div>
@@ -215,12 +239,12 @@ export default function Page() {
             </div>
 
             {/* Total · dark */}
-            <div className="grid grid-cols-[1fr_auto] gap-4 p-4 border-t border-primary bg-primary text-primary-foreground">
+            <div className="grid grid-cols-[1fr_auto] gap-4 p-3.5 border-t border-primary bg-primary text-primary-foreground">
               <div>
                 <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-accent-light mb-0.5">
                   {t.investment.oneTimeLabel}
                 </div>
-                <div className="text-[12px] text-white/70 leading-snug max-w-md">
+                <div className="text-[11.5px] text-white/70 leading-snug max-w-md">
                   {t.investment.totalFootnote}
                 </div>
               </div>
@@ -236,7 +260,7 @@ export default function Page() {
 
             {/* Anticipo / liquidación */}
             <div className="grid grid-cols-2 divide-x divide-card-border border-t border-card-border">
-              <div className="p-4">
+              <div className="p-3.5">
                 <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-muted">
                   {t.investment.depositLabel}
                 </div>
@@ -245,7 +269,7 @@ export default function Page() {
                 </div>
                 <div className="text-[11px] text-muted">{t.investment.depositCaption}</div>
               </div>
-              <div className="p-4">
+              <div className="p-3.5">
                 <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-muted">
                   {t.investment.finalLabel}
                 </div>
@@ -257,7 +281,7 @@ export default function Page() {
             </div>
           </div>
 
-          <ul className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1 text-[11.5px] text-muted">
+          <ul className="mt-2.5 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-0.5 text-[11px] text-muted">
             {t.investment.notes.map((n) => (
               <li key={n}>• {n}</li>
             ))}
@@ -265,37 +289,55 @@ export default function Page() {
           </ul>
         </section>
 
-        <section className="mt-6 rounded-xl bg-surface-muted border border-card-border p-4">
-          <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-accent mb-1.5">
+        {/* Siguiente paso */}
+        <section className="mt-4 rounded-xl bg-surface-muted border border-card-border p-3.5">
+          <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-accent mb-1">
             {t.nextStep.label}
           </div>
-          <p className="text-[13px] text-foreground/90 leading-relaxed">
+          <p className="text-[12.5px] text-foreground/90 leading-snug">
             {t.nextStep.textBefore}{" "}
             <span className="font-semibold text-foreground">{fmtMxn(DEPOSIT)}</span>{" "}
             {t.nextStep.textAfter}
           </p>
         </section>
 
-        <footer className="mt-8 pt-5 border-t border-card-border flex items-end justify-between gap-6">
+        {/* Firma + QR */}
+        <footer className="mt-5 pt-4 border-t border-card-border flex items-end justify-between gap-6">
           <div>
             <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-muted">
               {t.labels.acceptance}
             </div>
-            <div className="mt-8 w-60 border-t border-primary/60" />
+            <div className="mt-7 w-56 border-t border-primary/60" />
             <div className="mt-1 text-[11.5px] text-muted">
               {t.labels.signatureOf(t.client.short)}
             </div>
           </div>
-          <div className="text-right">
-            <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-muted">
-              {t.provider.name}
+          <div className="flex items-end gap-3">
+            <div className="text-right">
+              <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-muted">
+                {t.provider.name}
+              </div>
+              <div className="mt-0.5 text-[13px] text-primary font-semibold">{t.provider.lead}</div>
+              <div className="text-[11.5px] text-muted">{t.provider.email}</div>
+              <div className="text-[11.5px] text-accent">{t.provider.site}</div>
             </div>
-            <div className="mt-0.5 text-[13px] text-primary font-semibold">{t.provider.lead}</div>
-            <div className="text-[11.5px] text-muted">{t.provider.email}</div>
+            <div className="flex flex-col items-center shrink-0">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/qr-bravo.png"
+                alt={`QR ${t.provider.site}`}
+                width={64}
+                height={64}
+                className="w-16 h-16 rounded-md border border-card-border"
+              />
+              <span className="mt-1 text-[9px] uppercase tracking-[0.14em] text-muted/80 text-center leading-tight max-w-[64px]">
+                {t.provider.qrCaption}
+              </span>
+            </div>
           </div>
         </footer>
 
-        <PageFooter label={t.labels.pageOf(3, 3)} />
+        <PageFooter label={t.labels.pageOf(2, 2)} />
       </article>
 
       <style>{`
@@ -350,17 +392,36 @@ function IconBadge({ icon }: { icon: string }) {
   );
 }
 
+function CompactItem({ icon, title, detail }: { icon: string; title: string; detail: string }) {
+  return (
+    <li className="rounded-lg border border-card-border bg-card p-2.5 flex gap-2.5">
+      <div className="shrink-0 w-7 h-7 rounded-md bg-accent/10 text-accent flex items-center justify-center">
+        <span
+          className="material-symbols-outlined"
+          style={{ fontSize: 16, fontVariationSettings: "'wght' 500, 'FILL' 0" }}
+        >
+          {icon}
+        </span>
+      </div>
+      <div className="min-w-0">
+        <div className="text-[12.5px] font-semibold text-foreground leading-tight">{title}</div>
+        <div className="text-[11px] text-muted mt-0.5 leading-snug">{detail}</div>
+      </div>
+    </li>
+  );
+}
+
 function PhaseBar({
   active,
   phases,
 }: {
-  active: 1 | 2 | 3;
+  active: 1 | 2;
   phases: readonly { num: string; name: string }[];
 }) {
   return (
     <div className="flex items-center gap-3 w-full">
       {phases.map((p, i) => {
-        const idx = (i + 1) as 1 | 2 | 3;
+        const idx = (i + 1) as 1 | 2;
         const done = idx < active;
         const current = idx === active;
         return (
@@ -387,9 +448,7 @@ function PhaseBar({
             </div>
             {i < phases.length - 1 && (
               <div
-                className={`h-px flex-1 min-w-[10px] ${
-                  done ? "bg-accent/40" : "bg-card-border"
-                }`}
+                className={`h-px flex-1 min-w-[10px] ${done ? "bg-accent/40" : "bg-card-border"}`}
               />
             )}
           </Fragment>
@@ -399,17 +458,9 @@ function PhaseBar({
   );
 }
 
-function SectionTitle({
-  icon,
-  title,
-  meta,
-}: {
-  icon: string;
-  title: string;
-  meta?: string;
-}) {
+function SectionTitle({ icon, title, meta }: { icon: string; title: string; meta?: string }) {
   return (
-    <div className="flex items-center justify-between rounded-xl bg-primary text-primary-foreground px-4 py-2.5 mb-4 gap-3">
+    <div className="flex items-center justify-between rounded-xl bg-primary text-primary-foreground px-4 py-2 mb-3 gap-3">
       <div className="flex items-center gap-2.5 min-w-0">
         <span
           className="material-symbols-outlined text-accent shrink-0"
@@ -417,7 +468,7 @@ function SectionTitle({
         >
           {icon}
         </span>
-        <h2 className="text-[16px] font-bold tracking-tight leading-tight">{title}</h2>
+        <h2 className="text-[15px] font-bold tracking-tight leading-tight">{title}</h2>
       </div>
       {meta && (
         <span className="text-[10px] uppercase tracking-[0.22em] font-semibold text-white/60 shrink-0 whitespace-nowrap">
@@ -425,68 +476,6 @@ function SectionTitle({
         </span>
       )}
     </div>
-  );
-}
-
-function BeforeAfter() {
-  return (
-    <section className="mt-6 grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-3 items-stretch">
-      {/* Antes */}
-      <div className="rounded-xl border border-card-border bg-surface-muted/70 p-4">
-        <div className="flex items-center gap-2 mb-2">
-          <span
-            className="material-symbols-outlined text-muted"
-            style={{ fontSize: 20, fontVariationSettings: "'wght' 500" }}
-          >
-            remove_circle
-          </span>
-          <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-muted">
-            {t.before.heading}
-          </div>
-        </div>
-        <ul className="space-y-1.5">
-          {t.before.items.map((text) => (
-            <li key={text} className="text-[12px] text-muted leading-snug flex gap-2">
-              <span className="text-muted/50 mt-0.5">·</span>
-              <span>{text}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* Flecha */}
-      <div className="hidden md:flex items-center justify-center px-1">
-        <span
-          className="material-symbols-outlined text-accent"
-          style={{ fontSize: 28, fontVariationSettings: "'wght' 500" }}
-        >
-          arrow_forward
-        </span>
-      </div>
-
-      {/* Después · dark */}
-      <div className="rounded-xl border border-primary bg-primary text-primary-foreground p-4">
-        <div className="flex items-center gap-2 mb-2">
-          <span
-            className="material-symbols-outlined text-accent-light"
-            style={{ fontSize: 20, fontVariationSettings: "'wght' 600" }}
-          >
-            check_circle
-          </span>
-          <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-accent-light">
-            {t.after.heading}
-          </div>
-        </div>
-        <ul className="space-y-1.5">
-          {t.after.items.map((text) => (
-            <li key={text} className="text-[12px] text-white/90 leading-snug flex gap-2">
-              <span className="text-accent-light mt-0.5">+</span>
-              <span>{text}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
   );
 }
 
@@ -502,11 +491,11 @@ function InvestmentRow({
   price: string;
 }) {
   return (
-    <div className="flex items-start gap-4 p-4">
+    <div className="flex items-start gap-4 p-3">
       <IconBadge icon={icon} />
       <div className="flex-1 min-w-0">
         <div className="text-[13px] font-semibold text-foreground">{title}</div>
-        <div className="text-[11.5px] text-muted mt-0.5 leading-snug max-w-md">{detail}</div>
+        <div className="text-[11px] text-muted mt-0.5 leading-snug max-w-md">{detail}</div>
       </div>
       <div className="text-right shrink-0 tabular-nums">
         <div className="text-lg font-semibold text-foreground">{price}</div>
@@ -518,7 +507,7 @@ function InvestmentRow({
 
 function PageFooter({ label }: { label: string }) {
   return (
-    <div className="mt-6 text-right text-[10px] uppercase tracking-[0.22em] text-muted/70">
+    <div className="mt-5 text-right text-[10px] uppercase tracking-[0.22em] text-muted/70">
       {label}
     </div>
   );

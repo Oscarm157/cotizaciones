@@ -16,6 +16,9 @@ export const CONTENT = {
     lead: "Oscar Amayoral",
     email: "oscar.amayoral@gmail.com",
     roleLabel: "Responsable",
+    site: "bravopublicidad.webflow.io",
+    siteUrl: "https://bravopublicidad.webflow.io/",
+    qrCaption: "Escanea para ver el sitio",
   },
   client: {
     name: "Daniel Alejandro Pescador Silva",
@@ -40,9 +43,8 @@ export const CONTENT = {
     signatureOf: (name: string) => `Firma de ${name}`,
   },
   phases: [
-    { num: "01", name: "Propuesta" },
-    { num: "02", name: "Sitio y redes" },
-    { num: "03", name: "Inversión" },
+    { num: "01", name: "Propuesta y alcance" },
+    { num: "02", name: "Inversión" },
   ],
   intro: {
     eyebrow: "Propuesta · Sitio web + Gestión de redes sociales",
