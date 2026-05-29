@@ -15,6 +15,13 @@ const QUOTES = [
     folio: "384",
     date: "23 de abril de 2026",
   },
+  {
+    slug: "pescador",
+    title: "Daniel Alejandro Pescador Silva",
+    subtitle: "Sitio web 5 páginas + Gestión de redes",
+    folio: "WB-134",
+    date: "29 de mayo de 2026",
+  },
 ];
 
 export default function Page() {
