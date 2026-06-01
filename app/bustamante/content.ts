@@ -38,7 +38,6 @@ export const CONTENT = {
       from: "De",
       preparedFor: "Preparado para",
       printPdf: "Imprimir / PDF",
-      pageOf: (cur: number, total: number) => `Página ${cur} · ${total}`,
       toolbarLabel: (folio: string, client: string) =>
         `Cotización ${folio} · ${client}`,
       included: "Incluido",
@@ -46,12 +45,6 @@ export const CONTENT = {
       acceptance: "Aceptación",
       signatureOf: (name: string) => `Firma de ${name}`,
     },
-    phases: [
-      { num: "01", name: "Propuesta" },
-      { num: "02", name: "El sitio" },
-      { num: "03", name: "Contenido" },
-      { num: "04", name: "Inversión" },
-    ],
     intro: {
       eyebrow: "Propuesta · Sitio web profesional de servicios legales",
       titleLead: "Sitio web profesional de",
@@ -215,6 +208,7 @@ export const CONTENT = {
       status: "En línea · responde en segundos",
       badge: "Ejemplo",
       placeholder: "Escriba su mensaje…",
+      typing: "escribiendo…",
     },
     chat: [
       {
@@ -335,19 +329,12 @@ export const CONTENT = {
       from: "From",
       preparedFor: "Prepared for",
       printPdf: "Print / PDF",
-      pageOf: (cur: number, total: number) => `Page ${cur} of ${total}`,
       toolbarLabel: (folio: string, client: string) => `Quote ${folio} · ${client}`,
       included: "Included",
       optional: "Optional",
       acceptance: "Acceptance",
       signatureOf: (name: string) => `Signed by ${name}`,
     },
-    phases: [
-      { num: "01", name: "Proposal" },
-      { num: "02", name: "The site" },
-      { num: "03", name: "Content" },
-      { num: "04", name: "Investment" },
-    ],
     intro: {
       eyebrow: "Proposal · Professional website for legal services",
       titleLead: "Professional website for",
@@ -511,6 +498,7 @@ export const CONTENT = {
       status: "Online · replies in seconds",
       badge: "Sample",
       placeholder: "Type your message…",
+      typing: "typing…",
     },
     chat: [
       {
