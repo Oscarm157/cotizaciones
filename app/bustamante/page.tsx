@@ -33,7 +33,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
 
       {/* Toolbar — solo pantalla */}
       <div className="no-print sticky top-0 z-20 border-b border-card-border bg-background/80 backdrop-blur">
-        <div className="max-w-[900px] mx-auto px-6 py-3 flex items-center justify-between gap-3">
+        <div className="max-w-[860px] mx-auto px-6 py-3 flex items-center justify-between gap-3">
           <div className="text-[11px] uppercase tracking-[0.22em] font-semibold text-muted truncate">
             {t.labels.toolbarLabel(FOLIO, t.client.short)}
           </div>
@@ -44,12 +44,11 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
         </div>
       </div>
 
-      {/* ─────────── PÁGINA 1 · PROPUESTA ─────────── */}
-      <article className="doc-page relative max-w-[900px] mx-auto px-8 sm:px-12 py-8 text-[14px] leading-relaxed">
-        <PhaseBar active={1} phases={t.phases} />
+      <article className="doc relative max-w-[860px] mx-auto px-8 sm:px-12 py-9 text-[13px] leading-relaxed">
+        <PhaseIndex phases={t.phases} />
 
         {/* Encabezado */}
-        <header className="flex items-start justify-between gap-6 pb-5 border-b border-card-border mt-5">
+        <header className="keep flex items-start justify-between gap-6 pb-4 border-b border-card-border mt-5">
           <div>
             <div className="flex items-center gap-2">
               <span className="text-xl font-semibold tracking-tight text-primary">
@@ -78,7 +77,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
         </header>
 
         {/* Partes */}
-        <section className="grid grid-cols-1 sm:grid-cols-2 gap-6 py-5 border-b border-card-border">
+        <section className="keep grid grid-cols-1 sm:grid-cols-2 gap-6 py-4 border-b border-card-border">
           <div>
             <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-muted mb-1">
               {t.labels.from}
@@ -99,16 +98,16 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
         </section>
 
         {/* Intro */}
-        <section className="pt-6">
+        <section className="keep pt-5">
           <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-accent">
             {t.intro.eyebrow}
           </div>
-          <h1 className="mt-1.5 text-[28px] sm:text-[32px] font-bold leading-[1.08] tracking-[-0.015em] text-primary">
+          <h1 className="mt-1.5 text-[24px] sm:text-[27px] font-bold leading-[1.1] tracking-[-0.015em] text-primary">
             {t.intro.titleLead}{" "}
             <em className="italic text-gradient-accent">{t.intro.titleEmphasis}</em>{" "}
             {t.intro.titleSuffix} {t.client.short}
           </h1>
-          <p className="mt-2 text-[13px] text-muted leading-relaxed max-w-2xl">
+          <p className="mt-2 text-[12.5px] text-muted leading-relaxed max-w-2xl">
             {t.intro.paragraph}
           </p>
         </section>
@@ -119,42 +118,30 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
         {/* Beneficios en el día a día */}
         <section className="mt-6">
           <SectionTitle icon="auto_awesome" title={t.benefits.title} meta={t.benefits.meta} />
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             {t.benefits.items.map((b) => (
-              <li
-                key={b.title}
-                className="rounded-xl bg-card border border-card-border p-3.5 flex gap-3"
-              >
+              <li key={b.title} className="rounded-xl bg-card border border-card-border p-3 flex gap-3">
                 <IconBadge icon={b.icon} />
                 <div className="min-w-0">
-                  <div className="text-[13px] font-semibold text-foreground leading-tight">
+                  <div className="text-[12.5px] font-semibold text-foreground leading-tight">
                     {b.title}
                   </div>
-                  <div className="text-[11.5px] text-muted mt-1 leading-snug">{b.detail}</div>
+                  <div className="text-[11.5px] text-muted mt-0.5 leading-snug">{b.detail}</div>
                 </div>
               </li>
             ))}
           </ul>
         </section>
 
-        <PageFooter label={t.labels.pageOf(1, 4)} />
-      </article>
-
-      {/* ─────────── PÁGINA 2 · EL SITIO ─────────── */}
-      <article className="doc-page relative max-w-[900px] mx-auto px-8 sm:px-12 py-8 text-[14px] leading-relaxed page-break">
-        <PhaseBar active={2} phases={t.phases} />
-
+        {/* Qué incluye el sitio */}
         <section className="mt-6">
           <SectionTitle icon="check_circle" title={t.features.title} meta={t.features.meta} />
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             {t.features.items.map((f) => (
-              <li
-                key={f.title}
-                className="rounded-xl border border-card-border bg-card p-3 flex gap-3"
-              >
+              <li key={f.title} className="rounded-xl border border-card-border bg-card p-3 flex gap-3">
                 <IconBadge icon={f.icon} />
                 <div className="min-w-0">
-                  <div className="text-[13px] font-semibold text-foreground leading-tight">
+                  <div className="text-[12.5px] font-semibold text-foreground leading-tight">
                     {f.title}
                   </div>
                   <div className="text-[11.5px] text-muted mt-0.5 leading-snug">{f.detail}</div>
@@ -164,27 +151,21 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
           </ul>
         </section>
 
-        <section className="mt-7">
+        {/* Páginas del sitio */}
+        <section className="mt-6">
           <SectionTitle icon="menu_book" title={t.pages.title} meta={t.pages.meta} />
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {t.pages.items.map((p) => (
               <li
                 key={p.name}
-                className="rounded-lg bg-card border border-card-border border-l-4 border-l-accent px-3 py-2.5"
+                className="rounded-lg bg-card border border-card-border border-l-4 border-l-accent px-3 py-2"
               >
-                <div className="text-[13px] font-semibold text-foreground">{p.name}</div>
+                <div className="text-[12.5px] font-semibold text-foreground">{p.name}</div>
                 <div className="text-[11.5px] text-muted mt-0.5 leading-snug">{p.detail}</div>
               </li>
             ))}
           </ul>
         </section>
-
-        <PageFooter label={t.labels.pageOf(2, 4)} />
-      </article>
-
-      {/* ─────────── PÁGINA 3 · CONTENIDO ─────────── */}
-      <article className="doc-page relative max-w-[900px] mx-auto px-8 sm:px-12 py-8 text-[14px] leading-relaxed page-break">
-        <PhaseBar active={3} phases={t.phases} />
 
         {/* Áreas de práctica */}
         <section className="mt-6">
@@ -196,11 +177,11 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
             {t.practiceAreas.items.map((c) => (
               <li
                 key={c.name}
-                className="rounded-lg bg-card border border-card-border px-3 py-2.5 flex gap-3"
+                className="rounded-lg bg-card border border-card-border px-3 py-2 flex gap-3"
               >
                 <IconBadge icon={c.icon} small />
                 <div className="min-w-0">
-                  <div className="text-[13px] font-semibold text-foreground leading-tight">
+                  <div className="text-[12.5px] font-semibold text-foreground leading-tight">
                     {c.name}
                   </div>
                   <div className="text-[11.5px] text-muted mt-0.5 leading-snug">{c.detail}</div>
@@ -210,8 +191,8 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
           </ul>
         </section>
 
-        {/* Agente con IA */}
-        <section className="mt-7">
+        {/* Agente de ventas con IA */}
+        <section className="mt-6">
           <SectionTitle
             icon="smart_toy"
             title={t.agent.titleLead}
@@ -222,13 +203,12 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
             {t.agent.intro}
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Qué hace · cards en dark */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <ul className="grid grid-cols-1 gap-2">
               {t.agent.features.map((a) => (
                 <li
                   key={a.title}
-                  className="rounded-lg bg-primary text-primary-foreground border border-primary/30 p-3 flex gap-3"
+                  className="keep rounded-lg bg-primary text-primary-foreground border border-primary/30 p-2.5 flex gap-3"
                 >
                   <div className="shrink-0 w-8 h-8 rounded-lg bg-accent/20 text-accent-light flex items-center justify-center">
                     <span
@@ -239,21 +219,17 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
                     </span>
                   </div>
                   <div className="min-w-0">
-                    <div className="text-[13px] font-semibold leading-tight">{a.title}</div>
-                    <div className="text-[11.5px] text-white/70 mt-0.5 leading-snug">
-                      {a.detail}
-                    </div>
+                    <div className="text-[12.5px] font-semibold leading-tight">{a.title}</div>
+                    <div className="text-[11.5px] text-white/70 mt-0.5 leading-snug">{a.detail}</div>
                   </div>
                 </li>
               ))}
             </ul>
 
-            {/* Mock de chat */}
             <ChatMock t={t} />
           </div>
 
-          {/* Nota de integración */}
-          <div className="mt-3 rounded-lg bg-accent/10 border border-accent/30 px-3 py-2.5 flex items-start gap-2.5">
+          <div className="keep mt-3 rounded-lg bg-accent/10 border border-accent/30 px-3 py-2.5 flex items-start gap-2.5">
             <span
               className="material-symbols-outlined text-accent shrink-0 mt-0.5"
               style={{ fontSize: 18, fontVariationSettings: "'wght' 600" }}
@@ -269,18 +245,11 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
           </div>
         </section>
 
-        <PageFooter label={t.labels.pageOf(3, 4)} />
-      </article>
-
-      {/* ─────────── PÁGINA 4 · INVERSIÓN ─────────── */}
-      <article className="doc-page relative max-w-[900px] mx-auto px-8 sm:px-12 py-8 text-[14px] leading-relaxed page-break">
-        <PhaseBar active={4} phases={t.phases} />
-
+        {/* Inversión */}
         <section className="mt-6">
           <SectionTitle icon="payments" title={t.investment.title} />
 
-          <div className="rounded-xl border border-card-border bg-card overflow-hidden">
-            {/* Renglones */}
+          <div className="keep rounded-xl border border-card-border bg-card overflow-hidden">
             <div className="divide-y divide-card-border">
               <InvestmentRow
                 icon="language"
@@ -303,7 +272,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
             </div>
 
             {/* Total · dark */}
-            <div className="grid grid-cols-[1fr_auto] gap-4 p-4 border-t border-primary bg-primary text-primary-foreground">
+            <div className="grid grid-cols-[1fr_auto] gap-4 p-3.5 border-t border-primary bg-primary text-primary-foreground">
               <div>
                 <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-accent-light mb-0.5">
                   {t.investment.oneTimeLabel}
@@ -324,7 +293,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
 
             {/* Anticipo / liquidación */}
             <div className="grid grid-cols-2 divide-x divide-card-border border-t border-card-border">
-              <div className="p-4">
+              <div className="p-3.5">
                 <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-muted">
                   {t.investment.depositLabel}
                 </div>
@@ -333,7 +302,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
                 </div>
                 <div className="text-[11px] text-muted">{t.investment.depositCaption}</div>
               </div>
-              <div className="p-4">
+              <div className="p-3.5">
                 <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-muted">
                   {t.investment.finalLabel}
                 </div>
@@ -346,7 +315,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
           </div>
 
           {/* Mantenimiento anual */}
-          <div className="mt-4 rounded-xl border border-card-border bg-card overflow-hidden">
+          <div className="keep mt-4 rounded-xl border border-card-border bg-card overflow-hidden">
             <div className="flex items-center justify-between bg-surface-muted/60 px-4 py-2.5 border-b border-card-border gap-3">
               <div className="flex items-center gap-2.5 min-w-0">
                 <span
@@ -398,18 +367,20 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
           </ul>
         </section>
 
-        <section className="mt-6 rounded-xl bg-surface-muted border border-card-border p-4">
+        {/* Siguiente paso */}
+        <section className="keep mt-5 rounded-xl bg-surface-muted border border-card-border p-3.5">
           <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-accent mb-1.5">
             {t.nextStep.label}
           </div>
-          <p className="text-[13px] text-foreground/90 leading-relaxed">
+          <p className="text-[12.5px] text-foreground/90 leading-relaxed">
             {t.nextStep.textBefore}{" "}
             <span className="font-semibold text-foreground">{fmtMxn(DEPOSIT)}</span>{" "}
             {t.nextStep.textAfter}
           </p>
         </section>
 
-        <footer className="mt-8 pt-5 border-t border-card-border flex items-end justify-between gap-6">
+        {/* Firma */}
+        <footer className="keep mt-7 pt-5 border-t border-card-border flex items-end justify-between gap-6">
           <div>
             <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-muted">
               {t.labels.acceptance}
@@ -427,12 +398,10 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
             <div className="text-[11.5px] text-muted">{t.provider.email}</div>
           </div>
         </footer>
-
-        <PageFooter label={t.labels.pageOf(4, 4)} />
       </article>
 
       <style>{`
-        @page { size: Letter; margin: 10mm 12mm; }
+        @page { size: Letter; margin: 12mm; }
         @media print {
           .no-print { display: none !important; }
           html, body {
@@ -440,27 +409,17 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
             -webkit-print-color-adjust: exact;
             print-color-adjust: exact;
           }
-          .doc-page {
+          .doc {
             padding: 0 !important;
             max-width: 100% !important;
-            break-inside: avoid-page;
-            page-break-inside: avoid;
-            break-after: page;
-            page-break-after: always;
-            -webkit-print-color-adjust: exact;
-            print-color-adjust: exact;
           }
-          .doc-page:last-of-type {
-            break-after: auto;
-            page-break-after: auto;
-          }
-          .page-break {
-            break-before: auto !important;
-            page-break-before: auto !important;
-          }
-          article section, article ul li, article header, article footer {
+          article ul > li, .keep {
             break-inside: avoid;
             page-break-inside: avoid;
+          }
+          article h1, article h2, article h3 {
+            break-after: avoid;
+            page-break-after: avoid;
           }
         }
       `}</style>
@@ -471,8 +430,8 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
 /* ────────── Helpers locales ────────── */
 
 function IconBadge({ icon, small = false }: { icon: string; small?: boolean }) {
-  const size = small ? "w-8 h-8" : "w-10 h-10";
-  const iconSize = small ? 18 : 22;
+  const size = small ? "w-8 h-8" : "w-9 h-9";
+  const iconSize = small ? 18 : 20;
   return (
     <div
       className={`shrink-0 ${size} rounded-lg bg-accent/10 text-accent flex items-center justify-center`}
@@ -487,51 +446,22 @@ function IconBadge({ icon, small = false }: { icon: string; small?: boolean }) {
   );
 }
 
-function PhaseBar({
-  active,
-  phases,
-}: {
-  active: 1 | 2 | 3 | 4;
-  phases: readonly { num: string; name: string }[];
-}) {
+function PhaseIndex({ phases }: { phases: readonly { num: string; name: string }[] }) {
   return (
     <div className="flex items-center gap-3 w-full">
-      {phases.map((p, i) => {
-        const idx = (i + 1) as 1 | 2 | 3 | 4;
-        const done = idx < active;
-        const current = idx === active;
-        return (
-          <Fragment key={p.num}>
-            <div className="flex items-center gap-2 shrink-0">
-              <div
-                className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-mono font-semibold tabular-nums ${
-                  current
-                    ? "bg-accent text-white"
-                    : done
-                    ? "bg-accent/20 text-accent"
-                    : "bg-surface-muted text-muted"
-                }`}
-              >
-                {p.num}
-              </div>
-              <span
-                className={`text-[10.5px] uppercase tracking-[0.18em] font-semibold whitespace-nowrap ${
-                  current ? "text-primary" : done ? "text-accent" : "text-muted"
-                }`}
-              >
-                {p.name}
-              </span>
+      {phases.map((p, i) => (
+        <Fragment key={p.num}>
+          <div className="flex items-center gap-2 shrink-0">
+            <div className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-mono font-semibold tabular-nums bg-accent/15 text-accent">
+              {p.num}
             </div>
-            {i < phases.length - 1 && (
-              <div
-                className={`h-px flex-1 min-w-[10px] ${
-                  done ? "bg-accent/40" : "bg-card-border"
-                }`}
-              />
-            )}
-          </Fragment>
-        );
-      })}
+            <span className="text-[10.5px] uppercase tracking-[0.18em] font-semibold whitespace-nowrap text-muted">
+              {p.name}
+            </span>
+          </div>
+          {i < phases.length - 1 && <div className="h-px flex-1 min-w-[10px] bg-card-border" />}
+        </Fragment>
+      ))}
     </div>
   );
 }
@@ -548,7 +478,7 @@ function SectionTitle({
   emphasis?: string;
 }) {
   return (
-    <div className="flex items-center justify-between rounded-xl bg-primary text-primary-foreground px-4 py-2.5 mb-4 gap-3">
+    <div className="flex items-center justify-between rounded-xl bg-primary text-primary-foreground px-4 py-2 mb-3 gap-3">
       <div className="flex items-center gap-2.5 min-w-0">
         <span
           className="material-symbols-outlined text-accent shrink-0"
@@ -556,7 +486,7 @@ function SectionTitle({
         >
           {icon}
         </span>
-        <h2 className="text-[16px] font-bold tracking-tight leading-tight">
+        <h2 className="text-[15px] font-bold tracking-tight leading-tight">
           {title}
           {emphasis && (
             <>
@@ -577,9 +507,9 @@ function SectionTitle({
 
 function BeforeAfter({ t }: { t: typeof CONTENT[Lang] }) {
   return (
-    <section className="mt-6 grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-3 items-stretch">
+    <section className="keep mt-5 grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-3 items-stretch">
       {/* Antes */}
-      <div className="rounded-xl border border-card-border bg-surface-muted/70 p-4">
+      <div className="rounded-xl border border-card-border bg-surface-muted/70 p-3.5">
         <div className="flex items-center gap-2 mb-2">
           <span
             className="material-symbols-outlined text-muted"
@@ -591,9 +521,9 @@ function BeforeAfter({ t }: { t: typeof CONTENT[Lang] }) {
             {t.before.heading}
           </div>
         </div>
-        <ul className="space-y-1.5">
+        <ul className="space-y-1">
           {t.before.items.map((text) => (
-            <li key={text} className="text-[12px] text-muted leading-snug flex gap-2">
+            <li key={text} className="text-[11.5px] text-muted leading-snug flex gap-2">
               <span className="text-muted/50 mt-0.5">·</span>
               <span>{text}</span>
             </li>
@@ -605,14 +535,14 @@ function BeforeAfter({ t }: { t: typeof CONTENT[Lang] }) {
       <div className="hidden md:flex items-center justify-center px-1">
         <span
           className="material-symbols-outlined text-accent"
-          style={{ fontSize: 28, fontVariationSettings: "'wght' 500" }}
+          style={{ fontSize: 26, fontVariationSettings: "'wght' 500" }}
         >
           arrow_forward
         </span>
       </div>
 
       {/* Después · dark */}
-      <div className="rounded-xl border border-primary bg-primary text-primary-foreground p-4">
+      <div className="rounded-xl border border-primary bg-primary text-primary-foreground p-3.5">
         <div className="flex items-center gap-2 mb-2">
           <span
             className="material-symbols-outlined text-accent-light"
@@ -624,9 +554,9 @@ function BeforeAfter({ t }: { t: typeof CONTENT[Lang] }) {
             {t.after.heading}
           </div>
         </div>
-        <ul className="space-y-1.5">
+        <ul className="space-y-1">
           {t.after.items.map((text) => (
-            <li key={text} className="text-[12px] text-white/90 leading-snug flex gap-2">
+            <li key={text} className="text-[11.5px] text-white/90 leading-snug flex gap-2">
               <span className="text-accent-light mt-0.5">+</span>
               <span>{text}</span>
             </li>
@@ -639,7 +569,7 @@ function BeforeAfter({ t }: { t: typeof CONTENT[Lang] }) {
 
 function ChatMock({ t }: { t: typeof CONTENT[Lang] }) {
   return (
-    <div className="rounded-xl border border-card-border bg-card overflow-hidden flex flex-col">
+    <div className="keep rounded-xl border border-card-border bg-card overflow-hidden flex flex-col">
       {/* Header del chat */}
       <div className="flex items-center gap-2 px-3 py-2 border-b border-card-border bg-surface-muted/60">
         <div className="w-6 h-6 rounded-full bg-accent/15 text-accent flex items-center justify-center">
@@ -710,7 +640,7 @@ function InvestmentRow({
   price: string;
 }) {
   return (
-    <div className="flex items-start gap-4 p-4">
+    <div className="flex items-start gap-4 p-3">
       <IconBadge icon={icon} />
       <div className="flex-1 min-w-0">
         <div className="text-[13px] font-semibold text-foreground">{title}</div>
@@ -719,14 +649,6 @@ function InvestmentRow({
       <div className="text-right shrink-0 tabular-nums">
         <div className="text-lg font-semibold text-foreground">{price}</div>
       </div>
-    </div>
-  );
-}
-
-function PageFooter({ label }: { label: string }) {
-  return (
-    <div className="mt-6 text-right text-[10px] uppercase tracking-[0.22em] text-muted/70">
-      {label}
     </div>
   );
 }
