@@ -13,6 +13,7 @@ import {
 } from "./content";
 import { PrintButton } from "./print-button";
 import { Slideshow } from "./slideshow";
+import { LiveChat } from "./live-chat";
 
 const t = CONTENT;
 
@@ -39,11 +40,71 @@ export default function Page() {
         </div>
       </div>
 
+      {/* ─────────── HERO (solo pantalla) ─────────── */}
+      <section className="screen-only slide-dark relative overflow-hidden">
+        <div className="grid-bg absolute inset-0 opacity-70" aria-hidden />
+        <div
+          className="spotlight-accent absolute -top-1/3 left-1/2 -translate-x-1/2 w-[120%] h-[140%] pointer-events-none"
+          aria-hidden
+        />
+        <div className="relative max-w-[900px] mx-auto px-6 sm:px-10 pt-12 pb-14 hero-fade-in">
+          <div className="flex items-center gap-2">
+            <span className="text-[15px] font-semibold tracking-tight text-white">
+              {t.provider.name}
+            </span>
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-accent-light" />
+            <span className="text-[12px] text-white/55">{t.provider.tagline}</span>
+          </div>
+
+          <div className="mt-9 text-[11px] uppercase tracking-[0.24em] font-semibold text-accent-light">
+            {t.intro.eyebrow}
+          </div>
+          <h1 className="mt-2 text-[32px] sm:text-[48px] font-bold leading-[1.06] tracking-[-0.02em] text-white max-w-[18ch]">
+            {t.intro.titleLead}{" "}
+            <em className="italic text-gradient-accent">{t.intro.titleEmphasis}</em>{" "}
+            {t.intro.titleSuffix} {t.client.short}
+          </h1>
+          <p className="mt-4 text-[13.5px] sm:text-[14px] text-white/70 leading-relaxed max-w-[62ch]">
+            {t.intro.paragraph}
+          </p>
+
+          <div className="mt-9 flex flex-wrap items-end gap-x-10 gap-y-4 border-t border-white/10 pt-5">
+            <div>
+              <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-white/45">
+                {t.labels.quote}
+              </div>
+              <div className="mt-0.5 font-mono text-[14px] text-white">
+                {t.labels.quoteNumber} {FOLIO}
+              </div>
+            </div>
+            <div>
+              <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-white/45">
+                {t.labels.issued}
+              </div>
+              <div className="mt-0.5 text-[14px] text-white tabular-nums">{fmtDate(ISSUED)}</div>
+            </div>
+            <div>
+              <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-white/45">
+                {t.labels.validUntil}
+              </div>
+              <div className="mt-0.5 text-[14px] text-white tabular-nums">{fmtDate(VALID)}</div>
+            </div>
+            <div className="ml-auto text-right">
+              <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-white/45">
+                {t.labels.preparedFor}
+              </div>
+              <div className="mt-0.5 text-[14px] font-semibold text-white">{t.client.name}</div>
+              <div className="text-[12px] text-white/55">{t.client.descriptor}</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ─────────── PÁGINA 1 · PROPUESTA ─────────── */}
       <article className="doc-page relative max-w-[900px] mx-auto px-8 sm:px-12 py-8 text-[14px] leading-relaxed">
         <PhaseBar active={1} />
 
-        <header className="flex items-start justify-between gap-6 pb-5 border-b border-card-border mt-5">
+        <header className="print-only flex items-start justify-between gap-6 pb-5 border-b border-card-border mt-5">
           <div>
             <div className="flex items-center gap-2">
               <span className="text-xl font-semibold tracking-tight text-primary">
@@ -71,7 +132,7 @@ export default function Page() {
           </div>
         </header>
 
-        <section className="grid grid-cols-1 sm:grid-cols-2 gap-6 py-5 border-b border-card-border">
+        <section className="print-only grid grid-cols-1 sm:grid-cols-2 gap-6 py-5 border-b border-card-border">
           <div>
             <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-muted mb-1">
               {t.labels.from}
@@ -91,7 +152,7 @@ export default function Page() {
           </div>
         </section>
 
-        <section className="pt-6">
+        <section className="print-only pt-6">
           <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-accent">
             {t.intro.eyebrow}
           </div>
@@ -248,7 +309,10 @@ export default function Page() {
               ))}
             </ul>
 
-            <ChatMock />
+            <LiveChat messages={t.chat} ui={t.chatHeader} />
+            <div className="print-only">
+              <ChatMock />
+            </div>
           </div>
 
           <div className="mt-3 rounded-lg bg-accent/10 border border-accent/30 px-3 py-2.5 flex items-start gap-2.5">

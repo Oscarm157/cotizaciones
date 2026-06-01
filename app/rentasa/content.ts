@@ -241,6 +241,7 @@ export const CONTENT = {
     status: "En línea · responde en segundos",
     badge: "Ejemplo",
     placeholder: "Escriba su mensaje…",
+    typing: "escribiendo…",
   },
   chat: [
     {
