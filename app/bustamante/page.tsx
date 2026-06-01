@@ -349,7 +349,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
               />
             </div>
             <div className="flex items-end justify-between gap-4 px-4 py-3 border-t border-card-border bg-surface-muted/40">
-              <div className="text-[11.5px] text-muted leading-snug max-w-md">
+              <div className="text-[11.5px] font-semibold text-foreground leading-snug max-w-md">
                 {t.investment.annual.intro}
               </div>
               <div className="text-right shrink-0 tabular-nums">
