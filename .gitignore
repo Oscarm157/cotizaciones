@@ -7,3 +7,7 @@ node_modules
 .DS_Store
 tsconfig.tsbuildinfo
 next-env.d.ts
+
+# PDFs exportados de las cotizaciones y assets sueltos
+public/**/*.pdf
+/qr-code.png
