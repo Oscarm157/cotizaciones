@@ -219,31 +219,30 @@ export const CONTENT = {
     chat: [
       {
         from: "client",
-        text:
-          "Buenas tardes. Mi esposa es ciudadana y quiero arreglar mi residencia. ¿Llevan ese tipo de casos?",
+        text: "Hola, me deportaron hace 6 años y quiero volver de forma legal. ¿Tengo opción?",
       },
       {
         from: "agent",
         text:
-          "Buenas tardes. Sí, llevamos peticiones familiares y ajuste de estatus por matrimonio. ¿Usted se encuentra dentro de Estados Unidos o fuera del país?",
+          "Hola. Puede haberla, depende del caso. ¿Tiene cónyuge o hijos mayores de 21 que sean ciudadanos de EE. UU.?",
       },
       {
         from: "client",
-        text: "Estoy aquí, en Estados Unidos.",
+        text: "Sí, mi esposa es ciudadana.",
       },
       {
         from: "agent",
         text:
-          "Perfecto. Para que el abogado Bustamante revise su caso y le proponga fecha de consulta, ¿me comparte su nombre, teléfono y correo?",
+          "Con una esposa ciudadana suele existir una vía, aunque una deportación previa exige un perdón (waiver) que el abogado debe evaluar. ¿Me comparte su nombre, teléfono y correo para agendar la consulta?",
       },
       {
         from: "client",
-        text: "Jorge Medina, 619 555 0142, jorge.medina@correo.com",
+        text: "Roberto Lara, 664 555 0148, roberto.lara@correo.com",
       },
       {
         from: "agent",
         text:
-          "Gracias, Jorge. El abogado se pondrá en contacto con usted para confirmar la consulta. ¿Hay algo más en lo que pueda orientarle mientras tanto?",
+          "Gracias, Roberto. Le paso su caso al abogado Bustamante ya resumido: esposa ciudadana, deportación previa, posible perdón. Él lo contacta para confirmar la consulta.",
       },
     ] as const,
     requisite: {
@@ -516,31 +515,30 @@ export const CONTENT = {
     chat: [
       {
         from: "client",
-        text:
-          "Hi. My wife is a citizen and I want to get my residency. Do you handle those cases?",
+        text: "Hi, I was deported 6 years ago and want to come back legally. Do I have any option?",
       },
       {
         from: "agent",
         text:
-          "Hello. Yes, we handle family petitions and adjustment of status through marriage. Are you currently inside the United States or outside the country?",
+          "Hello. There may be one, it depends on the case. Do you have a spouse or children over 21 who are U.S. citizens?",
       },
       {
         from: "client",
-        text: "I'm here, in the United States.",
+        text: "Yes, my wife is a citizen.",
       },
       {
         from: "agent",
         text:
-          "Great. So attorney Bustamante can review your case and propose a consultation date, could I get your name, phone, and email?",
+          "With a citizen spouse there's usually a path, though a prior deportation requires a waiver that the attorney needs to assess. Could I get your name, phone, and email to book the consultation?",
       },
       {
         from: "client",
-        text: "Jorge Medina, 619 555 0142, jorge.medina@email.com",
+        text: "Roberto Lara, 664 555 0148, roberto.lara@email.com",
       },
       {
         from: "agent",
         text:
-          "Thank you, Jorge. The attorney will reach out to confirm the consultation. Anything else I can help point you to in the meantime?",
+          "Thank you, Roberto. I'm passing your case to attorney Bustamante already summarized: citizen spouse, prior deportation, possible waiver. He'll reach out to confirm the consultation.",
       },
     ] as const,
     requisite: {

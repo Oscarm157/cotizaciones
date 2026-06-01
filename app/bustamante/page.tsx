@@ -203,7 +203,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
             {t.agent.intro}
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 items-start">
             <ul className="grid grid-cols-1 gap-2">
               {t.agent.features.map((a) => (
                 <li
@@ -595,7 +595,7 @@ function ChatMock({ t }: { t: typeof CONTENT[Lang] }) {
       </div>
 
       {/* Mensajes */}
-      <div className="p-3 space-y-1.5 flex-1">
+      <div className="p-3 space-y-1.5">
         {t.chat.map((m, i) => {
           const isAgent = m.from === "agent";
           return (
