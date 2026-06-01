@@ -98,11 +98,11 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
         </section>
 
         {/* Intro */}
-        <section className="keep pt-5">
+        <section className="keep pt-4">
           <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-accent">
             {t.intro.eyebrow}
           </div>
-          <h1 className="mt-1.5 text-[24px] sm:text-[27px] font-bold leading-[1.1] tracking-[-0.015em] text-primary">
+          <h1 className="mt-1.5 text-[22px] sm:text-[24px] font-bold leading-[1.1] tracking-[-0.015em] text-primary">
             {t.intro.titleLead}{" "}
             <em className="italic text-gradient-accent">{t.intro.titleEmphasis}</em>{" "}
             {t.intro.titleSuffix} {t.client.short}
@@ -116,11 +116,11 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
         <BeforeAfter t={t} />
 
         {/* Beneficios en el día a día */}
-        <section className="mt-6">
+        <section className="mt-5">
           <SectionTitle icon="auto_awesome" title={t.benefits.title} meta={t.benefits.meta} />
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             {t.benefits.items.map((b) => (
-              <li key={b.title} className="rounded-xl bg-card border border-card-border p-3 flex gap-3">
+              <li key={b.title} className="rounded-xl bg-card border border-card-border p-2.5 flex gap-3">
                 <IconBadge icon={b.icon} />
                 <div className="min-w-0">
                   <div className="text-[12.5px] font-semibold text-foreground leading-tight">
@@ -134,11 +134,11 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
         </section>
 
         {/* Qué incluye el sitio */}
-        <section className="mt-6">
+        <section className="mt-5">
           <SectionTitle icon="check_circle" title={t.features.title} meta={t.features.meta} />
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             {t.features.items.map((f) => (
-              <li key={f.title} className="rounded-xl border border-card-border bg-card p-3 flex gap-3">
+              <li key={f.title} className="rounded-xl border border-card-border bg-card p-2.5 flex gap-3">
                 <IconBadge icon={f.icon} />
                 <div className="min-w-0">
                   <div className="text-[12.5px] font-semibold text-foreground leading-tight">
@@ -152,7 +152,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
         </section>
 
         {/* Páginas del sitio */}
-        <section className="mt-6">
+        <section className="mt-5">
           <SectionTitle icon="menu_book" title={t.pages.title} meta={t.pages.meta} />
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {t.pages.items.map((p) => (
@@ -168,7 +168,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
         </section>
 
         {/* Áreas de práctica */}
-        <section className="mt-6">
+        <section className="mt-5">
           <SectionTitle icon="gavel" title={t.practiceAreas.title} meta={t.practiceAreas.meta} />
           <p className="text-[12px] text-muted leading-relaxed max-w-2xl mb-3">
             {t.practiceAreas.intro}
@@ -192,7 +192,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
         </section>
 
         {/* Agente de ventas con IA */}
-        <section className="mt-6">
+        <section className="mt-5">
           <SectionTitle
             icon="smart_toy"
             title={t.agent.titleLead}
@@ -208,7 +208,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
               {t.agent.features.map((a) => (
                 <li
                   key={a.title}
-                  className="keep rounded-lg bg-primary text-primary-foreground border border-primary/30 p-2.5 flex gap-3"
+                  className="keep rounded-lg bg-primary text-primary-foreground border border-primary/30 p-2 flex gap-3"
                 >
                   <div className="shrink-0 w-8 h-8 rounded-lg bg-accent/20 text-accent-light flex items-center justify-center">
                     <span
@@ -246,7 +246,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
         </section>
 
         {/* Inversión */}
-        <section className="mt-6">
+        <section className="mt-5">
           <SectionTitle icon="payments" title={t.investment.title} />
 
           <div className="keep rounded-xl border border-card-border bg-card overflow-hidden">
@@ -368,7 +368,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
         </section>
 
         {/* Siguiente paso */}
-        <section className="keep mt-5 rounded-xl bg-surface-muted border border-card-border p-3.5">
+        <section className="keep mt-4 rounded-xl bg-surface-muted border border-card-border p-3">
           <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-accent mb-1.5">
             {t.nextStep.label}
           </div>
@@ -380,12 +380,12 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
         </section>
 
         {/* Firma */}
-        <footer className="keep mt-7 pt-5 border-t border-card-border flex items-end justify-between gap-6">
+        <footer className="keep mt-5 pt-4 border-t border-card-border flex items-end justify-between gap-6">
           <div>
             <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-muted">
               {t.labels.acceptance}
             </div>
-            <div className="mt-8 w-60 border-t border-primary/60" />
+            <div className="mt-6 w-60 border-t border-primary/60" />
             <div className="mt-1 text-[11.5px] text-muted">
               {t.labels.signatureOf(t.client.short)}
             </div>
@@ -401,7 +401,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
       </article>
 
       <style>{`
-        @page { size: Letter; margin: 12mm; }
+        @page { size: Letter; margin: 9mm 11mm; }
         @media print {
           .no-print { display: none !important; }
           html, body {
@@ -478,7 +478,7 @@ function SectionTitle({
   emphasis?: string;
 }) {
   return (
-    <div className="flex items-center justify-between rounded-xl bg-primary text-primary-foreground px-4 py-2 mb-3 gap-3">
+    <div className="flex items-center justify-between rounded-xl bg-primary text-primary-foreground px-4 py-1.5 mb-2.5 gap-3">
       <div className="flex items-center gap-2.5 min-w-0">
         <span
           className="material-symbols-outlined text-accent shrink-0"
@@ -507,9 +507,9 @@ function SectionTitle({
 
 function BeforeAfter({ t }: { t: typeof CONTENT[Lang] }) {
   return (
-    <section className="keep mt-5 grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-3 items-stretch">
+    <section className="keep mt-4 grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-3 items-stretch">
       {/* Antes */}
-      <div className="rounded-xl border border-card-border bg-surface-muted/70 p-3.5">
+      <div className="rounded-xl border border-card-border bg-surface-muted/70 p-3">
         <div className="flex items-center gap-2 mb-2">
           <span
             className="material-symbols-outlined text-muted"
@@ -542,7 +542,7 @@ function BeforeAfter({ t }: { t: typeof CONTENT[Lang] }) {
       </div>
 
       {/* Después · dark */}
-      <div className="rounded-xl border border-primary bg-primary text-primary-foreground p-3.5">
+      <div className="rounded-xl border border-primary bg-primary text-primary-foreground p-3">
         <div className="flex items-center gap-2 mb-2">
           <span
             className="material-symbols-outlined text-accent-light"
@@ -593,13 +593,13 @@ function ChatMock({ t }: { t: typeof CONTENT[Lang] }) {
       </div>
 
       {/* Mensajes */}
-      <div className="p-3 space-y-2 flex-1">
+      <div className="p-3 space-y-1.5 flex-1">
         {t.chat.map((m, i) => {
           const isAgent = m.from === "agent";
           return (
             <div key={i} className={`flex ${isAgent ? "justify-start" : "justify-end"}`}>
               <div
-                className={`max-w-[85%] rounded-xl px-3 py-2 text-[11.5px] leading-snug ${
+                className={`max-w-[85%] rounded-xl px-3 py-1.5 text-[11.5px] leading-snug ${
                   isAgent
                     ? "bg-accent text-white rounded-tl-sm"
                     : "bg-surface-muted text-foreground rounded-tr-sm border border-card-border"
@@ -640,7 +640,7 @@ function InvestmentRow({
   price: string;
 }) {
   return (
-    <div className="flex items-start gap-4 p-3">
+    <div className="flex items-start gap-4 p-2.5">
       <IconBadge icon={icon} />
       <div className="flex-1 min-w-0">
         <div className="text-[13px] font-semibold text-foreground">{title}</div>
