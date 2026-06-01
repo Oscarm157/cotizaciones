@@ -5,8 +5,8 @@ export const ISSUED = "2026-06-01";
 export const VALID = "2026-06-20";
 
 export const PRICE_SITIO = 9500;
-export const PRICE_AGENTE = 3300;
-export const PRICE_BILINGUE = 3000;
+export const PRICE_AGENTE = 2700;
+export const PRICE_BILINGUE = 2500;
 export const TOTAL = PRICE_SITIO + PRICE_AGENTE + PRICE_BILINGUE;
 export const DEPOSIT = Math.round(TOTAL * 0.5);
 
@@ -42,6 +42,7 @@ export const CONTENT = {
       toolbarLabel: (folio: string, client: string) =>
         `Cotización ${folio} · ${client}`,
       included: "Incluido",
+      optional: "Opcional",
       acceptance: "Aceptación",
       signatureOf: (name: string) => `Firma de ${name}`,
     },
@@ -280,10 +281,10 @@ export const CONTENT = {
         },
       },
       annual: {
-        title: "Mantenimiento anual del sitio",
+        title: "Hospedaje y dominio",
         intro:
-          "Estos dos pagos anuales mantienen el sitio publicado y el dominio activo. Se renuevan cada año a partir de la entrega.",
-        caption: "por año",
+          "Se cubre a la entrega del sitio y se renueva cada año para mantenerlo publicado y el dominio activo. No incluye cambios ni modificaciones al sitio.",
+        caption: "pago anual",
         subtotalLabel: "Total anual",
         lines: {
           hosting: {
@@ -338,6 +339,7 @@ export const CONTENT = {
       pageOf: (cur: number, total: number) => `Page ${cur} of ${total}`,
       toolbarLabel: (folio: string, client: string) => `Quote ${folio} · ${client}`,
       included: "Included",
+      optional: "Optional",
       acceptance: "Acceptance",
       signatureOf: (name: string) => `Signed by ${name}`,
     },
@@ -576,10 +578,10 @@ export const CONTENT = {
         },
       },
       annual: {
-        title: "Annual site maintenance",
+        title: "Hosting and domain",
         intro:
-          "These two annual payments keep the site published and the domain active. They renew each year starting from delivery.",
-        caption: "per year",
+          "Paid on delivery of the site and renewed each year to keep it published and the domain active. It does not cover changes or modifications to the site.",
+        caption: "annual",
         subtotalLabel: "Annual total",
         lines: {
           hosting: {

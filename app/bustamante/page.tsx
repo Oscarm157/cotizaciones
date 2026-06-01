@@ -262,12 +262,14 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
                 title={t.investment.lines.agente.title}
                 detail={t.investment.lines.agente.detail}
                 price={fmtMxn(PRICE_AGENTE)}
+                optional={t.labels.optional}
               />
               <InvestmentRow
                 icon="translate"
                 title={t.investment.lines.bilingue.title}
                 detail={t.investment.lines.bilingue.detail}
                 price={fmtMxn(PRICE_BILINGUE)}
+                optional={t.labels.optional}
               />
             </div>
 
@@ -633,17 +635,26 @@ function InvestmentRow({
   title,
   detail,
   price,
+  optional,
 }: {
   icon: string;
   title: string;
   detail: string;
   price: string;
+  optional?: string;
 }) {
   return (
     <div className="flex items-start gap-4 p-2.5">
       <IconBadge icon={icon} />
       <div className="flex-1 min-w-0">
-        <div className="text-[13px] font-semibold text-foreground">{title}</div>
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="text-[13px] font-semibold text-foreground">{title}</span>
+          {optional && (
+            <span className="text-[9px] uppercase tracking-[0.18em] font-semibold text-accent bg-accent/10 rounded px-1.5 py-0.5">
+              {optional}
+            </span>
+          )}
+        </div>
         <div className="text-[11.5px] text-muted mt-0.5 leading-snug max-w-md">{detail}</div>
       </div>
       <div className="text-right shrink-0 tabular-nums">
