@@ -53,12 +53,11 @@ export const CONTENT = {
       { num: "04", name: "Inversión" },
     ],
     intro: {
-      eyebrow: "Propuesta · Sitio bilingüe + Agente de ventas IA + Agendado de consulta",
-      titleLead: "Sitio web",
-      titleEmphasis: "bilingüe",
-      titleSuffix: "para",
+      eyebrow: "Propuesta · Sitio web profesional de servicios legales",
+      titleLead: "Sitio web profesional de",
+      titleEmphasis: "servicios legales",
       paragraph:
-        "Propuesta para construir el sitio web bilingüe de Hector Bustamante: presenta sus áreas de práctica en inmigración, permite agendar consulta en línea, e incluye un agente de ventas con inteligencia artificial que atiende a los interesados y captura más prospectos las 24 horas.",
+        "Propuesta para el sitio web de la práctica de inmigración de Hector Bustamante: presenta las áreas de práctica y permite agendar una consulta en línea. De forma opcional puede sumar una versión bilingüe en inglés y un agente de ventas con inteligencia artificial que atiende y califica a los prospectos las 24 horas.",
     },
     before: {
       heading: "Hoy",
@@ -74,8 +73,8 @@ export const CONTENT = {
       items: [
         "Áreas de práctica presentadas con claridad desde la primera pantalla.",
         "Solicitudes de consulta que llegan al correo con el tipo de caso identificado.",
-        "Un agente que responde dudas comunes y reúne el contexto del caso, no solo los datos básicos de un formulario.",
-        "Sitio en español e inglés para atender a ambos lados de la frontera.",
+        "Un agente opcional que responde dudas comunes y reúne el contexto del caso, no solo los datos básicos de un formulario.",
+        "Versión opcional en español e inglés para atender a ambos lados de la frontera.",
       ],
     },
     benefits: {
@@ -98,7 +97,7 @@ export const CONTENT = {
           icon: "language",
           title: "Atiende en español e inglés",
           detail:
-            "El visitante elige su idioma con un toque. Mismo contenido, sin perder al prospecto que busca en inglés.",
+            "Con la versión bilingüe (opcional), el visitante elige su idioma con un toque. Mismo contenido, sin perder al prospecto que busca en inglés.",
         },
         {
           icon: "insights",
@@ -180,9 +179,10 @@ export const CONTENT = {
     agent: {
       titleLead: "Agente de ventas con",
       titleEmphasis: "inteligencia artificial",
-      meta: "Incluido",
+      meta: "Opcional",
+      lead: "Agrega una experiencia nueva para quien visita el sitio: una conversación que orienta, en lugar de un formulario.",
       intro:
-        "Un agente de ventas integrado al sitio que conversa con cada visitante interesado, entiende qué trámite necesita y reúne el contexto de su caso. Al atender a toda hora, captura prospectos que de otro modo se irían sin dejar sus datos, y los entrega con contexto, no solo con los campos básicos de un formulario, listos para que Hector dé seguimiento y agende la consulta.",
+        "Un agente de ventas integrado al sitio que conversa con cada visitante interesado, entiende qué trámite necesita y reúne el contexto de su caso. Al atender a toda hora, puede captar prospectos que de otro modo se irían sin dejar sus datos, y los entrega con contexto, no solo con los campos básicos de un formulario, listos para que Hector dé seguimiento y agende la consulta.",
       features: [
         {
           icon: "support_agent",
@@ -349,12 +349,11 @@ export const CONTENT = {
       { num: "04", name: "Investment" },
     ],
     intro: {
-      eyebrow: "Proposal · Bilingual site + AI sales agent + Online booking",
-      titleLead: "A bilingual",
-      titleEmphasis: "website",
-      titleSuffix: "for",
+      eyebrow: "Proposal · Professional website for legal services",
+      titleLead: "Professional website for",
+      titleEmphasis: "legal services",
       paragraph:
-        "This proposal covers a bilingual website for Hector Bustamante: it presents his immigration practice areas, lets prospects book a consultation online, and includes an AI sales agent that engages interested visitors and captures more prospects around the clock.",
+        "This proposal covers the website for Hector Bustamante's immigration practice: it presents the practice areas and lets prospects book a consultation online. Optionally, it can add a bilingual English version and an AI sales agent that engages and qualifies prospects around the clock.",
     },
     before: {
       heading: "Today",
@@ -370,8 +369,8 @@ export const CONTENT = {
       items: [
         "Practice areas laid out clearly from the first screen.",
         "Consultation requests that reach the inbox with the case type already noted.",
-        "An agent that answers common questions and gathers the case context, not just the basic fields of a form.",
-        "A site in Spanish and English to serve both sides of the border.",
+        "An optional agent that answers common questions and gathers the case context, not just the basic fields of a form.",
+        "An optional Spanish and English version to serve both sides of the border.",
       ],
     },
     benefits: {
@@ -394,7 +393,7 @@ export const CONTENT = {
           icon: "language",
           title: "Serves Spanish and English",
           detail:
-            "Visitors pick their language with one tap. Same content, without losing the prospect who searches in English.",
+            "With the optional bilingual version, visitors pick their language with one tap. Same content, without losing the prospect who searches in English.",
         },
         {
           icon: "insights",
@@ -476,9 +475,10 @@ export const CONTENT = {
     agent: {
       titleLead: "AI sales",
       titleEmphasis: "agent",
-      meta: "Included",
+      meta: "Optional",
+      lead: "Adds a new experience for site visitors: a conversation that guides, instead of a form.",
       intro:
-        "A sales agent built into the site that talks with every interested visitor, understands which matter they need, and gathers the context of their case. By responding at any hour, it captures prospects who would otherwise leave without leaving their details, and hands them over with context, not just the basic fields of a form, ready for Hector to follow up and book the consultation.",
+        "A sales agent built into the site that talks with every interested visitor, understands which matter they need, and gathers the context of their case. By responding at any hour, it can capture prospects who would otherwise leave without leaving their details, and hands them over with context, not just the basic fields of a form, ready for Hector to follow up and book the consultation.",
       features: [
         {
           icon: "support_agent",

@@ -25,7 +25,7 @@ const QUOTES = [
   {
     slug: "bustamante",
     title: "Hector Bustamante",
-    subtitle: "Sitio bilingüe + Agente de ventas IA + Agendado de consulta",
+    subtitle: "Sitio web de servicios legales · agente IA y bilingüe opcionales",
     folio: "WB-135",
     date: "1 de junio de 2026",
   },

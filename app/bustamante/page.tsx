@@ -104,8 +104,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
           </div>
           <h1 className="mt-1.5 text-[22px] sm:text-[24px] font-bold leading-[1.1] tracking-[-0.015em] text-primary">
             {t.intro.titleLead}{" "}
-            <em className="italic text-gradient-accent">{t.intro.titleEmphasis}</em>{" "}
-            {t.intro.titleSuffix} {t.client.short}
+            <em className="italic text-gradient-accent">{t.intro.titleEmphasis}</em>
           </h1>
           <p className="mt-2 text-[12.5px] text-muted leading-relaxed max-w-2xl">
             {t.intro.paragraph}
@@ -199,6 +198,9 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
             emphasis={t.agent.titleEmphasis}
             meta={t.agent.meta}
           />
+          <p className="text-[13px] font-semibold text-foreground leading-snug max-w-2xl mb-1">
+            {t.agent.lead}
+          </p>
           <p className="text-[12px] text-muted leading-relaxed max-w-2xl mb-3">
             {t.agent.intro}
           </p>
