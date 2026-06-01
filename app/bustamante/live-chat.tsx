@@ -39,6 +39,7 @@ export function LiveChat({ messages, ui }: { messages: readonly Msg[]; ui: UI })
 
     // Un solo timer activo a la vez (timerRef), siempre cancelable en el cleanup.
     const schedule = (fn: () => void, ms: number) => {
+      if (timerRef.current) clearTimeout(timerRef.current);
       timerRef.current = setTimeout(fn, ms);
     };
     const run = () => {
@@ -73,7 +74,12 @@ export function LiveChat({ messages, ui }: { messages: readonly Msg[]; ui: UI })
 
   useEffect(() => {
     const el = scrollRef.current;
-    if (el) el.scrollTo({ top: el.scrollHeight, behavior: reduce ? "auto" : "smooth" });
+    if (!el) return;
+    if (count === 0) {
+      el.scrollTop = 0;
+      return;
+    }
+    el.scrollTo({ top: el.scrollHeight, behavior: reduce ? "auto" : "smooth" });
   }, [count, typing, reduce]);
 
   return (

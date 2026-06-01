@@ -534,7 +534,7 @@ export const CONTENT = {
       before: "the agent needs to be connected to a",
       or: "or",
       middle:
-        " account. That account runs an estimated 10–30 USD per month under regular traffic and is covered by the client. Setup and training of the agent are included in this quote.",
+        " account. That account runs an estimated 10 to 30 USD per month under regular traffic and is covered by the client. Setup and training of the agent are included in this quote.",
     },
     investment: {
       title: "Investment",
