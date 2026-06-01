@@ -7,8 +7,11 @@ import {
   PRICE_SITIO,
   PRICE_AGENTE,
   PRICE_BILINGUE,
+  PRICE_HOSTING,
+  PRICE_DOMINIO,
   TOTAL,
   DEPOSIT,
+  ANNUAL,
   fmtMxn,
   fmtDate,
   type Lang,
@@ -207,7 +210,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
           </ul>
         </section>
 
-        {/* Agente de intake IA */}
+        {/* Agente con IA */}
         <section className="mt-7">
           <SectionTitle
             icon="smart_toy"
@@ -297,31 +300,6 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
                 detail={t.investment.lines.bilingue.detail}
                 price={fmtMxn(PRICE_BILINGUE)}
               />
-              {/* Hosting · cortesía */}
-              <div className="flex items-start gap-4 p-4 bg-accent/5">
-                <IconBadge icon="dns" />
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <span className="text-[13px] font-semibold text-foreground">
-                      {t.investment.lines.hosting.title}
-                    </span>
-                    <span className="text-[9px] uppercase tracking-[0.22em] font-semibold text-white bg-accent rounded px-1.5 py-0.5">
-                      {t.labels.complimentaryBadge}
-                    </span>
-                  </div>
-                  <div className="text-[11.5px] text-muted mt-0.5 leading-snug max-w-md">
-                    <span className="font-semibold text-foreground">
-                      {t.investment.lines.hosting.hostingWord}
-                    </span>{" "}
-                    {t.investment.lines.hosting.detail}
-                  </div>
-                </div>
-                <div className="text-right shrink-0 tabular-nums">
-                  <div className="text-[10px] uppercase tracking-[0.22em] text-accent font-semibold">
-                    {t.labels.noCharge}
-                  </div>
-                </div>
-              </div>
             </div>
 
             {/* Total · dark */}
@@ -363,6 +341,51 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
                   {fmtMxn(TOTAL - DEPOSIT)}
                 </div>
                 <div className="text-[11px] text-muted">{t.investment.finalCaption}</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Mantenimiento anual */}
+          <div className="mt-4 rounded-xl border border-card-border bg-card overflow-hidden">
+            <div className="flex items-center justify-between bg-surface-muted/60 px-4 py-2.5 border-b border-card-border gap-3">
+              <div className="flex items-center gap-2.5 min-w-0">
+                <span
+                  className="material-symbols-outlined text-accent shrink-0"
+                  style={{ fontSize: 18, fontVariationSettings: "'wght' 600" }}
+                >
+                  autorenew
+                </span>
+                <h3 className="text-[13px] font-semibold text-foreground leading-tight">
+                  {t.investment.annual.title}
+                </h3>
+              </div>
+              <span className="text-[10px] uppercase tracking-[0.22em] font-semibold text-muted shrink-0 whitespace-nowrap">
+                {t.investment.annual.caption}
+              </span>
+            </div>
+            <div className="divide-y divide-card-border">
+              <InvestmentRow
+                icon="dns"
+                title={t.investment.annual.lines.hosting.title}
+                detail={t.investment.annual.lines.hosting.detail}
+                price={fmtMxn(PRICE_HOSTING)}
+              />
+              <InvestmentRow
+                icon="public"
+                title={t.investment.annual.lines.dominio.title}
+                detail={t.investment.annual.lines.dominio.detail}
+                price={fmtMxn(PRICE_DOMINIO)}
+              />
+            </div>
+            <div className="flex items-end justify-between gap-4 px-4 py-3 border-t border-card-border bg-surface-muted/40">
+              <div className="text-[11.5px] text-muted leading-snug max-w-md">
+                {t.investment.annual.intro}
+              </div>
+              <div className="text-right shrink-0 tabular-nums">
+                <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-muted">
+                  {t.investment.annual.subtotalLabel}
+                </div>
+                <div className="text-lg font-semibold text-foreground">{fmtMxn(ANNUAL)}</div>
               </div>
             </div>
           </div>

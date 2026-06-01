@@ -5,10 +5,14 @@ export const ISSUED = "2026-06-01";
 export const VALID = "2026-06-20";
 
 export const PRICE_SITIO = 9500;
-export const PRICE_AGENTE = 4500;
-export const PRICE_BILINGUE = 3500;
+export const PRICE_AGENTE = 3300;
+export const PRICE_BILINGUE = 3000;
 export const TOTAL = PRICE_SITIO + PRICE_AGENTE + PRICE_BILINGUE;
 export const DEPOSIT = Math.round(TOTAL * 0.5);
+
+export const PRICE_HOSTING = 1500;
+export const PRICE_DOMINIO = 1000;
+export const ANNUAL = PRICE_HOSTING + PRICE_DOMINIO;
 
 export const CONTENT = {
   es: {
@@ -38,8 +42,6 @@ export const CONTENT = {
       toolbarLabel: (folio: string, client: string) =>
         `Cotización ${folio} · ${client}`,
       included: "Incluido",
-      complimentaryBadge: "Cortesía",
-      noCharge: "Sin costo",
       acceptance: "Aceptación",
       signatureOf: (name: string) => `Firma de ${name}`,
     },
@@ -50,12 +52,12 @@ export const CONTENT = {
       { num: "04", name: "Inversión" },
     ],
     intro: {
-      eyebrow: "Propuesta · Sitio bilingüe + Agente IA + Agendado de consulta",
+      eyebrow: "Propuesta · Sitio bilingüe + Agente de ventas IA + Agendado de consulta",
       titleLead: "Sitio web",
       titleEmphasis: "bilingüe",
       titleSuffix: "para",
       paragraph:
-        "Propuesta para construir el sitio web bilingüe de Hector Bustamante: presenta sus áreas de práctica en inmigración, permite agendar consulta en línea, e incluye un agente con inteligencia artificial que orienta al prospecto y captura sus datos las 24 horas.",
+        "Propuesta para construir el sitio web bilingüe de Hector Bustamante: presenta sus áreas de práctica en inmigración, permite agendar consulta en línea, e incluye un agente de ventas con inteligencia artificial que atiende a los interesados y captura más prospectos las 24 horas.",
     },
     before: {
       heading: "Hoy",
@@ -71,7 +73,7 @@ export const CONTENT = {
       items: [
         "Áreas de práctica presentadas con claridad desde la primera pantalla.",
         "Solicitudes de consulta que llegan al correo con el tipo de caso identificado.",
-        "Un agente que responde dudas comunes e identifica el tipo de caso las 24 horas.",
+        "Un agente que responde dudas comunes y reúne el contexto del caso, no solo los datos básicos de un formulario.",
         "Sitio en español e inglés para atender a ambos lados de la frontera.",
       ],
     },
@@ -175,11 +177,11 @@ export const CONTENT = {
       ],
     },
     agent: {
-      titleLead: "Agente de intake con",
+      titleLead: "Agente de ventas con",
       titleEmphasis: "inteligencia artificial",
       meta: "Incluido",
       intro:
-        "Un asistente virtual integrado al sitio que conversa con el visitante, identifica el tipo de trámite migratorio que necesita, responde dudas comunes y registra sus datos de contacto para que Hector dé seguimiento y agende la consulta.",
+        "Un agente de ventas integrado al sitio que conversa con cada visitante interesado, entiende qué trámite necesita y reúne el contexto de su caso. Al atender a toda hora, captura prospectos que de otro modo se irían sin dejar sus datos, y los entrega con contexto, no solo con los campos básicos de un formulario, listos para que Hector dé seguimiento y agende la consulta.",
       features: [
         {
           icon: "support_agent",
@@ -195,9 +197,9 @@ export const CONTENT = {
         },
         {
           icon: "contact_mail",
-          title: "Captura datos del prospecto",
+          title: "Reúne el contexto, no solo el dato",
           detail:
-            "Solicita nombre, contacto y una descripción breve del caso para entregar un prospecto listo para agendar.",
+            "Junto con nombre y contacto, recoge la situación del caso, para que el prospecto llegue con contexto y no solo con los campos básicos de un formulario.",
         },
         {
           icon: "forward_to_inbox",
@@ -254,7 +256,7 @@ export const CONTENT = {
       title: "Inversión",
       oneTimeLabel: "Pago único · Entrega completa",
       totalFootnote:
-        "Medición de visitas y hospedaje del sitio por 1 año incluidos, sin cargo adicional.",
+        "Incluye la medición de visitas desde el primer día.",
       totalCaption: "total",
       depositLabel: "Anticipo · al aprobar",
       depositCaption: "50% para iniciar",
@@ -267,7 +269,7 @@ export const CONTENT = {
             "Diseño, desarrollo y publicación del sitio: las 5 páginas, las áreas de práctica, el agendado de consulta y el blog precargado.",
         },
         agente: {
-          title: "Agente de intake con IA",
+          title: "Agente de ventas con IA",
           detail:
             "Configuración del agente, entrenamiento con las áreas de práctica de inmigración e integración al sitio.",
         },
@@ -276,18 +278,27 @@ export const CONTENT = {
           detail:
             "Contenido del sitio en español e inglés, selector de idioma y sincronización de ambas versiones.",
         },
-        hosting: {
-          title: "Hospedaje del sitio (pago anual)",
-          detail:
-            "es el servicio que mantiene el sitio publicado y accesible las 24 horas. Incluido durante los primeros 12 meses; la renovación a partir del segundo año se gestiona con Bravo Publicidad bajo tarifa anual.",
-          hostingWord: "El hospedaje",
+      },
+      annual: {
+        title: "Mantenimiento anual del sitio",
+        intro:
+          "Estos dos pagos anuales mantienen el sitio publicado y el dominio activo. Se renuevan cada año a partir de la entrega.",
+        caption: "por año",
+        subtotalLabel: "Total anual",
+        lines: {
+          hosting: {
+            title: "Hospedaje",
+            detail: "Servicio que mantiene el sitio publicado y accesible las 24 horas.",
+          },
+          dominio: {
+            title: "Dominio",
+            detail: "Registro y renovación del nombre de internet del sitio (por ejemplo, sudespacho.com).",
+          },
         },
       },
       notes: [
-        "Todos los precios son más IVA (16%).",
         "Precios en pesos mexicanos (MXN).",
         "Formas de pago: transferencia o tarjeta.",
-        "Factura disponible a solicitud.",
       ],
       validityNote: (date: string) => `Vigencia de la cotización: hasta el ${date}.`,
     },
@@ -327,8 +338,6 @@ export const CONTENT = {
       pageOf: (cur: number, total: number) => `Page ${cur} of ${total}`,
       toolbarLabel: (folio: string, client: string) => `Quote ${folio} · ${client}`,
       included: "Included",
-      complimentaryBadge: "Included",
-      noCharge: "No charge",
       acceptance: "Acceptance",
       signatureOf: (name: string) => `Signed by ${name}`,
     },
@@ -339,12 +348,12 @@ export const CONTENT = {
       { num: "04", name: "Investment" },
     ],
     intro: {
-      eyebrow: "Proposal · Bilingual site + AI agent + Online booking",
+      eyebrow: "Proposal · Bilingual site + AI sales agent + Online booking",
       titleLead: "A bilingual",
       titleEmphasis: "website",
       titleSuffix: "for",
       paragraph:
-        "This proposal covers a bilingual website for Hector Bustamante: it presents his immigration practice areas, lets prospects book a consultation online, and includes an AI agent that guides visitors and captures their details around the clock.",
+        "This proposal covers a bilingual website for Hector Bustamante: it presents his immigration practice areas, lets prospects book a consultation online, and includes an AI sales agent that engages interested visitors and captures more prospects around the clock.",
     },
     before: {
       heading: "Today",
@@ -360,7 +369,7 @@ export const CONTENT = {
       items: [
         "Practice areas laid out clearly from the first screen.",
         "Consultation requests that reach the inbox with the case type already noted.",
-        "An agent that answers common questions and identifies the case type around the clock.",
+        "An agent that answers common questions and gathers the case context, not just the basic fields of a form.",
         "A site in Spanish and English to serve both sides of the border.",
       ],
     },
@@ -464,11 +473,11 @@ export const CONTENT = {
       ],
     },
     agent: {
-      titleLead: "AI intake",
+      titleLead: "AI sales",
       titleEmphasis: "agent",
       meta: "Included",
       intro:
-        "A virtual assistant built into the site that engages visitors, identifies the type of immigration matter they need, answers common questions, and captures their contact details so Hector can follow up and book the consultation.",
+        "A sales agent built into the site that talks with every interested visitor, understands which matter they need, and gathers the context of their case. By responding at any hour, it captures prospects who would otherwise leave without leaving their details, and hands them over with context, not just the basic fields of a form, ready for Hector to follow up and book the consultation.",
       features: [
         {
           icon: "support_agent",
@@ -484,9 +493,9 @@ export const CONTENT = {
         },
         {
           icon: "contact_mail",
-          title: "Captures prospect details",
+          title: "Gathers context, not just data",
           detail:
-            "Collects name, contact, and a short description of the case, so you get a lead ready to book.",
+            "Along with name and contact, it captures the situation of the case, so the lead arrives with context, not just the basic fields of a form.",
         },
         {
           icon: "forward_to_inbox",
@@ -543,7 +552,7 @@ export const CONTENT = {
       title: "Investment",
       oneTimeLabel: "One-time payment · Full delivery",
       totalFootnote:
-        "Visitor tracking and one full year of hosting are included at no extra charge.",
+        "Includes visitor tracking from day one.",
       totalCaption: "total",
       depositLabel: "Deposit · on approval",
       depositCaption: "50% to get started",
@@ -556,7 +565,7 @@ export const CONTENT = {
             "Design, development, and launch of the site: all 5 pages, the practice areas, online booking, and the pre-loaded blog.",
         },
         agente: {
-          title: "AI intake agent",
+          title: "AI sales agent",
           detail:
             "Agent setup, training on the immigration practice areas, and integration with the site.",
         },
@@ -565,18 +574,27 @@ export const CONTENT = {
           detail:
             "Site content in Spanish and English, a language selector, and both versions kept in sync.",
         },
-        hosting: {
-          title: "Site hosting (annual)",
-          detail:
-            "is what keeps the site online and reachable 24/7. Included for the first 12 months; starting in year two, renewal is handled by Bravo Publicidad at an annual rate.",
-          hostingWord: "Hosting",
+      },
+      annual: {
+        title: "Annual site maintenance",
+        intro:
+          "These two annual payments keep the site published and the domain active. They renew each year starting from delivery.",
+        caption: "per year",
+        subtotalLabel: "Annual total",
+        lines: {
+          hosting: {
+            title: "Hosting",
+            detail: "The service that keeps the site published and reachable 24 hours a day.",
+          },
+          dominio: {
+            title: "Domain",
+            detail: "Registration and renewal of the site's internet name (for example, yourfirm.com).",
+          },
         },
       },
       notes: [
-        "All prices are plus VAT (16%).",
         "Prices in Mexican pesos (MXN).",
         "Payment: wire transfer or card.",
-        "Invoice available on request.",
       ],
       validityNote: (date: string) => `Quote valid through ${date}.`,
     },
