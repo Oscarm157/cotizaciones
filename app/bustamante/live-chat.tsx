@@ -105,7 +105,7 @@ export function LiveChat({ messages, ui }: { messages: readonly Msg[]; ui: UI })
       </div>
 
       {/* Mensajes */}
-      <div ref={scrollRef} className="h-[290px] sm:h-[300px] overflow-y-auto scrollbar-hide p-3 space-y-2">
+      <div ref={scrollRef} className="h-[260px] sm:h-[280px] overflow-y-auto scrollbar-hide p-3 flex flex-col justify-end gap-2">
         {messages.slice(0, count).map((m, i) => {
           const isAgent = m.from === "agent";
           return (

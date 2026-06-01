@@ -208,8 +208,8 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
             {t.agent.intro}
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-start">
-            <ul className="grid grid-cols-1 gap-3 stagger-in">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:items-center">
+            <ul className="flex flex-col gap-4 stagger-in">
               {t.agent.features.map((a) => (
                 <li key={a.title} className="flex gap-3">
                   <Glyph icon={a.icon} />
