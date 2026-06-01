@@ -51,7 +51,7 @@ export function LiveChat({ messages, ui }: { messages: readonly Msg[]; ui: UI })
         schedule(() => {
           setTyping(false);
           setCount(0);
-        }, 3600);
+        }, 5500);
         return;
       }
       const next = messages[count];
@@ -60,12 +60,12 @@ export function LiveChat({ messages, ui }: { messages: readonly Msg[]; ui: UI })
         schedule(() => {
           setTyping(false);
           setCount((c) => c + 1);
-        }, 1150);
+        }, 1400);
       } else {
-        schedule(() => setCount((c) => c + 1), 750);
+        schedule(() => setCount((c) => c + 1), 1200);
       }
     };
-    schedule(run, 450);
+    schedule(run, 1800);
 
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
