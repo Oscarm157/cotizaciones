@@ -284,7 +284,7 @@ export const CONTENT = {
         title: "Hospedaje y dominio",
         intro:
           "Se cubre a la entrega del sitio y se renueva cada año para mantenerlo publicado y el dominio activo. No incluye cambios ni modificaciones al sitio.",
-        caption: "pago anual",
+        caption: "Pago anual",
         subtotalLabel: "Total anual",
         lines: {
           hosting: {
@@ -581,7 +581,7 @@ export const CONTENT = {
         title: "Hosting and domain",
         intro:
           "Paid on delivery of the site and renewed each year to keep it published and the domain active. It does not cover changes or modifications to the site.",
-        caption: "annual",
+        caption: "Annual payment",
         subtotalLabel: "Annual total",
         lines: {
           hosting: {

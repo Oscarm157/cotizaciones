@@ -330,7 +330,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
                   {t.investment.annual.title}
                 </h3>
               </div>
-              <span className="text-[10px] uppercase tracking-[0.22em] font-semibold text-muted shrink-0 whitespace-nowrap">
+              <span className="text-[10px] uppercase tracking-[0.18em] font-semibold text-white bg-accent rounded px-2 py-0.5 shrink-0 whitespace-nowrap">
                 {t.investment.annual.caption}
               </span>
             </div>
