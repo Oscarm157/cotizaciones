@@ -93,10 +93,10 @@ export const CONTENT = {
             "Con la versión bilingüe (opcional), el visitante elige su idioma con un toque. Mismo contenido, sin perder al prospecto que busca en inglés.",
         },
         {
-          icon: "insights",
-          title: "Datos sobre lo que más consultan",
+          icon: "verified",
+          title: "Confianza antes de la primera llamada",
           detail:
-            "Cada mes se reporta qué áreas de práctica reciben más visitas. Información para decidir en qué enfocar la atención.",
+            "Un sitio propio y profesional da credibilidad. El prospecto llega a la consulta convencido, no dudando si es el abogado correcto.",
         },
       ],
     },
@@ -383,10 +383,10 @@ export const CONTENT = {
             "With the optional bilingual version, visitors pick their language with one tap. Same content, without losing the prospect who searches in English.",
         },
         {
-          icon: "insights",
-          title: "Data on what gets the most interest",
+          icon: "verified",
+          title: "Trust before the first call",
           detail:
-            "Each month you'll see which practice areas draw the most visits, useful for deciding where to focus.",
+            "A professional site of his own builds credibility. The prospect arrives to the consultation convinced, not wondering whether this is the right lawyer.",
         },
       ],
     },
