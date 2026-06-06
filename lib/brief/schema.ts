@@ -126,7 +126,6 @@ export const BRIEF_SCHEMA: Section[] = [
       { id: "companyName", type: "text", label: "Nombre de la empresa o marca", placeholder: "Rentasa, Proyectos Inmobiliarios", required: true },
       { id: "sector", type: "select", label: "Sector", options: SECTORS },
       { id: "logo", type: "file", label: "Logo", description: "Sube tu logo en alta calidad (PNG, SVG, AI, EPS)", accept: ".png,.svg,.ai,.eps,.pdf,.jpg,.jpeg" },
-      { id: "brandColors", type: "color", label: "Colores de marca", description: "Si ya tienes una paleta definida, indícala aquí." },
       { id: "slogan", type: "text", label: "Eslogan o tagline", placeholder: "Si tienes uno" },
       { id: "brandValues", type: "textarea", label: "¿Qué valores o personalidad debe transmitir la marca?", placeholder: "Cercana, confiable, profesional...", maxLength: 400 },
       { id: "tone", type: "radio", label: "Tono de comunicación", options: TONE_OPTIONS },
