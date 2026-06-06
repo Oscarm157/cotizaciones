@@ -103,7 +103,7 @@ export default function BriefForm({
       <div className="sticky top-0 z-20 bg-background/85 backdrop-blur border-b border-card-border">
         <div className="max-w-3xl mx-auto px-4 sm:px-8 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="text-sm font-semibold tracking-tight text-primary">La agencia</span>
+            <span className="text-sm font-semibold tracking-tight text-primary">Bravo Publicidad</span>
             <span className="inline-block w-1.5 h-1.5 rounded-full bg-accent" />
           </div>
           <div className="text-[11px] uppercase tracking-[0.18em] font-semibold">
@@ -118,16 +118,16 @@ export default function BriefForm({
         </div>
       </div>
 
-      <div className="max-w-3xl mx-auto px-4 sm:px-8 py-8 sm:py-12">
+      <div className="max-w-3xl mx-auto px-4 sm:px-8 py-6 sm:py-10">
         {stepIdx === 0 && (
-          <header className="pb-7 mb-2">
+          <header className="pb-5">
             <div className="text-[11px] uppercase tracking-[0.22em] font-semibold text-accent">
               {entry.folio ? `Cotización ${entry.folio}` : entry.title}
             </div>
-            <h1 className="mt-2 text-[1.7rem] sm:text-4xl font-semibold text-primary leading-tight">
+            <h1 className="mt-1.5 text-2xl sm:text-3xl font-semibold text-primary leading-tight">
               Brief del proyecto
             </h1>
-            <p className="mt-3 text-muted text-sm sm:text-base leading-relaxed max-w-xl">
+            <p className="mt-2 text-muted text-sm leading-relaxed max-w-xl">
               {entry.title}. Cuéntanos los detalles para arrancar con todo claro. Se guarda solo conforme
               escribes, puedes salir y volver con el mismo enlace.
             </p>
@@ -138,7 +138,7 @@ export default function BriefForm({
           <div className="py-20 text-center text-muted text-sm">Cargando tu brief…</div>
         ) : (
           <>
-            <div className="mb-8">
+            <div className="mb-6">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-[11px] uppercase tracking-[0.2em] font-semibold text-muted">
                   Paso {stepIdx + 1} de {total} · {STEP_TITLES[currentStep]}
@@ -155,20 +155,20 @@ export default function BriefForm({
               </div>
             </div>
 
-            <div className="space-y-8">
+            <div className="space-y-5">
               {currentSections.map((section) => (
-                <section key={section.id} className="bg-card border border-card-border rounded-2xl p-5 sm:p-8">
-                  <h2 className="text-xl font-semibold text-primary">{section.title}</h2>
+                <section key={section.id} className="bg-card border border-card-border rounded-2xl p-4 sm:p-6">
+                  <h2 className="text-lg font-semibold text-primary">{section.title}</h2>
                   {section.description && (
-                    <p className="mt-1.5 text-sm text-muted leading-relaxed">{section.description}</p>
+                    <p className="mt-1 text-sm text-muted leading-relaxed">{section.description}</p>
                   )}
-                  <div className="mt-7 space-y-7">
+                  <div className="mt-5 space-y-5">
                     {section.fields.map((field) => (
                       <FieldRenderer key={field.id} field={field} />
                     ))}
                   </div>
                   {section.expertTip && (
-                    <div className="mt-8">
+                    <div className="mt-6">
                       <ExpertTip text={section.expertTip} />
                     </div>
                   )}
@@ -176,9 +176,9 @@ export default function BriefForm({
               ))}
             </div>
 
-            {error && <p className="mt-6 text-danger text-sm text-center">{error}</p>}
+            {error && <p className="mt-5 text-danger text-sm text-center">{error}</p>}
 
-            <div className="mt-8 flex items-center justify-between gap-3">
+            <div className="mt-6 flex items-center justify-between gap-3">
               {stepIdx > 0 ? (
                 <button
                   type="button"
@@ -214,7 +214,7 @@ export default function BriefForm({
               )}
             </div>
 
-            <p className="mt-4 text-xs text-muted text-center">
+            <p className="mt-3 text-xs text-muted text-center">
               {isLast ? "Al enviar, la agencia recibe tu brief para iniciar el proyecto." : "Se guarda solo, puedes volver después con el mismo enlace."}
             </p>
           </>

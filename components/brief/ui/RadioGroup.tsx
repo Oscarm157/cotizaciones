@@ -19,7 +19,7 @@ export default function RadioGroup({
           {label}
         </label>
       )}
-      <div className="space-y-3">
+      <div className="space-y-2">
         {options.map((opt) => {
           const optValue = typeof opt === "string" ? opt : opt.value;
           const optLabel = typeof opt === "string" ? opt : opt.label;
@@ -31,7 +31,7 @@ export default function RadioGroup({
               key={optValue}
               type="button"
               onClick={() => onChange(optValue)}
-              className={`w-full text-left px-5 py-4 rounded-lg flex items-center gap-4 transition-all border ${
+              className={`w-full text-left px-4 py-3 rounded-lg flex items-center gap-3 transition-all border ${
                 isSelected
                   ? "bg-primary text-primary-foreground border-primary"
                   : "bg-card text-foreground border-card-border hover:border-accent"

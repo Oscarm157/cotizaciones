@@ -31,7 +31,7 @@ export default function CheckboxGroup({
           {label}
         </label>
       )}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
         {options.map((opt) => {
           const value = typeof opt === "string" ? opt : opt.value;
           const optLabel = typeof opt === "string" ? opt : opt.label;
@@ -43,7 +43,7 @@ export default function CheckboxGroup({
               type="button"
               onClick={() => toggle(value)}
               disabled={isDisabled}
-              className={`text-left px-4 py-3 rounded-lg text-sm font-medium transition-all border ${
+              className={`text-left px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all border ${
                 isSelected
                   ? "bg-primary text-primary-foreground border-primary"
                   : isDisabled

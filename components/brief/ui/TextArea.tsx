@@ -5,7 +5,7 @@ export default function TextArea({
   placeholder,
   maxLength = 500,
   showCount = true,
-  minHeight = "140px",
+  minHeight = "108px",
 }: {
   label?: string;
   value: string;

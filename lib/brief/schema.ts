@@ -11,7 +11,8 @@ export type FieldType =
   | "checkboxes"
   | "file"
   | "color"
-  | "date";
+  | "date"
+  | "list";
 
 export type Option =
   | string
@@ -171,9 +172,11 @@ export const BRIEF_SCHEMA: Section[] = [
       { id: "contentStatus", type: "radio", label: "¿En qué estado está tu contenido?", options: CONTENT_STATUS_OPTIONS },
       { id: "contentProvider", type: "radio", label: "¿Quién entrega los textos y las fotos?", options: [
         { value: "client", label: "Yo entrego textos y fotos" },
-        { value: "bravo", label: "Que el equipo de Bravo los genere" },
+        { value: "agency", label: "Que la agencia los genere" },
+        { value: "ai", label: "Generar el contenido con IA" },
         { value: "mixed", label: "Mixto" },
       ] },
+      { id: "services", type: "list", label: "Servicios que quieres incluir en el sitio", description: "Agrega los servicios que ofreces, uno por uno.", placeholder: "Ej. Consultoría fiscal" },
       { id: "hasPhotos", type: "radio", label: "¿Tienes fotografía profesional?", options: PHOTO_STATUS_OPTIONS },
       { id: "materials", type: "file", label: "Material existente", description: "Textos, fotos, presentaciones o documentos que ya tengas." },
     ],
@@ -201,7 +204,7 @@ export const BRIEF_SCHEMA: Section[] = [
       { id: "languages", type: "text", label: "Idiomas del sitio", placeholder: "Español e inglés" },
       { id: "translationProvider", type: "radio", label: "¿Quién entrega las traducciones?", options: [
         { value: "client", label: "Yo entrego las traducciones" },
-        { value: "bravo", label: "Que Bravo traduzca" },
+        { value: "agency", label: "Que la agencia traduzca" },
         { value: "mixed", label: "Mixto" },
       ] },
       { id: "bilingualScope", type: "textarea", label: "¿Qué contenido necesita traducción?", placeholder: "Todo el sitio, solo páginas clave...", maxLength: 400 },
@@ -242,7 +245,7 @@ export const BRIEF_SCHEMA: Section[] = [
       { id: "catalogFilters", type: "textarea", label: "¿Por qué deben poder filtrar los usuarios?", placeholder: "Precio, ubicación, tipo, categoría...", maxLength: 400 },
       { id: "catalogSource", type: "radio", label: "¿Quién carga la información del catálogo?", options: [
         { value: "client", label: "Yo cargo la información" },
-        { value: "bravo", label: "Que Bravo la cargue" },
+        { value: "agency", label: "Que la agencia la cargue" },
         { value: "import", label: "Importar de un sistema actual" },
       ] },
     ],
@@ -303,7 +306,7 @@ export const BRIEF_SCHEMA: Section[] = [
       ] },
       { id: "analyticsAccount", type: "radio", label: "Cuentas de analítica y publicidad", options: [
         { value: "client", label: "Yo proporciono las cuentas" },
-        { value: "bravo", label: "Que Bravo las cree" },
+        { value: "agency", label: "Que la agencia las cree" },
         { value: "unsure", label: "No estoy seguro" },
       ] },
     ],
