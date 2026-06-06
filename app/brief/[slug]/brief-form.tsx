@@ -2,15 +2,11 @@
 
 import { useEffect, useMemo, useState } from "react";
 import useBriefStore from "@/store/useBriefStore";
-import type { FileMeta } from "@/lib/brief/types";
 import type { PlainSection } from "@/lib/brief/schema";
 import type { QuoteRegistryEntry } from "@/lib/brief/registry";
 import FieldRenderer from "@/components/brief/FieldRenderer";
 import ExpertTip from "@/components/brief/ExpertTip";
-import DownloadZipButton from "@/components/brief/DownloadZipButton";
 import Icon from "@/components/brief/ui/Icon";
-
-type Snapshot = { answers: Record<string, unknown>; files: Record<string, FileMeta[]> };
 
 const STEP_TITLES: Record<number, string> = {
   1: "Tu marca",
@@ -38,7 +34,6 @@ export default function BriefForm({
 
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
-  const [snapshot, setSnapshot] = useState<Snapshot | null>(null);
   const [stepIdx, setStepIdx] = useState(0);
 
   // Pasos que de verdad tienen secciones visibles para esta cotizacion.
@@ -69,8 +64,6 @@ export default function BriefForm({
     setError("");
     try {
       await submitBrief();
-      const st = useBriefStore.getState();
-      setSnapshot({ answers: st.answers, files: st.files });
     } catch (e) {
       setError(e instanceof Error ? e.message : "No se pudo enviar el brief.");
     } finally {
@@ -78,7 +71,7 @@ export default function BriefForm({
     }
   };
 
-  if (submitted && snapshot) {
+  if (submitted) {
     return (
       <main className="slide-light min-h-screen w-full flex items-center justify-center px-5 py-16">
         <div className="max-w-lg w-full text-center bg-card border border-card-border rounded-2xl p-8 sm:p-10">
@@ -87,12 +80,8 @@ export default function BriefForm({
           </div>
           <h1 className="text-2xl font-semibold text-primary">Brief enviado</h1>
           <p className="mt-3 text-muted text-sm leading-relaxed">
-            Recibimos tu información para {entry.title}. La agencia la revisará para arrancar el proyecto.
-            Puedes descargar una copia con tus respuestas y los archivos que subiste.
+            Recibimos tu información para {entry.title}. Se revisará para iniciar el proyecto.
           </p>
-          <div className="mt-7 flex justify-center">
-            <DownloadZipButton entry={entry} sections={sections} answers={snapshot.answers} files={snapshot.files} />
-          </div>
         </div>
       </main>
     );
