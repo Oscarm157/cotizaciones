@@ -107,7 +107,7 @@ export default function BriefForm({
       <div className="max-w-3xl mx-auto px-6 sm:px-8 py-12">
         <header className="pb-8 border-b border-card-border">
           <div className="text-[11px] uppercase tracking-[0.22em] font-semibold text-accent">
-            Cotización {entry.folio}
+            {entry.folio ? `Cotización ${entry.folio}` : entry.title}
           </div>
           <h1 className="mt-2 text-3xl sm:text-4xl font-semibold text-primary leading-tight">
             Brief del proyecto

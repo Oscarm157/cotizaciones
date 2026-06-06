@@ -42,7 +42,7 @@ export default async function BriefDetailPage({ params }: { params: Promise<{ id
 
         <header className="mt-4 pb-8 border-b border-card-border">
           <div className="text-[11px] uppercase tracking-[0.22em] font-semibold text-accent">
-            {quote.title} · {quote.folio}
+            {quote.folio ? `${quote.title} · ${quote.folio}` : quote.title}
           </div>
           <h1 className="mt-2 text-3xl font-semibold text-primary leading-tight">
             {data.client_name || "Brief sin nombre"}
