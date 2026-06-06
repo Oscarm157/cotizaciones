@@ -31,6 +31,7 @@ export default function BriefForm({
   const submitBrief = useBriefStore((s) => s.submitBrief);
   const flushPendingSave = useBriefStore((s) => s.flushPendingSave);
   const resetInitGuard = useBriefStore((s) => s.resetInitGuard);
+  const editAgain = useBriefStore((s) => s.editAgain);
 
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
@@ -82,6 +83,14 @@ export default function BriefForm({
           <p className="mt-3 text-muted text-sm leading-relaxed">
             Recibimos tu información para {entry.title}. Se revisará para iniciar el proyecto.
           </p>
+          <button
+            type="button"
+            onClick={editAgain}
+            className="mt-6 inline-flex items-center gap-1.5 rounded-lg border border-card-border bg-card text-primary px-5 py-2.5 text-sm font-semibold hover:border-accent transition"
+          >
+            <Icon name="edit" className="text-base" />
+            Editar mis respuestas
+          </button>
         </div>
       </main>
     );

@@ -45,6 +45,7 @@ interface BriefState {
   saveLocal: () => void;
   initDraft: (slug: string, urlBriefId?: string | null) => Promise<void>;
   submitBrief: () => Promise<string>;
+  editAgain: () => void;
   flushPendingSave: () => void;
   resetInitGuard: () => void;
 }
@@ -207,14 +208,14 @@ const useBriefStore = create<BriefState>((set, get) => ({
       }),
     });
     if (!res.ok) throw new Error("No se pudo enviar el brief. Revisa tu conexión e intenta de nuevo.");
-    try {
-      localStorage.removeItem(draftKey(s.quoteSlug));
-    } catch {
-      /* ignore */
-    }
+    // Se conserva el puntero en localStorage para que al volver al link se pueda
+    // editar lo enviado y reenviar.
+    get().saveLocal();
     set({ submitted: true });
     return id;
   },
+
+  editAgain: () => set({ submitted: false }),
 
   flushPendingSave: () => {
     if (!debounceTimer) return;
