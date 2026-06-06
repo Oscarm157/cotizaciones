@@ -155,7 +155,20 @@ export default function BriefForm({
 
             <div className="space-y-5">
               {currentSections.map((section) => (
-                <section key={section.id} className="bg-card border border-card-border rounded-2xl p-4 sm:p-6">
+                <section
+                  key={section.id}
+                  className={`rounded-2xl p-4 sm:p-6 ${
+                    section.highlight
+                      ? "bg-accent/5 border-2 border-accent/40 ring-1 ring-accent/10"
+                      : "bg-card border border-card-border"
+                  }`}
+                >
+                  {section.highlight && (
+                    <div className="mb-2 inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.18em] font-bold text-accent">
+                      <Icon name="star" className="text-sm" fill />
+                      Importante
+                    </div>
+                  )}
                   <h2 className="text-lg font-semibold text-primary">{section.title}</h2>
                   {section.description && (
                     <p className="mt-1 text-sm text-muted leading-relaxed">{section.description}</p>

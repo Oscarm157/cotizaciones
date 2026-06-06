@@ -47,6 +47,7 @@ export interface Section {
   step: 1 | 2 | 3;
   description?: string;
   expertTip?: string;
+  highlight?: boolean;
   visibleIf?: (flags: DeliverableFlags) => boolean;
   fields: Field[];
 }
@@ -144,7 +145,6 @@ export const BRIEF_SCHEMA: Section[] = [
       "Mientras más claro tengas el objetivo, más fácil es diseñar algo que realmente convierta.",
     fields: [
       { id: "vision", type: "textarea", label: "¿Qué quieres lograr con este sitio?", placeholder: "Generar leads, vender en línea, dar información...", maxLength: 1000, required: true },
-      { id: "objectives", type: "textarea", label: "¿Cómo medirías el éxito en 6 meses?", placeholder: "Más solicitudes, más visitas, mejor imagen...", maxLength: 1000, required: true },
       { id: "desiredAction", type: "text", label: "¿Cuál es la acción principal que debe hacer el visitante?", placeholder: "Llenar formulario, agendar, comprar, llamar..." },
       { id: "differentiator", type: "textarea", label: "¿Qué te diferencia de la competencia?", placeholder: "Por qué te eligen a ti", maxLength: 600 },
     ],
@@ -157,6 +157,16 @@ export const BRIEF_SCHEMA: Section[] = [
     fields: [
       { id: "targetAudience", type: "textarea", label: "¿Quién es tu cliente ideal?", placeholder: "Edad, ubicación, qué busca, qué le preocupa...", maxLength: 800, required: true },
       { id: "competitors", type: "textarea", label: "Competidores o referentes del sector", placeholder: "Nombres o sitios web", maxLength: 600 },
+    ],
+  },
+  {
+    id: "servicios",
+    step: 2,
+    title: "Servicios que ofreces",
+    description: "Lo más importante: agrega cada servicio que quieres mostrar en el sitio.",
+    highlight: true,
+    fields: [
+      { id: "services", type: "list", label: "Servicios", placeholder: "Ej. Consultoría fiscal", required: true },
     ],
   },
   {
@@ -175,7 +185,6 @@ export const BRIEF_SCHEMA: Section[] = [
         { value: "ai", label: "Generar el contenido con IA" },
         { value: "mixed", label: "Mixto" },
       ] },
-      { id: "services", type: "list", label: "Servicios que quieres incluir en el sitio", description: "Agrega los servicios que ofreces, uno por uno.", placeholder: "Ej. Consultoría fiscal" },
       { id: "hasPhotos", type: "radio", label: "¿Tienes fotografía profesional?", options: PHOTO_STATUS_OPTIONS },
       { id: "materials", type: "file", label: "Material existente", description: "Textos, fotos, presentaciones o documentos que ya tengas." },
     ],

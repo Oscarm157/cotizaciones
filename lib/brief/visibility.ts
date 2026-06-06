@@ -24,6 +24,7 @@ export function visibleSchema(slug: string): PlainSection[] {
     step: s.step,
     description: s.description,
     expertTip: s.expertTip,
+    highlight: s.highlight,
     fields: s.fields,
   }));
 }
