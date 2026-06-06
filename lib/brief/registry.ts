@@ -43,7 +43,8 @@ export const QUOTE_REGISTRY: Record<string, QuoteRegistryEntry> = {
     slug: "vbt",
     title: "VBT Consultores",
     folio: "",
-    flags: { agent: true, autoadmin: false, bilingual: true, social: false, portal: false, blog: false, booking: false, pages: 0 },
+    flags: { agent: false, autoadmin: false, bilingual: false, social: false, portal: false, blog: false, booking: false, pages: 0 },
+    overrides: { dominio: false, integraciones: false, plazos: false, bilinguepref: true },
   },
 };
 

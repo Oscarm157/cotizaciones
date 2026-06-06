@@ -19,14 +19,15 @@ export default function FieldRenderer({ field }: { field: Field }) {
 
   const value = answers[field.id];
   const set = (v: unknown) => updateAnswer(field.id, v);
+  const label = field.label && !field.required ? `${field.label} (opcional)` : field.label;
 
   switch (field.type) {
     case "text":
-      return <TextInput label={field.label} value={(value as string) || ""} onChange={set} placeholder={field.placeholder} />;
+      return <TextInput label={label} value={(value as string) || ""} onChange={set} placeholder={field.placeholder} />;
     case "textarea":
       return (
         <TextArea
-          label={field.label}
+          label={label}
           value={(value as string) || ""}
           onChange={set}
           placeholder={field.placeholder}
@@ -34,26 +35,26 @@ export default function FieldRenderer({ field }: { field: Field }) {
         />
       );
     case "select":
-      return <Select label={field.label} value={(value as string) || ""} onChange={set} options={field.options || []} />;
+      return <Select label={label} value={(value as string) || ""} onChange={set} options={field.options || []} />;
     case "radio":
-      return <RadioGroup label={field.label} value={(value as string) || ""} onChange={set} options={field.options || []} />;
+      return <RadioGroup label={label} value={(value as string) || ""} onChange={set} options={field.options || []} />;
     case "checkboxes":
       return (
         <CheckboxGroup
-          label={field.label}
+          label={label}
           selected={(value as string[]) || []}
           onChange={set}
           options={field.options || []}
         />
       );
     case "color":
-      return <ColorPicker label={field.label} colors={(value as string[]) || []} onChange={set} />;
+      return <ColorPicker label={label} colors={(value as string[]) || []} onChange={set} />;
     case "date":
-      return <DateInput label={field.label} value={(value as string) || ""} onChange={set} />;
+      return <DateInput label={label} value={(value as string) || ""} onChange={set} />;
     case "file":
       return (
         <FileUpload
-          label={field.label}
+          label={label}
           description={field.description}
           accept={field.accept}
           files={filesMap[field.id] || []}

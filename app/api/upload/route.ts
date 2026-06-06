@@ -14,6 +14,7 @@ export async function POST(req: Request) {
   const blob = await put(`${briefId}/${fieldId}/${file.name}`, file, {
     access: "public",
     addRandomSuffix: true,
+    token: process.env.BRIEF_BLOB_TOKEN,
   });
 
   return NextResponse.json({

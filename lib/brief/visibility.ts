@@ -21,6 +21,7 @@ export function visibleSchema(slug: string): PlainSection[] {
   ).map((s) => ({
     id: s.id,
     title: s.title,
+    step: s.step,
     description: s.description,
     expertTip: s.expertTip,
     fields: s.fields,

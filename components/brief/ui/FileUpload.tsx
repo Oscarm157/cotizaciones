@@ -75,10 +75,10 @@ export default function FileUpload({
               key={i}
               className="flex items-center justify-between p-4 bg-surface-muted rounded-lg hover:bg-card-border/40 transition-colors"
             >
-              <div className="flex items-center gap-3">
-                <Icon name={file.type?.includes("pdf") ? "description" : "image"} className="text-accent" />
-                <div>
-                  <p className="text-sm font-semibold text-primary">{file.name}</p>
+              <div className="flex items-center gap-3 min-w-0">
+                <Icon name={file.type?.includes("pdf") ? "description" : "image"} className="text-accent shrink-0" />
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold text-primary truncate">{file.name}</p>
                   <p className="text-[0.7rem] text-muted uppercase font-bold tracking-tight">
                     {formatSize(file.size)}
                   </p>
@@ -90,7 +90,7 @@ export default function FileUpload({
                   e.stopPropagation();
                   removeFile(i);
                 }}
-                className="text-muted-light hover:text-accent transition-colors"
+                className="text-muted-light hover:text-accent transition-colors shrink-0 ml-3"
               >
                 <Icon name="close" />
               </button>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import useBriefStore from "@/store/useBriefStore";
 import type { FileMeta } from "@/lib/brief/types";
 import type { PlainSection } from "@/lib/brief/schema";
@@ -11,6 +11,12 @@ import DownloadZipButton from "@/components/brief/DownloadZipButton";
 import Icon from "@/components/brief/ui/Icon";
 
 type Snapshot = { answers: Record<string, unknown>; files: Record<string, FileMeta[]> };
+
+const STEP_TITLES: Record<number, string> = {
+  1: "Tu marca",
+  2: "El proyecto",
+  3: "Cierre",
+};
 
 export default function BriefForm({
   entry,
@@ -33,6 +39,14 @@ export default function BriefForm({
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [snapshot, setSnapshot] = useState<Snapshot | null>(null);
+  const [stepIdx, setStepIdx] = useState(0);
+
+  // Pasos que de verdad tienen secciones visibles para esta cotizacion.
+  const steps = useMemo(() => [1, 2, 3].filter((n) => sections.some((s) => s.step === n)), [sections]);
+  const total = steps.length;
+  const currentStep = steps[stepIdx] ?? steps[0];
+  const currentSections = sections.filter((s) => s.step === currentStep);
+  const isLast = stepIdx >= total - 1;
 
   useEffect(() => {
     initDraft(entry.slug, resumeId);
@@ -44,6 +58,11 @@ export default function BriefForm({
     window.addEventListener("beforeunload", handler);
     return () => window.removeEventListener("beforeunload", handler);
   }, [flushPendingSave]);
+
+  const goTo = (idx: number) => {
+    setStepIdx(idx);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const handleSubmit = async () => {
     setSubmitting(true);
@@ -61,23 +80,18 @@ export default function BriefForm({
 
   if (submitted && snapshot) {
     return (
-      <main className="slide-light min-h-screen w-full flex items-center justify-center px-6 py-16">
-        <div className="max-w-lg w-full text-center bg-card border border-card-border rounded-2xl p-10">
+      <main className="slide-light min-h-screen w-full flex items-center justify-center px-5 py-16">
+        <div className="max-w-lg w-full text-center bg-card border border-card-border rounded-2xl p-8 sm:p-10">
           <div className="mx-auto w-14 h-14 rounded-full bg-success/15 flex items-center justify-center mb-5">
             <Icon name="check" className="text-success text-3xl" />
           </div>
           <h1 className="text-2xl font-semibold text-primary">Brief enviado</h1>
           <p className="mt-3 text-muted text-sm leading-relaxed">
-            Recibimos tu información para {entry.title}. El equipo de Bravo Publicidad la revisará para
-            arrancar el proyecto. Puedes descargar una copia con tus respuestas y los archivos que subiste.
+            Recibimos tu información para {entry.title}. La agencia la revisará para arrancar el proyecto.
+            Puedes descargar una copia con tus respuestas y los archivos que subiste.
           </p>
           <div className="mt-7 flex justify-center">
-            <DownloadZipButton
-              entry={entry}
-              sections={sections}
-              answers={snapshot.answers}
-              files={snapshot.files}
-            />
+            <DownloadZipButton entry={entry} sections={sections} answers={snapshot.answers} files={snapshot.files} />
           </div>
         </div>
       </main>
@@ -87,9 +101,9 @@ export default function BriefForm({
   return (
     <main className="slide-light min-h-screen w-full text-foreground">
       <div className="sticky top-0 z-20 bg-background/85 backdrop-blur border-b border-card-border">
-        <div className="max-w-3xl mx-auto px-6 sm:px-8 py-3 flex items-center justify-between">
+        <div className="max-w-3xl mx-auto px-4 sm:px-8 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="text-sm font-semibold tracking-tight text-primary">Bravo Publicidad</span>
+            <span className="text-sm font-semibold tracking-tight text-primary">La agencia</span>
             <span className="inline-block w-1.5 h-1.5 rounded-full bg-accent" />
           </div>
           <div className="text-[11px] uppercase tracking-[0.18em] font-semibold">
@@ -104,63 +118,106 @@ export default function BriefForm({
         </div>
       </div>
 
-      <div className="max-w-3xl mx-auto px-6 sm:px-8 py-12">
-        <header className="pb-8 border-b border-card-border">
-          <div className="text-[11px] uppercase tracking-[0.22em] font-semibold text-accent">
-            {entry.folio ? `Cotización ${entry.folio}` : entry.title}
-          </div>
-          <h1 className="mt-2 text-3xl sm:text-4xl font-semibold text-primary leading-tight">
-            Brief del proyecto
-          </h1>
-          <p className="mt-3 text-muted text-sm sm:text-base leading-relaxed max-w-xl">
-            {entry.title}. Cuéntanos los detalles para arrancar con todo claro. Se guarda solo conforme
-            escribes, puedes salir y volver con el mismo enlace.
-          </p>
-        </header>
+      <div className="max-w-3xl mx-auto px-4 sm:px-8 py-8 sm:py-12">
+        {stepIdx === 0 && (
+          <header className="pb-7 mb-2">
+            <div className="text-[11px] uppercase tracking-[0.22em] font-semibold text-accent">
+              {entry.folio ? `Cotización ${entry.folio}` : entry.title}
+            </div>
+            <h1 className="mt-2 text-[1.7rem] sm:text-4xl font-semibold text-primary leading-tight">
+              Brief del proyecto
+            </h1>
+            <p className="mt-3 text-muted text-sm sm:text-base leading-relaxed max-w-xl">
+              {entry.title}. Cuéntanos los detalles para arrancar con todo claro. Se guarda solo conforme
+              escribes, puedes salir y volver con el mismo enlace.
+            </p>
+          </header>
+        )}
 
         {loading ? (
           <div className="py-20 text-center text-muted text-sm">Cargando tu brief…</div>
         ) : (
-          <div className="mt-10 space-y-10">
-            {sections.map((section) => (
-              <section
-                key={section.id}
-                className="bg-card border border-card-border rounded-2xl p-6 sm:p-8"
-              >
-                <h2 className="text-xl font-semibold text-primary">{section.title}</h2>
-                {section.description && (
-                  <p className="mt-1.5 text-sm text-muted leading-relaxed">{section.description}</p>
-                )}
-                <div className="mt-7 space-y-7">
-                  {section.fields.map((field) => (
-                    <FieldRenderer key={field.id} field={field} />
-                  ))}
-                </div>
-                {section.expertTip && (
-                  <div className="mt-8">
-                    <ExpertTip text={section.expertTip} />
-                  </div>
-                )}
-              </section>
-            ))}
-
-            {error && <p className="text-danger text-sm text-center">{error}</p>}
-
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
-              <p className="text-xs text-muted">
-                Al enviar, el equipo de Bravo recibe tu brief para iniciar el proyecto.
-              </p>
-              <button
-                type="button"
-                onClick={handleSubmit}
-                disabled={submitting}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg bg-primary text-primary-foreground px-7 py-3.5 text-sm font-semibold hover:bg-primary/90 transition disabled:opacity-60"
-              >
-                {submitting ? "Enviando…" : "Enviar brief"}
-                {!submitting && <Icon name="arrow_forward" className="text-base" />}
-              </button>
+          <>
+            <div className="mb-8">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-[11px] uppercase tracking-[0.2em] font-semibold text-muted">
+                  Paso {stepIdx + 1} de {total} · {STEP_TITLES[currentStep]}
+                </span>
+                <span className="text-[11px] font-semibold text-accent">
+                  {Math.round(((stepIdx + 1) / total) * 100)}%
+                </span>
+              </div>
+              <div className="h-1.5 rounded-full bg-surface-muted overflow-hidden">
+                <div
+                  className="h-full bg-accent transition-all duration-500"
+                  style={{ width: `${((stepIdx + 1) / total) * 100}%` }}
+                />
+              </div>
             </div>
-          </div>
+
+            <div className="space-y-8">
+              {currentSections.map((section) => (
+                <section key={section.id} className="bg-card border border-card-border rounded-2xl p-5 sm:p-8">
+                  <h2 className="text-xl font-semibold text-primary">{section.title}</h2>
+                  {section.description && (
+                    <p className="mt-1.5 text-sm text-muted leading-relaxed">{section.description}</p>
+                  )}
+                  <div className="mt-7 space-y-7">
+                    {section.fields.map((field) => (
+                      <FieldRenderer key={field.id} field={field} />
+                    ))}
+                  </div>
+                  {section.expertTip && (
+                    <div className="mt-8">
+                      <ExpertTip text={section.expertTip} />
+                    </div>
+                  )}
+                </section>
+              ))}
+            </div>
+
+            {error && <p className="mt-6 text-danger text-sm text-center">{error}</p>}
+
+            <div className="mt-8 flex items-center justify-between gap-3">
+              {stepIdx > 0 ? (
+                <button
+                  type="button"
+                  onClick={() => goTo(stepIdx - 1)}
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-card-border bg-card text-primary px-5 py-3 text-sm font-semibold hover:border-accent transition"
+                >
+                  <Icon name="arrow_back" className="text-base" />
+                  Atrás
+                </button>
+              ) : (
+                <span />
+              )}
+
+              {isLast ? (
+                <button
+                  type="button"
+                  onClick={handleSubmit}
+                  disabled={submitting}
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary text-primary-foreground px-7 py-3 text-sm font-semibold hover:bg-primary/90 transition disabled:opacity-60"
+                >
+                  {submitting ? "Enviando…" : "Enviar brief"}
+                  {!submitting && <Icon name="arrow_forward" className="text-base" />}
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => goTo(stepIdx + 1)}
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary text-primary-foreground px-7 py-3 text-sm font-semibold hover:bg-primary/90 transition"
+                >
+                  Siguiente
+                  <Icon name="arrow_forward" className="text-base" />
+                </button>
+              )}
+            </div>
+
+            <p className="mt-4 text-xs text-muted text-center">
+              {isLast ? "Al enviar, la agencia recibe tu brief para iniciar el proyecto." : "Se guarda solo, puedes volver después con el mismo enlace."}
+            </p>
+          </>
         )}
       </div>
     </main>

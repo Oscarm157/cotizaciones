@@ -43,6 +43,7 @@ export interface DeliverableFlags {
 export interface Section {
   id: string;
   title: string;
+  step: 1 | 2 | 3;
   description?: string;
   expertTip?: string;
   visibleIf?: (flags: DeliverableFlags) => boolean;
@@ -114,13 +115,14 @@ const PHOTO_STATUS_OPTIONS: Option[] = [
 export const BRIEF_SCHEMA: Section[] = [
   {
     id: "identidad",
+    step: 1,
     title: "Identidad y marca",
     description: "Lo que ya define a tu marca: nombre, logo, colores y personalidad.",
     expertTip:
       "Un logo nítido y colores bien definidos desde el inicio generan más confianza y aceleran el diseño.",
     fields: [
       { id: "projectName", type: "text", label: "Nombre del proyecto", placeholder: "Portal Rentasa", required: true },
-      { id: "companyName", type: "text", label: "Nombre de la empresa o marca", placeholder: "Rentasa, Proyectos Inmobiliarios" },
+      { id: "companyName", type: "text", label: "Nombre de la empresa o marca", placeholder: "Rentasa, Proyectos Inmobiliarios", required: true },
       { id: "sector", type: "select", label: "Sector", options: SECTORS },
       { id: "logo", type: "file", label: "Logo", description: "Sube tu logo en alta calidad (PNG, SVG, AI, EPS)", accept: ".png,.svg,.ai,.eps,.pdf,.jpg,.jpeg" },
       { id: "brandColors", type: "color", label: "Colores de marca", description: "Si ya tienes una paleta definida, indícala aquí." },
@@ -135,34 +137,37 @@ export const BRIEF_SCHEMA: Section[] = [
   },
   {
     id: "vision",
+    step: 1,
     title: "Visión y objetivos",
     description: "Qué quieres lograr con el proyecto y cómo se vería el éxito.",
     expertTip:
       "Mientras más claro tengas el objetivo, más fácil es diseñar algo que realmente convierta.",
     fields: [
-      { id: "vision", type: "textarea", label: "¿Qué quieres lograr con este sitio?", placeholder: "Generar leads, vender en línea, dar información...", maxLength: 1000 },
-      { id: "objectives", type: "textarea", label: "¿Cómo medirías el éxito en 6 meses?", placeholder: "Más solicitudes, más visitas, mejor imagen...", maxLength: 1000 },
+      { id: "vision", type: "textarea", label: "¿Qué quieres lograr con este sitio?", placeholder: "Generar leads, vender en línea, dar información...", maxLength: 1000, required: true },
+      { id: "objectives", type: "textarea", label: "¿Cómo medirías el éxito en 6 meses?", placeholder: "Más solicitudes, más visitas, mejor imagen...", maxLength: 1000, required: true },
       { id: "desiredAction", type: "text", label: "¿Cuál es la acción principal que debe hacer el visitante?", placeholder: "Llenar formulario, agendar, comprar, llamar..." },
       { id: "differentiator", type: "textarea", label: "¿Qué te diferencia de la competencia?", placeholder: "Por qué te eligen a ti", maxLength: 600 },
     ],
   },
   {
     id: "audiencia",
+    step: 1,
     title: "Audiencia",
     description: "A quién le hablas y contra quién compites.",
     fields: [
-      { id: "targetAudience", type: "textarea", label: "¿Quién es tu cliente ideal?", placeholder: "Edad, ubicación, qué busca, qué le preocupa...", maxLength: 800 },
+      { id: "targetAudience", type: "textarea", label: "¿Quién es tu cliente ideal?", placeholder: "Edad, ubicación, qué busca, qué le preocupa...", maxLength: 800, required: true },
       { id: "competitors", type: "textarea", label: "Competidores o referentes del sector", placeholder: "Nombres o sitios web", maxLength: 600 },
     ],
   },
   {
     id: "contenido",
+    step: 2,
     title: "Contenido y páginas",
     description: "Las secciones del sitio y quién aporta los textos y las fotos.",
     expertTip:
       "Una estructura simple con pocas secciones principales retiene mejor que un menú con diez opciones.",
     fields: [
-      { id: "pages", type: "checkboxes", label: "Páginas que necesitas", description: "Marca las secciones del sitio.", options: SUGGESTED_PAGES },
+      { id: "pages", type: "checkboxes", label: "Páginas que necesitas", description: "Marca las secciones del sitio.", options: SUGGESTED_PAGES, required: true },
       { id: "contentStatus", type: "radio", label: "¿En qué estado está tu contenido?", options: CONTENT_STATUS_OPTIONS },
       { id: "contentProvider", type: "radio", label: "¿Quién entrega los textos y las fotos?", options: [
         { value: "client", label: "Yo entrego textos y fotos" },
@@ -175,6 +180,7 @@ export const BRIEF_SCHEMA: Section[] = [
   },
   {
     id: "agente",
+    step: 2,
     title: "Agente de IA",
     description: "El asistente que responde a tus visitantes.",
     visibleIf: (f) => f.agent,
@@ -187,6 +193,7 @@ export const BRIEF_SCHEMA: Section[] = [
   },
   {
     id: "bilingue",
+    step: 2,
     title: "Versión bilingüe",
     description: "El sitio en más de un idioma.",
     visibleIf: (f) => f.bilingual,
@@ -201,7 +208,18 @@ export const BRIEF_SCHEMA: Section[] = [
     ],
   },
   {
+    id: "bilinguepref",
+    step: 2,
+    title: "Idioma",
+    description: "¿En qué idiomas quieres el sitio?",
+    visibleIf: () => false,
+    fields: [
+      { id: "wantsBilingual", type: "checkboxes", label: "", options: ["Sí, lo quiero bilingüe (español e inglés)"] },
+    ],
+  },
+  {
     id: "redes",
+    step: 2,
     title: "Gestión de redes sociales",
     description: "El manejo de tus redes incluido en la propuesta.",
     visibleIf: (f) => f.social,
@@ -214,6 +232,7 @@ export const BRIEF_SCHEMA: Section[] = [
   },
   {
     id: "portal",
+    step: 2,
     title: "Catálogo o portal",
     description: "El listado con filtros que verán tus usuarios.",
     visibleIf: (f) => f.portal,
@@ -230,18 +249,20 @@ export const BRIEF_SCHEMA: Section[] = [
   },
   {
     id: "contacto",
+    step: 3,
     title: "Contacto y ubicación",
     description: "Los datos que verán tus clientes y por donde te contactan.",
     fields: [
       { id: "contactPhone", type: "text", label: "Teléfono", placeholder: "664 000 0000" },
       { id: "contactWhatsapp", type: "text", label: "WhatsApp", placeholder: "Número con lada" },
-      { id: "contactEmail", type: "text", label: "Correo de contacto", placeholder: "contacto@..." },
+      { id: "contactEmail", type: "text", label: "Correo de contacto", placeholder: "contacto@...", required: true },
       { id: "contactAddress", type: "text", label: "Dirección física (si aplica)", placeholder: "Calle, número, ciudad" },
       { id: "businessHours", type: "text", label: "Horario de atención", placeholder: "Lun a Vie, 9 a 18 h" },
     ],
   },
   {
     id: "dominio",
+    step: 3,
     title: "Dominio y hosting",
     description: "La dirección del sitio y dónde vive.",
     fields: [
@@ -265,6 +286,7 @@ export const BRIEF_SCHEMA: Section[] = [
   },
   {
     id: "integraciones",
+    step: 3,
     title: "Integraciones",
     description: "Herramientas externas que se conectan al sitio.",
     fields: [
@@ -288,6 +310,7 @@ export const BRIEF_SCHEMA: Section[] = [
   },
   {
     id: "plazos",
+    step: 3,
     title: "Plazos",
     description: "Tiempos y fechas que debemos respetar.",
     fields: [
@@ -297,6 +320,7 @@ export const BRIEF_SCHEMA: Section[] = [
   },
   {
     id: "referencias",
+    step: 3,
     title: "Referencias e inspiración",
     description: "El look and feel que buscas y lo que quieres evitar.",
     fields: [
