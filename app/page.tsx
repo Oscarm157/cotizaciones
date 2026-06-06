@@ -45,6 +45,12 @@ export default function Page() {
           <p className="mt-1 text-sm text-muted">
             Cotizaciones y propuestas digitales.
           </p>
+          <Link
+            href="/admin"
+            className="mt-3 inline-block text-[11px] uppercase tracking-[0.18em] font-semibold text-accent hover:text-accent-light transition"
+          >
+            Briefs recibidos →
+          </Link>
         </header>
 
         <section className="mt-10">
@@ -53,7 +59,7 @@ export default function Page() {
           </div>
           <ul className="flex flex-col gap-2">
             {QUOTES.map((q) => (
-              <li key={q.slug}>
+              <li key={q.slug} className="flex flex-col gap-1.5">
                 <Link
                   href={`/${q.slug}`}
                   className="flex items-center justify-between rounded-xl bg-card border border-card-border px-5 py-4 hover:border-accent/50 transition"
@@ -73,6 +79,12 @@ export default function Page() {
                       Abrir →
                     </div>
                   </div>
+                </Link>
+                <Link
+                  href={`/brief/${q.slug}`}
+                  className="self-start pl-1 text-[11px] uppercase tracking-[0.18em] font-semibold text-muted hover:text-accent transition"
+                >
+                  Brief del proyecto →
                 </Link>
               </li>
             ))}

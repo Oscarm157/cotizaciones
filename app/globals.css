@@ -291,6 +291,11 @@ em, i {
   );
 }
 
+/* Print: hide chrome marked .no-print (used by the brief admin) */
+@media print {
+  .no-print { display: none !important; }
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .slide-enter, .stagger-in > *, .animate-number, .bar-grow, .hero-fade-in,
