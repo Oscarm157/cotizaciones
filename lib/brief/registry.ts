@@ -39,9 +39,9 @@ export const QUOTE_REGISTRY: Record<string, QuoteRegistryEntry> = {
     folio: "WB-135",
     flags: { agent: true, autoadmin: false, bilingual: true, social: false, portal: false, blog: true, booking: true, pages: 5 },
   },
-  bvt: {
-    slug: "bvt",
-    title: "BVT Consultores",
+  vbt: {
+    slug: "vbt",
+    title: "VBT Consultores",
     folio: "",
     flags: { agent: true, autoadmin: false, bilingual: true, social: false, portal: false, blog: false, booking: false, pages: 0 },
   },
