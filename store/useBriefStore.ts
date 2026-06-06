@@ -1,16 +1,7 @@
 import { create } from "zustand";
-import { supabase, supabaseUrl, supabaseKey } from "@/lib/supabase";
+import type { FileMeta } from "@/lib/brief/types";
 
-const TABLE = "quote_briefs";
-const BUCKET = "brief-files";
 const DEBOUNCE_MS = 1500;
-
-export interface FileMeta {
-  name: string;
-  size: number;
-  type: string;
-  url: string;
-}
 
 type FileItem = File | FileMeta;
 
@@ -23,12 +14,18 @@ function isUploaded(f: FileItem): f is FileMeta {
   return !(f instanceof File) && typeof (f as FileMeta).url === "string";
 }
 
-async function uploadFile(file: File, briefId: string, fieldId: string): Promise<FileMeta> {
-  const path = `${briefId}/${fieldId}/${Date.now()}-${file.name}`;
-  const { error } = await supabase.storage.from(BUCKET).upload(path, file, { upsert: true });
-  if (error) throw error;
-  const { data } = supabase.storage.from(BUCKET).getPublicUrl(path);
-  return { name: file.name, size: file.size, type: file.type, url: data.publicUrl };
+function clientNameFrom(answers: Record<string, unknown>): string | null {
+  return (answers.companyName as string) || (answers.projectName as string) || null;
+}
+
+async function uploadOne(file: File, briefId: string, fieldId: string): Promise<FileMeta> {
+  const form = new FormData();
+  form.append("file", file);
+  form.append("briefId", briefId);
+  form.append("fieldId", fieldId);
+  const res = await fetch("/api/upload", { method: "POST", body: form });
+  if (!res.ok) throw new Error("upload failed");
+  return res.json();
 }
 
 interface BriefState {
@@ -44,7 +41,7 @@ interface BriefState {
   updateFiles: (fieldId: string, items: FileItem[]) => Promise<void>;
   createDraftRow: () => Promise<string | null>;
   debouncedSave: () => void;
-  saveToSupabase: () => Promise<void>;
+  saveDraft: () => Promise<void>;
   saveLocal: () => void;
   initDraft: (slug: string, urlBriefId?: string | null) => Promise<void>;
   submitBrief: () => Promise<string>;
@@ -78,14 +75,10 @@ const useBriefStore = create<BriefState>((set, get) => ({
       set({ saving: true });
       const kept = items.filter(isUploaded);
       const fresh = items.filter((f): f is File => f instanceof File);
-      const uploaded = await Promise.all(fresh.map((f) => uploadFile(f, briefId!, fieldId)));
-      const all = [...kept, ...uploaded];
-      set((s) => ({ files: { ...s.files, [fieldId]: all }, saving: false, saveError: false }));
-      await supabase
-        .from(TABLE)
-        .update({ files: get().files, updated_at: new Date().toISOString() })
-        .eq("id", briefId);
+      const uploaded = await Promise.all(fresh.map((f) => uploadOne(f, briefId!, fieldId)));
+      set((s) => ({ files: { ...s.files, [fieldId]: [...kept, ...uploaded] }, saving: false, saveError: false }));
       get().saveLocal();
+      await get().saveDraft();
     } catch (e) {
       console.error("File upload error:", e);
       set({ saving: false, saveError: true });
@@ -94,16 +87,17 @@ const useBriefStore = create<BriefState>((set, get) => ({
 
   createDraftRow: async () => {
     try {
-      const { data, error } = await supabase
-        .from(TABLE)
-        .insert({ quote_slug: get().quoteSlug, status: "draft", updated_at: new Date().toISOString() })
-        .select()
-        .single();
-      if (error) throw error;
-      set({ briefId: data.id });
-      return data.id as string;
+      const res = await fetch("/api/brief", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ quote_slug: get().quoteSlug }),
+      });
+      if (!res.ok) throw new Error("create failed");
+      const { id } = await res.json();
+      set({ briefId: id });
+      return id as string;
     } catch (e) {
-      console.error("Could not create draft row:", e);
+      console.error("Could not create draft:", e);
       set({ saveError: true });
       return null;
     }
@@ -111,31 +105,29 @@ const useBriefStore = create<BriefState>((set, get) => ({
 
   debouncedSave: () => {
     if (debounceTimer) clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(() => get().saveToSupabase(), DEBOUNCE_MS);
+    debounceTimer = setTimeout(() => get().saveDraft(), DEBOUNCE_MS);
   },
 
-  saveToSupabase: async () => {
-    const state = get();
+  saveDraft: async () => {
+    if (!get().briefId) {
+      await get().createDraftRow();
+    }
+    const id = get().briefId;
+    if (!id) return;
     set({ saving: true });
     try {
-      if (!state.briefId) {
-        await get().createDraftRow();
-      }
-      const briefId = get().briefId;
-      if (briefId) {
-        const latest = get();
-        const { error } = await supabase
-          .from(TABLE)
-          .update({
-            answers: latest.answers,
-            files: latest.files,
-            client_name: (latest.answers.companyName as string) || (latest.answers.projectName as string) || null,
-            status: "draft",
-            updated_at: new Date().toISOString(),
-          })
-          .eq("id", briefId);
-        if (error) throw error;
-      }
+      const s = get();
+      const res = await fetch(`/api/brief/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          answers: s.answers,
+          files: s.files,
+          client_name: clientNameFrom(s.answers),
+          status: "draft",
+        }),
+      });
+      if (!res.ok) throw new Error("save failed");
       set({ saving: false, saveError: false });
     } catch (e) {
       console.error("Could not save draft:", e);
@@ -176,15 +168,18 @@ const useBriefStore = create<BriefState>((set, get) => ({
 
     if (briefId) {
       try {
-        const { data, error } = await supabase.from(TABLE).select("*").eq("id", briefId).single();
-        if (!error && data && data.quote_slug === slug) {
-          set({
-            briefId: data.id,
-            answers: data.answers || localAnswers || {},
-            files: data.files || localFiles || {},
-            loading: false,
-          });
-          return;
+        const res = await fetch(`/api/brief/${briefId}`);
+        if (res.ok) {
+          const row = await res.json();
+          if (row.quote_slug === slug) {
+            set({
+              briefId: row.id,
+              answers: row.answers || localAnswers || {},
+              files: row.files || localFiles || {},
+              loading: false,
+            });
+            return;
+          }
         }
       } catch {
         /* ignore */
@@ -195,29 +190,25 @@ const useBriefStore = create<BriefState>((set, get) => ({
   },
 
   submitBrief: async () => {
-    const state = get();
-    const payload = {
-      quote_slug: state.quoteSlug,
-      answers: state.answers,
-      files: state.files,
-      client_name: (state.answers.companyName as string) || (state.answers.projectName as string) || null,
-      status: "submitted",
-      updated_at: new Date().toISOString(),
-    };
-
-    let id: string;
-    if (state.briefId) {
-      const { data, error } = await supabase.from(TABLE).update(payload).eq("id", state.briefId).select().single();
-      if (error) throw new Error("No se pudo enviar el brief. Revisa tu conexión e intenta de nuevo.");
-      id = data.id;
-    } else {
-      const { data, error } = await supabase.from(TABLE).insert(payload).select().single();
-      if (error) throw new Error("No se pudo enviar el brief. Revisa tu conexión e intenta de nuevo.");
-      id = data.id;
+    if (!get().briefId) {
+      await get().createDraftRow();
     }
-
+    const id = get().briefId;
+    if (!id) throw new Error("No se pudo enviar el brief. Revisa tu conexión e intenta de nuevo.");
+    const s = get();
+    const res = await fetch(`/api/brief/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        answers: s.answers,
+        files: s.files,
+        client_name: clientNameFrom(s.answers),
+        status: "submitted",
+      }),
+    });
+    if (!res.ok) throw new Error("No se pudo enviar el brief. Revisa tu conexión e intenta de nuevo.");
     try {
-      localStorage.removeItem(draftKey(state.quoteSlug));
+      localStorage.removeItem(draftKey(s.quoteSlug));
     } catch {
       /* ignore */
     }
@@ -229,20 +220,16 @@ const useBriefStore = create<BriefState>((set, get) => ({
     if (!debounceTimer) return;
     clearTimeout(debounceTimer);
     debounceTimer = null;
-    const state = get();
-    if (!state.briefId) return;
-    fetch(`${supabaseUrl}/rest/v1/${TABLE}?id=eq.${state.briefId}`, {
+    const s = get();
+    if (!s.briefId) return;
+    fetch(`/api/brief/${s.briefId}`, {
       method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        apikey: supabaseKey,
-        Authorization: `Bearer ${supabaseKey}`,
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        answers: state.answers,
-        files: state.files,
+        answers: s.answers,
+        files: s.files,
+        client_name: clientNameFrom(s.answers),
         status: "draft",
-        updated_at: new Date().toISOString(),
       }),
       keepalive: true,
     });

@@ -1,6 +1,6 @@
 import type { PlainSection, Option } from "./schema";
 import type { QuoteRegistryEntry } from "./registry";
-import type { FileMeta } from "@/store/useBriefStore";
+import type { FileMeta } from "./types";
 
 function labelFor(options: Option[] | undefined, value: string): string {
   if (!options) return value;

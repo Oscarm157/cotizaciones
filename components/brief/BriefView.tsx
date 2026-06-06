@@ -1,5 +1,5 @@
 import type { PlainSection, Option } from "@/lib/brief/schema";
-import type { FileMeta } from "@/store/useBriefStore";
+import type { FileMeta } from "@/lib/brief/types";
 
 function labelFor(options: Option[] | undefined, value: string): string {
   if (!options) return value;

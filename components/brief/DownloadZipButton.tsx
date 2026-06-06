@@ -5,7 +5,7 @@ import { zipSync, strToU8 } from "fflate";
 import { briefToMarkdown } from "@/lib/brief/markdown";
 import type { PlainSection } from "@/lib/brief/schema";
 import type { QuoteRegistryEntry } from "@/lib/brief/registry";
-import type { FileMeta } from "@/store/useBriefStore";
+import type { FileMeta } from "@/lib/brief/types";
 import Icon from "./ui/Icon";
 
 export default function DownloadZipButton({

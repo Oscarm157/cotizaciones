@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import useBriefStore, { type FileMeta } from "@/store/useBriefStore";
+import useBriefStore from "@/store/useBriefStore";
+import type { FileMeta } from "@/lib/brief/types";
 import type { PlainSection } from "@/lib/brief/schema";
 import type { QuoteRegistryEntry } from "@/lib/brief/registry";
 import FieldRenderer from "@/components/brief/FieldRenderer";

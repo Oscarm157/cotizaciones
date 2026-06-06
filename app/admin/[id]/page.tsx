@@ -1,10 +1,10 @@
 import { redirect, notFound } from "next/navigation";
 import Link from "next/link";
 import { isAdmin } from "../auth";
-import { supabase } from "@/lib/supabase";
+import { sql } from "@/lib/db";
 import { getQuote } from "@/lib/brief/registry";
 import { visibleSchema } from "@/lib/brief/visibility";
-import type { FileMeta } from "@/store/useBriefStore";
+import type { FileMeta } from "@/lib/brief/types";
 import BriefView from "@/components/brief/BriefView";
 import DownloadZipButton from "@/components/brief/DownloadZipButton";
 import PrintButton from "@/components/brief/PrintButton";
@@ -15,8 +15,9 @@ export default async function BriefDetailPage({ params }: { params: Promise<{ id
   if (!(await isAdmin())) redirect("/admin/login");
   const { id } = await params;
 
-  const { data, error } = await supabase.from("quote_briefs").select("*").eq("id", id).single();
-  if (error || !data) notFound();
+  const rows = await sql`select * from quote_briefs where id = ${id}`;
+  const data = rows[0];
+  if (!data) notFound();
 
   const quote = getQuote(data.quote_slug);
   if (!quote) notFound();

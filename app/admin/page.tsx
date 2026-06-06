@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { isAdmin } from "./auth";
 import { logout } from "./actions";
-import { supabase } from "@/lib/supabase";
+import { sql } from "@/lib/db";
 import { QUOTE_REGISTRY } from "@/lib/brief/registry";
 
 export const dynamic = "force-dynamic";
@@ -17,13 +17,13 @@ interface BriefRow {
 export default async function AdminPage() {
   if (!(await isAdmin())) redirect("/admin/login");
 
-  const { data } = await supabase
-    .from("quote_briefs")
-    .select("id,quote_slug,client_name,created_at")
-    .eq("status", "submitted")
-    .order("created_at", { ascending: false });
+  const data = await sql`
+    select id, quote_slug, client_name, created_at
+    from quote_briefs
+    where status = 'submitted'
+    order by created_at desc`;
 
-  const briefs = (data as BriefRow[] | null) || [];
+  const briefs = data as BriefRow[];
 
   const groups = new Map<string, BriefRow[]>();
   for (const b of briefs) {
