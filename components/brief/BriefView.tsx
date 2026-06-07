@@ -50,24 +50,6 @@ export default function BriefView({
             const v = answers[field.id];
             if (v === null || v === undefined || v === "" || (Array.isArray(v) && v.length === 0)) return null;
 
-            if (field.type === "color" && Array.isArray(v)) {
-              return (
-                <div key={field.id}>
-                  <div className="text-[0.7rem] font-bold text-muted uppercase tracking-wider">{field.label}</div>
-                  <div className="mt-1.5 flex gap-2">
-                    {(v as string[]).map((c, i) => (
-                      <span
-                        key={i}
-                        className="w-7 h-7 rounded-md border border-card-border"
-                        style={{ backgroundColor: c }}
-                        title={c}
-                      />
-                    ))}
-                  </div>
-                </div>
-              );
-            }
-
             if (Array.isArray(v) && v.length > 0 && typeof v[0] === "object" && v[0] !== null && "name" in (v[0] as object)) {
               const services = v as { name: string; desc?: string }[];
               return (

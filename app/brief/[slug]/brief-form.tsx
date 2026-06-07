@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import useBriefStore from "@/store/useBriefStore";
 import type { PlainSection } from "@/lib/brief/schema";
-import type { QuoteRegistryEntry } from "@/lib/brief/registry";
+import type { Client } from "@/lib/brief/clients";
 import FieldRenderer from "@/components/brief/FieldRenderer";
 import ExpertTip from "@/components/brief/ExpertTip";
 import Icon from "@/components/brief/ui/Icon";
@@ -19,7 +19,7 @@ export default function BriefForm({
   sections,
   resumeId,
 }: {
-  entry: QuoteRegistryEntry;
+  entry: Client;
   sections: PlainSection[];
   resumeId: string | null;
 }) {
@@ -61,8 +61,26 @@ export default function BriefForm({
   };
 
   const handleSubmit = async () => {
-    setSubmitting(true);
     setError("");
+    const st = useBriefStore.getState();
+    const isEmpty = (fieldId: string, type: string) => {
+      if (type === "file") return !(st.files[fieldId]?.length);
+      const v = st.answers[fieldId];
+      if (Array.isArray(v)) return v.length === 0;
+      return v === undefined || v === null || String(v).trim() === "";
+    };
+    const missing: { label: string; step: number }[] = [];
+    for (const sec of sections)
+      for (const f of sec.fields) if (f.required && isEmpty(f.id, f.type)) missing.push({ label: f.label, step: sec.step });
+
+    if (missing.length > 0) {
+      const idx = steps.indexOf(missing[0].step);
+      if (idx >= 0) goTo(idx);
+      setError(`Faltan campos obligatorios: ${missing.map((m) => m.label).join(", ")}.`);
+      return;
+    }
+
+    setSubmitting(true);
     try {
       await submitBrief();
     } catch (e) {

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { isAdmin } from "./auth";
 import { logout } from "./actions";
 import { sql } from "@/lib/db";
-import { QUOTE_REGISTRY } from "@/lib/brief/registry";
+import { listClients } from "@/lib/brief/clients";
 
 export const dynamic = "force-dynamic";
 
@@ -22,8 +22,10 @@ export default async function AdminPage() {
     from quote_briefs
     where status = 'submitted'
     order by created_at desc`;
-
   const briefs = data as BriefRow[];
+
+  const clients = await listClients();
+  const meta = new Map(clients.map((c) => [c.slug, c]));
 
   const groups = new Map<string, BriefRow[]>();
   for (const b of briefs) {
@@ -41,7 +43,7 @@ export default async function AdminPage() {
         <header className="flex items-center justify-between pb-8 border-b border-card-border">
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-2xl font-semibold tracking-tight text-primary">Briefs recibidos</span>
+              <span className="text-2xl font-semibold tracking-tight text-primary">Panel de briefs</span>
               <span className="inline-block w-1.5 h-1.5 rounded-full bg-accent" />
             </div>
             <p className="mt-1 text-sm text-muted">{briefs.length} brief(s) enviados.</p>
@@ -53,14 +55,31 @@ export default async function AdminPage() {
           </form>
         </header>
 
+        <Link
+          href="/admin/clientes"
+          className="mt-8 flex items-center justify-between rounded-xl bg-primary text-primary-foreground px-5 py-4 hover:bg-primary/90 transition"
+        >
+          <div>
+            <div className="text-base font-semibold">Clientes</div>
+            <div className="text-[12px] text-primary-foreground/70">
+              Crea clientes y elige qué secciones tiene cada brief.
+            </div>
+          </div>
+          <span className="text-sm font-semibold">Abrir →</span>
+        </Link>
+
+        <div className="mt-10 text-[10px] uppercase tracking-[0.22em] font-semibold text-muted mb-3">
+          Briefs enviados
+        </div>
+
         {briefs.length === 0 ? (
-          <div className="py-20 text-center text-muted text-sm">Aún no hay briefs enviados.</div>
+          <div className="py-16 text-center text-muted text-sm">Aún no hay briefs enviados.</div>
         ) : (
-          <div className="mt-10 space-y-10">
+          <div className="space-y-10">
             {[...groups.entries()].map(([slug, rows]) => (
               <section key={slug}>
                 <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-muted mb-3">
-                  {QUOTE_REGISTRY[slug]?.title || slug}
+                  {meta.get(slug)?.title || slug}
                 </div>
                 <ul className="flex flex-col gap-2">
                   {rows.map((b) => (
@@ -70,12 +89,8 @@ export default async function AdminPage() {
                         className="flex items-center justify-between rounded-xl bg-card border border-card-border px-5 py-4 hover:border-accent/50 transition"
                       >
                         <div>
-                          <div className="text-base font-semibold text-primary">
-                            {b.client_name || "Sin nombre"}
-                          </div>
-                          <div className="text-[12px] text-muted">
-                            {QUOTE_REGISTRY[slug]?.folio || slug}
-                          </div>
+                          <div className="text-base font-semibold text-primary">{b.client_name || "Sin nombre"}</div>
+                          <div className="text-[12px] text-muted">{meta.get(slug)?.folio || slug}</div>
                         </div>
                         <div className="text-right">
                           <div className="text-[11px] text-muted">{fmtDate(b.created_at)}</div>

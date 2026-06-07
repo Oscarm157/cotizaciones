@@ -1,7 +1,9 @@
 import { notFound } from "next/navigation";
-import { getQuote } from "@/lib/brief/registry";
+import { getClient } from "@/lib/brief/clients";
 import { visibleSchema } from "@/lib/brief/visibility";
 import BriefForm from "./brief-form";
+
+export const dynamic = "force-dynamic";
 
 export default async function Page({
   params,
@@ -12,9 +14,9 @@ export default async function Page({
 }) {
   const { slug } = await params;
   const { id } = await searchParams;
-  const quote = getQuote(slug);
-  if (!quote) notFound();
+  const client = await getClient(slug);
+  if (!client) notFound();
 
-  const sections = visibleSchema(slug);
-  return <BriefForm entry={quote} sections={sections} resumeId={id ?? null} />;
+  const sections = visibleSchema(client);
+  return <BriefForm entry={client} sections={sections} resumeId={id ?? null} />;
 }

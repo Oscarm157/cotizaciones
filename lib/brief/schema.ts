@@ -1,7 +1,6 @@
-// Esquema maestro del brief: universal y data-driven.
-// Las secciones condicionales se muestran segun los entregables de cada cotizacion
-// (DeliverableFlags). La visibilidad se resuelve en el servidor (lib/brief/visibility.ts)
-// y al cliente solo cruza un esquema plano sin funciones.
+// Esquema maestro del brief (catalogo de secciones y campos). Que secciones
+// aparecen por cliente lo decide la config en la base (tabla clients, mapa
+// sections), no este archivo. Ver lib/brief/clients.ts y lib/brief/visibility.ts.
 
 export type FieldType =
   | "text"
@@ -10,7 +9,6 @@ export type FieldType =
   | "radio"
   | "checkboxes"
   | "file"
-  | "color"
   | "date"
   | "servicelist";
 
@@ -30,17 +28,6 @@ export interface Field {
   maxLength?: number;
 }
 
-export interface DeliverableFlags {
-  agent: boolean;
-  autoadmin: boolean;
-  bilingual: boolean;
-  social: boolean;
-  portal: boolean;
-  blog: boolean;
-  booking: boolean;
-  pages: number;
-}
-
 export interface Section {
   id: string;
   title: string;
@@ -48,12 +35,11 @@ export interface Section {
   description?: string;
   expertTip?: string;
   highlight?: boolean;
-  visibleIf?: (flags: DeliverableFlags) => boolean;
   fields: Field[];
 }
 
-// Version serializable (sin visibleIf) que cruza a los client components.
-export type PlainSection = Omit<Section, "visibleIf">;
+// Las secciones ya son serializables (sin funciones).
+export type PlainSection = Section;
 
 const SECTORS: Option[] = [
   "Tecnología",
@@ -194,7 +180,6 @@ export const BRIEF_SCHEMA: Section[] = [
     step: 2,
     title: "Agente de IA",
     description: "El asistente que responde a tus visitantes.",
-    visibleIf: (f) => f.agent,
     fields: [
       { id: "agentScope", type: "textarea", label: "¿Qué debe resolver el agente?", placeholder: "Preguntas frecuentes, agendar, dar información de productos...", maxLength: 800 },
       { id: "agentData", type: "textarea", label: "¿Qué datos debe capturar de cada visitante?", placeholder: "Nombre, teléfono, presupuesto, interés...", maxLength: 500 },
@@ -207,7 +192,6 @@ export const BRIEF_SCHEMA: Section[] = [
     step: 2,
     title: "Versión bilingüe",
     description: "El sitio en más de un idioma.",
-    visibleIf: (f) => f.bilingual,
     fields: [
       { id: "languages", type: "text", label: "Idiomas del sitio", placeholder: "Español e inglés" },
       { id: "translationProvider", type: "radio", label: "¿Quién entrega las traducciones?", options: [
@@ -223,7 +207,6 @@ export const BRIEF_SCHEMA: Section[] = [
     step: 2,
     title: "Idioma",
     description: "¿En qué idiomas quieres el sitio?",
-    visibleIf: () => false,
     fields: [
       { id: "wantsBilingual", type: "checkboxes", label: "", options: ["Sí, lo quiero bilingüe (español e inglés)"] },
     ],
@@ -233,7 +216,6 @@ export const BRIEF_SCHEMA: Section[] = [
     step: 2,
     title: "Gestión de redes sociales",
     description: "El manejo de tus redes incluido en la propuesta.",
-    visibleIf: (f) => f.social,
     fields: [
       { id: "socialNetworks", type: "checkboxes", label: "¿Qué redes manejamos?", options: ["Instagram", "Facebook", "TikTok", "LinkedIn", "YouTube", "X / Twitter"] },
       { id: "socialHandles", type: "textarea", label: "Cuentas actuales", placeholder: "Links o usuarios de tus redes", maxLength: 300 },
@@ -246,7 +228,6 @@ export const BRIEF_SCHEMA: Section[] = [
     step: 2,
     title: "Catálogo o portal",
     description: "El listado con filtros que verán tus usuarios.",
-    visibleIf: (f) => f.portal,
     fields: [
       { id: "catalogType", type: "text", label: "¿Qué se lista en el catálogo?", placeholder: "Propiedades, productos, servicios..." },
       { id: "catalogVolume", type: "text", label: "¿Cuántos elementos aproximadamente?", placeholder: "50, 200, más de 1000..." },
@@ -343,3 +324,15 @@ export const BRIEF_SCHEMA: Section[] = [
     ],
   },
 ];
+
+// Catalogo de secciones para el panel de admin (toggles por cliente).
+export const SECTION_CATALOG = BRIEF_SCHEMA.map((s) => ({ id: s.id, title: s.title, step: s.step }));
+
+// Secciones encendidas por defecto al crear un cliente nuevo.
+export const BASE_SECTIONS = ["identidad", "vision", "audiencia", "servicios", "contenido", "contacto", "referencias"];
+
+export function defaultSections(): Record<string, boolean> {
+  const map: Record<string, boolean> = {};
+  for (const s of BRIEF_SCHEMA) map[s.id] = BASE_SECTIONS.includes(s.id);
+  return map;
+}

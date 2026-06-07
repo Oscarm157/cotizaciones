@@ -4,7 +4,7 @@ import { useState } from "react";
 import { zipSync, strToU8 } from "fflate";
 import { briefToMarkdown } from "@/lib/brief/markdown";
 import type { PlainSection } from "@/lib/brief/schema";
-import type { QuoteRegistryEntry } from "@/lib/brief/registry";
+import type { Client } from "@/lib/brief/clients";
 import type { FileMeta } from "@/lib/brief/types";
 import Icon from "./ui/Icon";
 
@@ -16,7 +16,7 @@ export default function DownloadZipButton({
   submittedAt,
   className = "",
 }: {
-  entry: QuoteRegistryEntry;
+  entry: Client;
   sections: PlainSection[];
   answers: Record<string, unknown>;
   files: Record<string, FileMeta[]>;

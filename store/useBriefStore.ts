@@ -6,6 +6,7 @@ const DEBOUNCE_MS = 1500;
 type FileItem = File | FileMeta;
 
 let debounceTimer: ReturnType<typeof setTimeout> | null = null;
+let createPromise: Promise<string | null> | null = null;
 let initSlug: string | null = null;
 
 const draftKey = (slug: string) => `quote-brief-draft-${slug}`;
@@ -63,6 +64,8 @@ const useBriefStore = create<BriefState>((set, get) => ({
   updateAnswer: (fieldId, value) => {
     set((s) => ({ answers: { ...s.answers, [fieldId]: value } }));
     get().saveLocal();
+    // Crear la fila de inmediato para que el flush en beforeunload tenga dónde guardar.
+    if (!get().briefId) get().createDraftRow();
     get().debouncedSave();
   },
 
@@ -87,21 +90,28 @@ const useBriefStore = create<BriefState>((set, get) => ({
   },
 
   createDraftRow: async () => {
-    try {
-      const res = await fetch("/api/brief", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ quote_slug: get().quoteSlug }),
-      });
-      if (!res.ok) throw new Error("create failed");
-      const { id } = await res.json();
-      set({ briefId: id });
-      return id as string;
-    } catch (e) {
-      console.error("Could not create draft:", e);
-      set({ saveError: true });
-      return null;
-    }
+    if (get().briefId) return get().briefId;
+    if (createPromise) return createPromise;
+    createPromise = (async () => {
+      try {
+        const res = await fetch("/api/brief", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ quote_slug: get().quoteSlug }),
+        });
+        if (!res.ok) throw new Error("create failed");
+        const { id } = await res.json();
+        set({ briefId: id });
+        return id as string;
+      } catch (e) {
+        console.error("Could not create draft:", e);
+        set({ saveError: true });
+        return null;
+      } finally {
+        createPromise = null;
+      }
+    })();
+    return createPromise;
   },
 
   debouncedSave: () => {
@@ -191,6 +201,11 @@ const useBriefStore = create<BriefState>((set, get) => ({
   },
 
   submitBrief: async () => {
+    // Cancelar cualquier autosave pendiente para que no regrese el status a draft.
+    if (debounceTimer) {
+      clearTimeout(debounceTimer);
+      debounceTimer = null;
+    }
     if (!get().briefId) {
       await get().createDraftRow();
     }

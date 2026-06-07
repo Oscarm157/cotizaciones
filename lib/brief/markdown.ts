@@ -1,5 +1,5 @@
 import type { PlainSection, Option } from "./schema";
-import type { QuoteRegistryEntry } from "./registry";
+import type { Client } from "./clients";
 import type { FileMeta } from "./types";
 
 function labelFor(options: Option[] | undefined, value: string): string {
@@ -28,7 +28,7 @@ function formatAnswer(value: unknown, options: Option[] | undefined): string | n
 }
 
 export function briefToMarkdown(
-  entry: QuoteRegistryEntry,
+  entry: Client,
   sections: PlainSection[],
   answers: Record<string, unknown>,
   files: Record<string, FileMeta[]>,

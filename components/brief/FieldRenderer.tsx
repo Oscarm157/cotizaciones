@@ -8,7 +8,6 @@ import Select from "./ui/Select";
 import RadioGroup from "./ui/RadioGroup";
 import CheckboxGroup from "./ui/CheckboxGroup";
 import FileUpload from "./ui/FileUpload";
-import ColorPicker from "./ui/ColorPicker";
 import DateInput from "./ui/DateInput";
 import ServiceListInput, { type ServiceItem } from "./ui/ServiceListInput";
 
@@ -48,8 +47,6 @@ export default function FieldRenderer({ field }: { field: Field }) {
           options={field.options || []}
         />
       );
-    case "color":
-      return <ColorPicker label={label} colors={(value as string[]) || []} onChange={set} />;
     case "date":
       return <DateInput label={label} value={(value as string) || ""} onChange={set} />;
     case "servicelist":
