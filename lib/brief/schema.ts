@@ -12,7 +12,7 @@ export type FieldType =
   | "file"
   | "color"
   | "date"
-  | "list";
+  | "servicelist";
 
 export type Option =
   | string
@@ -166,7 +166,7 @@ export const BRIEF_SCHEMA: Section[] = [
     description: "Lo más importante: agrega cada servicio que quieres mostrar en el sitio.",
     highlight: true,
     fields: [
-      { id: "services", type: "list", label: "Servicios", placeholder: "Ej. Consultoría fiscal", required: true },
+      { id: "services", type: "servicelist", label: "Servicios", placeholder: "Ej. Consultoría fiscal", required: true },
     ],
   },
   {

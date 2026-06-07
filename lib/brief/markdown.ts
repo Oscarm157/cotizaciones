@@ -14,7 +14,15 @@ function formatAnswer(value: unknown, options: Option[] | undefined): string | n
   if (value === null || value === undefined || value === "") return null;
   if (Array.isArray(value)) {
     if (value.length === 0) return null;
-    return value.map((v) => `- ${labelFor(options, String(v))}`).join("\n");
+    return value
+      .map((v) => {
+        if (v && typeof v === "object" && "name" in (v as object)) {
+          const o = v as { name: string; desc?: string };
+          return o.desc ? `- **${o.name}**: ${o.desc}` : `- **${o.name}**`;
+        }
+        return `- ${labelFor(options, String(v))}`;
+      })
+      .join("\n");
   }
   return labelFor(options, String(value));
 }

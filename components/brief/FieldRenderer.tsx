@@ -10,7 +10,7 @@ import CheckboxGroup from "./ui/CheckboxGroup";
 import FileUpload from "./ui/FileUpload";
 import ColorPicker from "./ui/ColorPicker";
 import DateInput from "./ui/DateInput";
-import ListInput from "./ui/ListInput";
+import ServiceListInput, { type ServiceItem } from "./ui/ServiceListInput";
 
 export default function FieldRenderer({ field }: { field: Field }) {
   const answers = useBriefStore((s) => s.answers);
@@ -52,8 +52,8 @@ export default function FieldRenderer({ field }: { field: Field }) {
       return <ColorPicker label={label} colors={(value as string[]) || []} onChange={set} />;
     case "date":
       return <DateInput label={label} value={(value as string) || ""} onChange={set} />;
-    case "list":
-      return <ListInput label={label} items={(value as string[]) || []} onChange={set} placeholder={field.placeholder} />;
+    case "servicelist":
+      return <ServiceListInput label={label} items={(value as ServiceItem[]) || []} onChange={set} placeholder={field.placeholder} />;
     case "file":
       return (
         <FileUpload

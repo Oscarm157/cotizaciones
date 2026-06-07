@@ -68,6 +68,23 @@ export default function BriefView({
               );
             }
 
+            if (Array.isArray(v) && v.length > 0 && typeof v[0] === "object" && v[0] !== null && "name" in (v[0] as object)) {
+              const services = v as { name: string; desc?: string }[];
+              return (
+                <div key={field.id}>
+                  <div className="text-[0.7rem] font-bold text-muted uppercase tracking-wider">{field.label}</div>
+                  <ul className="mt-1.5 space-y-1.5">
+                    {services.map((s, i) => (
+                      <li key={i} className="text-sm text-primary leading-snug">
+                        <span className="font-semibold">{s.name}</span>
+                        {s.desc && <span className="text-muted">: {s.desc}</span>}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              );
+            }
+
             const text = Array.isArray(v)
               ? (v as string[]).map((x) => labelFor(field.options, x)).join(", ")
               : labelFor(field.options, String(v));
