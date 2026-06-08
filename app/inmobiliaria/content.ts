@@ -3,9 +3,9 @@ export const ISSUED = "2026-05-25";
 export const VALID = "2026-06-09";
 
 export const PRICE_SITIO: number | null = 17000;
-export const PRICE_AGENTE: number | null = 3300;
+export const PRICE_AGENTE: number | null = 3000;
 export const PRICE_AUTOADMIN: number | null = 3000;
-export const PRICE_COTIZADOR: number | null = 1700;
+export const PRICE_COTIZADOR: number | null = 2500;
 export const PRICE_HOSTING: number | null = 2000;
 
 export const CONTENT = {
