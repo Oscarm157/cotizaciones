@@ -335,7 +335,7 @@ export const CONTENT = {
           "Panel propio para que el equipo de Inmobiliaria actualice el catálogo de propiedades, los artículos del blog y los textos e imágenes del sitio sin depender de un desarrollador, lo que reduce los costos por actualizaciones y mantenimiento a futuro. Capacitación inicial incluida.",
       },
       cotizador: {
-        title: "Cotizador en línea integrado con CRM",
+        title: "Cotizador en línea + CRM",
         detail:
           "Formulario de cotización que el visitante completa desde el portal y genera un estimado en pantalla. Cada cotización entra al CRM como lead con sus datos y la propiedad de interés, listo para que el asesor le dé seguimiento.",
       },
