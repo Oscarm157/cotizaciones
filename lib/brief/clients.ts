@@ -9,8 +9,8 @@ export interface Client {
   sections: Record<string, boolean>;
 }
 
-// Los 4 clientes con pagina de cotizacion estatica (app/<slug>/page.tsx).
-export const QUOTE_PAGES = ["rentasa", "intransittech", "pescador", "bustamante"];
+// Los clientes con pagina de cotizacion estatica (app/<slug>/page.tsx).
+export const QUOTE_PAGES = ["inmobiliaria", "rentasa", "intransittech", "pescador", "bustamante"];
 
 export function quotePathFor(slug: string): string | null {
   return QUOTE_PAGES.includes(slug) ? `/${slug}` : null;

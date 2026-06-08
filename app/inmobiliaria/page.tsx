@@ -5,16 +5,24 @@ import {
   ISSUED,
   VALID,
   PRICE_SITIO,
+  PRICE_AGENTE,
+  PRICE_AUTOADMIN,
+  PRICE_COTIZADOR,
   PRICE_HOSTING,
-  PRICE_DOMINIO,
   fmtMxn,
   fmtDate,
 } from "./content";
 import { PrintButton } from "./print-button";
+import { Slideshow } from "./slideshow";
+import { LiveChat } from "./live-chat";
 
 const t = CONTENT;
 
-const TOTAL_MXN: number | null = PRICE_SITIO;
+const PRICES = [PRICE_SITIO, PRICE_AGENTE, PRICE_AUTOADMIN, PRICE_COTIZADOR, PRICE_HOSTING];
+const HAS_PENDING = PRICES.some((p) => p === null);
+const TOTAL_MXN: number | null = HAS_PENDING
+  ? null
+  : (PRICES as number[]).reduce((a, b) => a + b, 0);
 const DEPOSIT_MXN: number | null = TOTAL_MXN === null ? null : Math.round(TOTAL_MXN * 0.5);
 const FINAL_MXN: number | null =
   TOTAL_MXN === null || DEPOSIT_MXN === null ? null : TOTAL_MXN - DEPOSIT_MXN;
@@ -163,7 +171,7 @@ export default function Page() {
 
         <section className="mt-6">
           <SectionTitle icon="auto_awesome" title={t.benefits.title} meta={t.benefits.meta} />
-          <ul className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {t.benefits.items.map((b) => (
               <li
                 key={b.title}
@@ -181,10 +189,10 @@ export default function Page() {
           </ul>
         </section>
 
-        <PageFooter label={t.labels.pageOf(1, 3)} />
+        <PageFooter label={t.labels.pageOf(1, 6)} />
       </article>
 
-      {/* ─────────── PÁGINA 2 · EL SITIO ─────────── */}
+      {/* ─────────── PÁGINA 2 · EL PORTAL ─────────── */}
       <article className="doc-page relative max-w-[900px] mx-auto px-8 sm:px-12 py-8 text-[14px] leading-relaxed page-break">
         <PhaseBar active={2} />
 
@@ -210,29 +218,200 @@ export default function Page() {
 
         <section className="mt-7">
           <SectionTitle icon="menu_book" title={t.pages.title} meta={t.pages.meta} />
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {t.pages.items.map((p) => (
-              <li key={p.name} className="flex gap-3 rounded-xl border border-card-border bg-card p-3">
-                <span className="font-mono text-[15px] font-semibold text-accent tabular-nums shrink-0 leading-none pt-0.5">
-                  {p.num}
-                </span>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-x-5 gap-y-6">
+            {t.pages.groups.map((g) => (
+              <div key={g.label}>
+                <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-accent pb-1.5 border-b border-accent/30 mb-3">
+                  {g.label}
+                </div>
+                <ul className="space-y-3">
+                  {g.items.map((p) => (
+                    <li key={p.name} className="flex gap-3">
+                      <span className="font-mono text-[15px] font-semibold text-accent tabular-nums shrink-0 leading-none pt-0.5">
+                        {p.num}
+                      </span>
+                      <div className="min-w-0">
+                        <div className="text-[13px] font-semibold text-foreground leading-tight">
+                          {p.name}
+                        </div>
+                        <div className="text-[11.5px] text-muted mt-0.5 leading-snug">
+                          {p.detail}
+                        </div>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <PageFooter label={t.labels.pageOf(2, 6)} />
+      </article>
+
+      {/* ─────────── PÁGINA 3 · CONTENIDO ─────────── */}
+      <article className="doc-page relative max-w-[900px] mx-auto px-8 sm:px-12 py-8 text-[14px] leading-relaxed page-break">
+        <PhaseBar active={3} />
+
+        <section className="mt-6">
+          <SectionTitle icon="category" title={t.categories.title} meta={t.categories.meta} />
+          <p className="text-[12px] text-muted leading-relaxed max-w-2xl mb-3">
+            {t.categories.intro}
+          </p>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {t.categories.items.map((c) => (
+              <li
+                key={c.name}
+                className="rounded-lg bg-card border border-card-border px-3 py-2.5 flex gap-3"
+              >
+                <IconBadge icon={c.icon} small />
                 <div className="min-w-0">
                   <div className="text-[13px] font-semibold text-foreground leading-tight">
-                    {p.name}
+                    {c.name}
                   </div>
-                  <div className="text-[11.5px] text-muted mt-0.5 leading-snug">{p.detail}</div>
+                  <div className="text-[11.5px] text-muted mt-0.5 leading-snug">{c.detail}</div>
                 </div>
               </li>
             ))}
           </ul>
         </section>
 
-        <PageFooter label={t.labels.pageOf(2, 3)} />
+        <section className="mt-7">
+          <SectionTitle
+            icon="smart_toy"
+            title={t.agent.titleLead}
+            emphasis={t.agent.titleEmphasis}
+            meta={t.agent.meta}
+          />
+          <p className="text-[12px] text-muted leading-relaxed max-w-2xl mb-3">{t.agent.intro}</p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <ul className="grid grid-cols-1 gap-2">
+              {t.agent.features.map((a) => (
+                <li
+                  key={a.title}
+                  className="rounded-lg bg-primary text-primary-foreground border border-primary/30 p-3 flex gap-3"
+                >
+                  <div className="shrink-0 w-8 h-8 rounded-lg bg-accent/20 text-accent-light flex items-center justify-center">
+                    <span
+                      className="material-symbols-outlined"
+                      style={{ fontSize: 18, fontVariationSettings: "'wght' 500" }}
+                    >
+                      {a.icon}
+                    </span>
+                  </div>
+                  <div className="min-w-0">
+                    <div className="text-[13px] font-semibold leading-tight">{a.title}</div>
+                    <div className="text-[11.5px] text-white/70 mt-0.5 leading-snug">
+                      {a.detail}
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+
+            <LiveChat messages={t.chat} ui={t.chatHeader} />
+            <div className="print-only">
+              <ChatMock />
+            </div>
+          </div>
+
+          <div className="mt-3 rounded-lg bg-accent/10 border border-accent/30 px-3 py-2.5 flex items-start gap-2.5">
+            <span
+              className="material-symbols-outlined text-accent shrink-0 mt-0.5"
+              style={{ fontSize: 18, fontVariationSettings: "'wght' 600" }}
+            >
+              info
+            </span>
+            <div className="text-[11.5px] text-foreground/90 leading-snug">
+              <span className="font-semibold text-primary">{t.requisite.label}</span>{" "}
+              {t.requisite.before} <span className="font-semibold">ChatGPT (OpenAI)</span>{" "}
+              {t.requisite.or} <span className="font-semibold">Gemini (Google)</span>
+              {t.requisite.middle}
+            </div>
+          </div>
+        </section>
+
+        <PageFooter label={t.labels.pageOf(3, 6)} />
       </article>
 
-      {/* ─────────── PÁGINA 3 · INVERSIÓN ─────────── */}
+      {/* ─────────── PÁGINA 4 · AUTOADMINISTRACIÓN ─────────── */}
       <article className="doc-page relative max-w-[900px] mx-auto px-8 sm:px-12 py-8 text-[14px] leading-relaxed page-break">
-        <PhaseBar active={3} />
+        <PhaseBar active={4} />
+
+        <section className="mt-6">
+          <SectionTitle
+            icon="settings_account_box"
+            title={t.autoadmin.titleLead}
+            emphasis={t.autoadmin.titleEmphasis}
+            meta={t.autoadmin.meta}
+          />
+          <p className="text-[12px] text-muted leading-relaxed max-w-2xl mb-4">
+            {t.autoadmin.intro}
+          </p>
+
+          <ul className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {t.autoadmin.features.map((a) => (
+              <li
+                key={a.title}
+                className="rounded-xl bg-card border border-card-border p-3.5 flex gap-3"
+              >
+                <IconBadge icon={a.icon} />
+                <div className="min-w-0">
+                  <div className="text-[13px] font-semibold text-foreground leading-tight">
+                    {a.title}
+                  </div>
+                  <div className="text-[11.5px] text-muted mt-1 leading-snug">{a.detail}</div>
+                </div>
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="rounded-lg bg-accent/10 border border-accent/30 px-3 py-2.5 flex items-start gap-2.5">
+              <span
+                className="material-symbols-outlined text-accent shrink-0 mt-0.5"
+                style={{ fontSize: 18, fontVariationSettings: "'wght' 600" }}
+              >
+                school
+              </span>
+              <div className="text-[11.5px] text-foreground/90 leading-snug">
+                {t.autoadmin.training}
+              </div>
+            </div>
+            <div className="rounded-lg bg-surface-muted border border-card-border px-3 py-2.5 flex items-start gap-2.5">
+              <span
+                className="material-symbols-outlined text-primary shrink-0 mt-0.5"
+                style={{ fontSize: 18, fontVariationSettings: "'wght' 600" }}
+              >
+                upload_file
+              </span>
+              <div className="text-[11.5px] text-foreground/90 leading-snug">
+                {t.autoadmin.migration}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <PageFooter label={t.labels.pageOf(4, 6)} />
+      </article>
+
+      {/* ─────────── PÁGINA 5 · PREVISUALIZACIÓN ─────────── */}
+      <article className="doc-page relative max-w-[900px] mx-auto px-8 sm:px-12 py-8 text-[14px] leading-relaxed page-break">
+        <PhaseBar active={5} />
+
+        <section className="mt-6">
+          <SectionTitle icon="slideshow" title={t.preview.title} meta={t.preview.meta} />
+          <p className="text-[12px] text-muted leading-relaxed max-w-2xl mb-4">{t.preview.intro}</p>
+          <Slideshow />
+        </section>
+
+        <PageFooter label={t.labels.pageOf(5, 6)} />
+      </article>
+
+      {/* ─────────── PÁGINA 6 · INVERSIÓN ─────────── */}
+      <article className="doc-page relative max-w-[900px] mx-auto px-8 sm:px-12 py-8 text-[14px] leading-relaxed page-break">
+        <PhaseBar active={6} />
 
         <section className="mt-6">
           <SectionTitle icon="payments" title={t.investment.title} />
@@ -243,7 +422,31 @@ export default function Page() {
                 icon="domain"
                 title={t.investment.lines.sitio.title}
                 detail={t.investment.lines.sitio.detail}
-                price={fmtMxn(PRICE_SITIO)}
+                price={PRICE_SITIO}
+              />
+              <InvestmentRow
+                icon="support_agent"
+                title={t.investment.lines.agente.title}
+                detail={t.investment.lines.agente.detail}
+                price={PRICE_AGENTE}
+              />
+              <InvestmentRow
+                icon="settings_account_box"
+                title={t.investment.lines.autoadmin.title}
+                detail={t.investment.lines.autoadmin.detail}
+                price={PRICE_AUTOADMIN}
+              />
+              <InvestmentRow
+                icon="request_quote"
+                title={t.investment.lines.cotizador.title}
+                detail={t.investment.lines.cotizador.detail}
+                price={PRICE_COTIZADOR}
+              />
+              <InvestmentRow
+                icon="dns"
+                title={t.investment.lines.hosting.title}
+                detail={t.investment.lines.hosting.detail}
+                price={PRICE_HOSTING}
               />
             </div>
 
@@ -252,13 +455,16 @@ export default function Page() {
                 <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-accent-light mb-0.5">
                   {t.investment.oneTimeLabel}
                 </div>
+                <div className="text-[12px] text-white/70 leading-snug max-w-md">
+                  {t.investment.totalFootnote}
+                </div>
               </div>
               <div className="text-right shrink-0">
                 <div className="text-3xl font-semibold tabular-nums text-accent-light">
                   {fmtMxn(TOTAL_MXN)}
                 </div>
                 <div className="text-[10px] uppercase tracking-[0.2em] text-white/60">
-                  {t.investment.oneTimeCaption} · {t.labels.plusVat}
+                  {t.investment.totalCaption} · {t.labels.plusVat}
                 </div>
               </div>
             </div>
@@ -291,30 +497,7 @@ export default function Page() {
             </div>
           </div>
 
-          <div className="mt-4">
-            <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-accent mb-2">
-              {t.investment.recurringTitle}
-            </div>
-            <div className="rounded-xl border border-card-border bg-card overflow-hidden divide-y divide-card-border">
-              <InvestmentRow
-                icon="dns"
-                title={t.investment.lines.hosting.title}
-                detail={t.investment.lines.hosting.detail}
-                price={`${fmtMxn(PRICE_HOSTING)} ${t.labels.perYear}`}
-              />
-              <InvestmentRow
-                icon="language"
-                title={t.investment.lines.dominio.title}
-                detail={t.investment.lines.dominio.detail}
-                price={`${PRICE_DOMINIO} MXN ${t.labels.perYear}`}
-              />
-            </div>
-            <p className="mt-2 text-[11.5px] text-muted leading-snug">
-              {t.investment.recurringNote}
-            </p>
-          </div>
-
-          <ul className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1 text-[11.5px] text-muted">
+          <ul className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1 text-[11.5px] text-muted">
             {t.investment.notes.map((n) => (
               <li key={n}>• {n}</li>
             ))}
@@ -357,7 +540,7 @@ export default function Page() {
           </div>
         </footer>
 
-        <PageFooter label={t.labels.pageOf(3, 3)} />
+        <PageFooter label={t.labels.pageOf(6, 6)} />
       </article>
 
       <style>{`
@@ -420,11 +603,11 @@ function IconBadge({ icon, small = false }: { icon: string; small?: boolean }) {
   );
 }
 
-function PhaseBar({ active }: { active: 1 | 2 | 3 }) {
+function PhaseBar({ active }: { active: 1 | 2 | 3 | 4 | 5 | 6 }) {
   return (
     <div className="flex items-center gap-1.5 w-full">
       {t.phases.map((p, i) => {
-        const idx = (i + 1) as 1 | 2 | 3;
+        const idx = (i + 1) as 1 | 2 | 3 | 4 | 5 | 6;
         const done = idx < active;
         const current = idx === active;
         return (
@@ -451,7 +634,9 @@ function PhaseBar({ active }: { active: 1 | 2 | 3 }) {
             </div>
             {i < t.phases.length - 1 && (
               <div
-                className={`h-px flex-1 min-w-[6px] ${done ? "bg-accent/40" : "bg-card-border"}`}
+                className={`h-px flex-1 min-w-[6px] ${
+                  done ? "bg-accent/40" : "bg-card-border"
+                }`}
               />
             )}
           </Fragment>
@@ -559,6 +744,64 @@ function BeforeAfter() {
   );
 }
 
+function ChatMock() {
+  return (
+    <div className="rounded-xl border border-card-border bg-card overflow-hidden flex flex-col">
+      <div className="flex items-center gap-2 px-3 py-2 border-b border-card-border bg-surface-muted/60">
+        <div className="w-6 h-6 rounded-full bg-accent/15 text-accent flex items-center justify-center">
+          <span
+            className="material-symbols-outlined"
+            style={{ fontSize: 14, fontVariationSettings: "'wght' 600" }}
+          >
+            support_agent
+          </span>
+        </div>
+        <div>
+          <div className="text-[11.5px] font-semibold text-foreground leading-none">
+            {t.chatHeader.title}
+          </div>
+          <div className="text-[9.5px] text-muted mt-0.5">{t.chatHeader.status}</div>
+        </div>
+        <div className="ml-auto flex items-center gap-1 text-[9px] uppercase tracking-[0.18em] font-semibold text-accent">
+          <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+          {t.chatHeader.badge}
+        </div>
+      </div>
+
+      <div className="p-3 space-y-2 flex-1">
+        {t.chat.map((m, i) => {
+          const isAgent = m.from === "agent";
+          return (
+            <div key={i} className={`flex ${isAgent ? "justify-start" : "justify-end"}`}>
+              <div
+                className={`max-w-[85%] rounded-xl px-3 py-2 text-[11.5px] leading-snug ${
+                  isAgent
+                    ? "bg-accent text-white rounded-tl-sm"
+                    : "bg-surface-muted text-foreground rounded-tr-sm border border-card-border"
+                }`}
+              >
+                {m.text}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="flex items-center gap-2 px-3 py-2 border-t border-card-border">
+        <div className="flex-1 text-[11px] text-muted/70 italic">{t.chatHeader.placeholder}</div>
+        <div className="w-7 h-7 rounded-full bg-accent text-white flex items-center justify-center">
+          <span
+            className="material-symbols-outlined"
+            style={{ fontSize: 14, fontVariationSettings: "'wght' 700" }}
+          >
+            send
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function InvestmentRow({
   icon,
   title,
@@ -568,7 +811,7 @@ function InvestmentRow({
   icon: string;
   title: string;
   detail: string;
-  price: string;
+  price: number | null;
 }) {
   return (
     <div className="flex items-start gap-4 p-4">
@@ -578,10 +821,20 @@ function InvestmentRow({
         <div className="text-[11.5px] text-muted mt-0.5 leading-snug max-w-md">{detail}</div>
       </div>
       <div className="text-right shrink-0 tabular-nums">
-        <div className="text-lg font-semibold text-foreground">{price}</div>
-        <div className="text-[10px] uppercase tracking-[0.2em] text-muted mt-0.5">
-          {t.labels.plusVat}
+        <div
+          className={
+            price === null
+              ? "text-[12px] uppercase tracking-[0.18em] font-semibold text-muted"
+              : "text-lg font-semibold text-foreground"
+          }
+        >
+          {fmtMxn(price)}
         </div>
+        {price !== null && (
+          <div className="text-[10px] uppercase tracking-[0.2em] text-muted mt-0.5">
+            {t.labels.plusVat}
+          </div>
+        )}
       </div>
     </div>
   );

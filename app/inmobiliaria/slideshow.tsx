@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react";
 
 const SLIDES = [
-  { src: "/rentasa/inicio.png", label: "Inicio" },
-  { src: "/rentasa/portal.png", label: "Portal de propiedades" },
-  { src: "/rentasa/detalle.png", label: "Detalle de propiedad" },
-  { src: "/rentasa/contacto.png", label: "Contacto" },
+  { src: "/inmobiliaria/inicio.png", label: "Inicio" },
+  { src: "/inmobiliaria/portal.png", label: "Portal de propiedades" },
+  { src: "/inmobiliaria/detalle.png", label: "Detalle de propiedad" },
+  { src: "/inmobiliaria/contacto.png", label: "Contacto" },
 ];
 
 const INTERVAL_MS = 3000;

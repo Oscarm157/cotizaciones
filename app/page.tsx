@@ -2,11 +2,18 @@ import Link from "next/link";
 
 const QUOTES = [
   {
-    slug: "rentasa",
-    title: "Rentasa, Proyectos Inmobiliarios",
-    subtitle: "Portal inmobiliario + Agente IA + Módulo autoadministrable",
+    slug: "inmobiliaria",
+    title: "Inmobiliaria",
+    subtitle: "Portal inmobiliario + Agente IA + Autoadmin + Cotizador con CRM",
     folio: "WB-133",
     date: "25 de mayo de 2026",
+  },
+  {
+    slug: "rentasa",
+    title: "Rentasa, Proyectos Inmobiliarios",
+    subtitle: "Sitio web informativo · 5 páginas",
+    folio: "WB-136",
+    date: "8 de junio de 2026",
   },
   {
     slug: "intransittech",
