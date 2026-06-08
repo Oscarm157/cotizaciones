@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import Link from "next/link";
 import {
   CONTENT,
   FOLIO,
@@ -6,18 +7,22 @@ import {
   VALID,
   PRICE_SITIO,
   PRICE_HOSTING,
-  PRICE_DOMINIO,
+  PRICE_DOMINIO_MIN,
+  PRICE_DOMINIO_MAX,
   fmtMxn,
+  fmtRange,
   fmtDate,
 } from "./content";
 import { PrintButton } from "./print-button";
 
 const t = CONTENT;
 
-const TOTAL_MXN: number | null = PRICE_SITIO;
-const DEPOSIT_MXN: number | null = TOTAL_MXN === null ? null : Math.round(TOTAL_MXN * 0.5);
-const FINAL_MXN: number | null =
-  TOTAL_MXN === null || DEPOSIT_MXN === null ? null : TOTAL_MXN - DEPOSIT_MXN;
+// Anticipo = el sitio. Liquidacion = hosting + dominio del primer ano (pagos anuales).
+const DEPOSIT_MXN = PRICE_SITIO;
+const FINAL_MIN = PRICE_HOSTING + PRICE_DOMINIO_MIN;
+const FINAL_MAX = PRICE_HOSTING + PRICE_DOMINIO_MAX;
+const TOTAL_MIN = DEPOSIT_MXN + FINAL_MIN;
+const TOTAL_MAX = DEPOSIT_MXN + FINAL_MAX;
 
 export default function Page() {
   return (
@@ -28,6 +33,18 @@ export default function Page() {
             {t.labels.toolbarLabel(FOLIO, t.client.short)}
           </div>
           <div className="flex items-center gap-2 shrink-0">
+            <Link
+              href={t.relatedQuote.href}
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-card-border text-[11px] uppercase tracking-[0.16em] font-semibold text-muted hover:text-accent hover:border-accent/50 transition"
+            >
+              <span
+                className="material-symbols-outlined"
+                style={{ fontSize: 15, fontVariationSettings: "'wght' 600" }}
+              >
+                link
+              </span>
+              {t.relatedQuote.name}
+            </Link>
             <PrintButton label={t.labels.printPdf} />
           </div>
         </div>
@@ -208,25 +225,6 @@ export default function Page() {
           </ul>
         </section>
 
-        <section className="mt-7">
-          <SectionTitle icon="menu_book" title={t.pages.title} meta={t.pages.meta} />
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {t.pages.items.map((p) => (
-              <li key={p.name} className="flex gap-3 rounded-xl border border-card-border bg-card p-3">
-                <span className="font-mono text-[15px] font-semibold text-accent tabular-nums shrink-0 leading-none pt-0.5">
-                  {p.num}
-                </span>
-                <div className="min-w-0">
-                  <div className="text-[13px] font-semibold text-foreground leading-tight">
-                    {p.name}
-                  </div>
-                  <div className="text-[11.5px] text-muted mt-0.5 leading-snug">{p.detail}</div>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </section>
-
         <PageFooter label={t.labels.pageOf(2, 3)} />
       </article>
 
@@ -239,26 +237,75 @@ export default function Page() {
 
           <div className="rounded-xl border border-card-border bg-card overflow-hidden">
             <div className="divide-y divide-card-border">
+              <div className="p-4">
+                <div className="flex items-start gap-4">
+                  <IconBadge icon="domain" />
+                  <div className="flex-1 min-w-0">
+                    <div className="text-[13px] font-semibold text-foreground">
+                      {t.investment.lines.sitio.title}
+                    </div>
+                    <div className="text-[11.5px] text-muted mt-0.5 leading-snug max-w-md">
+                      {t.investment.lines.sitio.detail}
+                    </div>
+                  </div>
+                  <div className="text-right shrink-0 tabular-nums">
+                    <div className="text-lg font-semibold text-foreground">
+                      {fmtMxn(PRICE_SITIO)}
+                    </div>
+                    <div className="text-[10px] uppercase tracking-[0.2em] text-muted mt-0.5">
+                      {t.labels.plusVat}
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-3 sm:ml-14 rounded-lg bg-surface-muted/60 border border-card-border p-3">
+                  <div className="text-[10px] uppercase tracking-[0.2em] font-semibold text-accent mb-2">
+                    {t.investment.pagesLabel}
+                  </div>
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-1.5">
+                    {t.pages.items.map((p) => (
+                      <li key={p.name} className="flex gap-2 text-[11.5px] leading-snug">
+                        <span className="font-mono font-semibold text-accent tabular-nums shrink-0">
+                          {p.num}
+                        </span>
+                        <span className="min-w-0">
+                          <span className="font-semibold text-foreground">{p.name}</span>
+                          <span className="text-muted"> · {p.detail}</span>
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
               <InvestmentRow
-                icon="domain"
-                title={t.investment.lines.sitio.title}
-                detail={t.investment.lines.sitio.detail}
-                price={fmtMxn(PRICE_SITIO)}
+                icon="dns"
+                title={t.investment.lines.hosting.title}
+                detail={t.investment.lines.hosting.detail}
+                price={`${fmtMxn(PRICE_HOSTING)} ${t.labels.perYear}`}
+              />
+              <InvestmentRow
+                icon="language"
+                title={t.investment.lines.dominio.title}
+                detail={t.investment.lines.dominio.detail}
+                price={`${fmtRange(PRICE_DOMINIO_MIN, PRICE_DOMINIO_MAX)} ${t.labels.perYear}`}
               />
             </div>
 
             <div className="grid grid-cols-[1fr_auto] gap-4 p-4 border-t border-primary bg-primary text-primary-foreground">
               <div>
                 <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-accent-light mb-0.5">
-                  {t.investment.oneTimeLabel}
+                  {t.investment.totalLabel}
+                </div>
+                <div className="text-[12px] text-white/70 leading-snug max-w-md">
+                  {t.investment.recurringNote}
                 </div>
               </div>
               <div className="text-right shrink-0">
                 <div className="text-3xl font-semibold tabular-nums text-accent-light">
-                  {fmtMxn(TOTAL_MXN)}
+                  {fmtRange(TOTAL_MIN, TOTAL_MAX)}
                 </div>
                 <div className="text-[10px] uppercase tracking-[0.2em] text-white/60">
-                  {t.investment.oneTimeCaption} · {t.labels.plusVat}
+                  {t.investment.totalCaption} · {t.labels.plusVat}
                 </div>
               </div>
             </div>
@@ -281,7 +328,7 @@ export default function Page() {
                   {t.investment.finalLabel}
                 </div>
                 <div className="mt-0.5 text-lg font-semibold tabular-nums text-foreground">
-                  {fmtMxn(FINAL_MXN)}{" "}
+                  {fmtRange(FINAL_MIN, FINAL_MAX)}{" "}
                   <span className="text-[10px] uppercase tracking-[0.2em] text-muted font-normal">
                     {t.labels.plusVat}
                   </span>
@@ -289,29 +336,6 @@ export default function Page() {
                 <div className="text-[11px] text-muted">{t.investment.finalCaption}</div>
               </div>
             </div>
-          </div>
-
-          <div className="mt-4">
-            <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-accent mb-2">
-              {t.investment.recurringTitle}
-            </div>
-            <div className="rounded-xl border border-card-border bg-card overflow-hidden divide-y divide-card-border">
-              <InvestmentRow
-                icon="dns"
-                title={t.investment.lines.hosting.title}
-                detail={t.investment.lines.hosting.detail}
-                price={`${fmtMxn(PRICE_HOSTING)} ${t.labels.perYear}`}
-              />
-              <InvestmentRow
-                icon="language"
-                title={t.investment.lines.dominio.title}
-                detail={t.investment.lines.dominio.detail}
-                price={`${PRICE_DOMINIO} MXN ${t.labels.perYear}`}
-              />
-            </div>
-            <p className="mt-2 text-[11.5px] text-muted leading-snug">
-              {t.investment.recurringNote}
-            </p>
           </div>
 
           <ul className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1 text-[11.5px] text-muted">
@@ -327,13 +351,8 @@ export default function Page() {
             {t.nextStep.label}
           </div>
           <p className="text-[13px] text-foreground/90 leading-relaxed">
-            {t.nextStep.textBefore}
-            {DEPOSIT_MXN !== null && (
-              <>
-                {" "}
-                <span className="font-semibold text-foreground">{fmtMxn(DEPOSIT_MXN)}</span>
-              </>
-            )}{" "}
+            {t.nextStep.textBefore}{" "}
+            <span className="font-semibold text-foreground">{fmtMxn(DEPOSIT_MXN)}</span>{" "}
             {t.nextStep.textAfter}
           </p>
         </section>

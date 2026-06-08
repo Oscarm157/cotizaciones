@@ -3,7 +3,7 @@ import Link from "next/link";
 const QUOTES = [
   {
     slug: "inmobiliaria",
-    title: "Inmobiliaria",
+    title: "Inmobiliaria Vértice",
     subtitle: "Portal inmobiliario + Agente IA + Autoadmin + Cotizador con CRM",
     folio: "WB-133",
     date: "25 de mayo de 2026",

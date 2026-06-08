@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import Link from "next/link";
 import {
   CONTENT,
   FOLIO,
@@ -36,6 +37,18 @@ export default function Page() {
             {t.labels.toolbarLabel(FOLIO, t.client.short)}
           </div>
           <div className="flex items-center gap-2 shrink-0">
+            <Link
+              href={t.relatedQuote.href}
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-lg border border-card-border text-[11px] uppercase tracking-[0.16em] font-semibold text-muted hover:text-accent hover:border-accent/50 transition"
+            >
+              <span
+                className="material-symbols-outlined"
+                style={{ fontSize: 15, fontVariationSettings: "'wght' 600" }}
+              >
+                link
+              </span>
+              {t.relatedQuote.name}
+            </Link>
             <PrintButton label={t.labels.printPdf} />
           </div>
         </div>
@@ -431,16 +444,16 @@ export default function Page() {
                 price={PRICE_AGENTE}
               />
               <InvestmentRow
-                icon="settings_account_box"
-                title={t.investment.lines.autoadmin.title}
-                detail={t.investment.lines.autoadmin.detail}
-                price={PRICE_AUTOADMIN}
-              />
-              <InvestmentRow
                 icon="request_quote"
                 title={t.investment.lines.cotizador.title}
                 detail={t.investment.lines.cotizador.detail}
                 price={PRICE_COTIZADOR}
+              />
+              <InvestmentRow
+                icon="settings_account_box"
+                title={t.investment.lines.autoadmin.title}
+                detail={t.investment.lines.autoadmin.detail}
+                price={PRICE_AUTOADMIN}
               />
               <InvestmentRow
                 icon="dns"

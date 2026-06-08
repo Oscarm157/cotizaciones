@@ -1,10 +1,11 @@
 export const FOLIO = "WB-136";
 export const ISSUED = "2026-06-08";
-export const VALID = "2026-06-22";
+export const VALID = "2026-06-15";
 
-export const PRICE_SITIO: number | null = 10500;
-export const PRICE_HOSTING: number | null = 1500;
-export const PRICE_DOMINIO = "$500 – $1,000";
+export const PRICE_SITIO = 10500;
+export const PRICE_HOSTING = 1500;
+export const PRICE_DOMINIO_MIN = 500;
+export const PRICE_DOMINIO_MAX = 1000;
 
 export const CONTENT = {
   locale: "es-MX",
@@ -21,6 +22,10 @@ export const CONTENT = {
     short: "Rentasa",
     descriptor:
       "Grupo inmobiliario mexicano. Desarrollo, adquisición, administración y comercialización de activos inmobiliarios.",
+  },
+  relatedQuote: {
+    href: "/inmobiliaria",
+    name: "Portal Inmobiliaria Vértice",
   },
   labels: {
     quote: "Cotización",
@@ -129,8 +134,6 @@ export const CONTENT = {
     ],
   },
   pages: {
-    title: "Páginas del sitio",
-    meta: "5 secciones",
     items: [
       { num: "01", name: "Inicio", detail: "Presentación del grupo, propuesta de valor y accesos a las secciones." },
       { num: "02", name: "Nosotros", detail: "Historia del grupo, trayectoria y filosofía de operación." },
@@ -141,20 +144,20 @@ export const CONTENT = {
   },
   investment: {
     title: "Inversión",
-    oneTimeLabel: "Pago único · Entrega completa",
-    oneTimeCaption: "MXN · total",
-    recurringTitle: "Costos anuales",
+    totalLabel: "Total primer año",
+    totalCaption: "MXN · sitio + hosting y dominio del primer año",
     recurringNote:
-      "Hosting y dominio se cobran por año. El rango del dominio depende de la extensión y nombre elegidos.",
+      "Hosting y dominio se renuevan cada año. El rango del dominio depende de la extensión y el nombre elegidos.",
     depositLabel: "Anticipo · al aprobar",
-    depositCaption: "50% para iniciar",
+    depositCaption: "Sitio web completo, para iniciar",
     finalLabel: "Liquidación · al entregar",
-    finalCaption: "50% con todo publicado",
+    finalCaption: "Hosting y dominio del primer año, con todo publicado",
+    pagesLabel: "Las 5 páginas",
     lines: {
       sitio: {
-        title: "Sitio web informativo (5 páginas)",
+        title: "Sitio web informativo",
         detail:
-          "Diseño, desarrollo y publicación del sitio. Incluye galería de proyectos con carga inicial, formulario de contacto y medición de visitas.",
+          "Diseño, desarrollo y publicación del sitio de 5 páginas. Incluye galería de proyectos con carga inicial, formulario de contacto y medición de visitas.",
       },
       hosting: {
         title: "Hosting del sitio",
@@ -185,6 +188,11 @@ export const fmtMxn = (n: number | null) => {
   if (n === null) return CONTENT.labels.pendingPrice;
   return `$${n.toLocaleString("es-MX", { maximumFractionDigits: 0 })} MXN`;
 };
+
+const fmtNum = (n: number) => n.toLocaleString("es-MX", { maximumFractionDigits: 0 });
+
+export const fmtRange = (min: number, max: number) =>
+  min === max ? fmtMxn(min) : `$${fmtNum(min)} – $${fmtNum(max)} MXN`;
 
 export const fmtDate = (iso: string) => {
   const [y, m, d] = iso.split("-").map(Number);

@@ -1,6 +1,6 @@
 export const FOLIO = "WB-133";
 export const ISSUED = "2026-05-25";
-export const VALID = "2026-06-09";
+export const VALID = "2026-06-15";
 
 export const PRICE_SITIO: number | null = 17000;
 export const PRICE_AGENTE: number | null = 3000;
@@ -19,10 +19,14 @@ export const CONTENT = {
     roleLabel: "Responsable",
   },
   client: {
-    name: "Inmobiliaria",
-    short: "Inmobiliaria",
+    name: "Inmobiliaria Vértice",
+    short: "Inmobiliaria Vértice",
     descriptor:
       "Comercializadora inmobiliaria. Venta y renta de activos industriales, comerciales, oficinas, habitacionales y reserva territorial.",
+  },
+  relatedQuote: {
+    href: "/rentasa",
+    name: "Sitio web Rentasa",
   },
   labels: {
     quote: "Cotización",
@@ -57,12 +61,12 @@ export const CONTENT = {
       "Vistas preliminares de las pantallas principales del portal: Inicio, Portal de propiedades, Detalle de propiedad y Contacto.",
   },
   intro: {
-    eyebrow: "Propuesta · Portal inmobiliario + Agente IA + Módulo autoadministrable",
+    eyebrow: "Propuesta · Portal inmobiliario + Agente IA + Autoadmin + Cotizador con CRM",
     titleLead: "Portal inmobiliario",
     titleEmphasis: "profesional",
     titleSuffix: "para",
     paragraph:
-      "Propuesta para construir el portal inmobiliario de Inmobiliaria: 10 páginas con catálogo de propiedades filtrable, ficha individual por activo, agente de ventas conversacional con inteligencia artificial que atiende consultas 24 horas y un módulo autoadministrable para que el equipo actualice contenido, catálogo y blog sin depender de un desarrollador.",
+      "Propuesta para construir el portal inmobiliario de Vértice: 10 páginas con catálogo de propiedades filtrable, ficha individual por activo, agente de ventas conversacional con inteligencia artificial que atiende consultas 24 horas, un módulo autoadministrable para que el equipo actualice contenido, catálogo y blog sin depender de un desarrollador, y un cotizador en línea que registra cada prospecto en un CRM.",
   },
   before: {
     heading: "Hoy",
@@ -76,7 +80,7 @@ export const CONTENT = {
   after: {
     heading: "Con el portal nuevo",
     items: [
-      "Catálogo de propiedades en línea, actualizable por el equipo de Inmobiliaria en cualquier momento.",
+      "Catálogo de propiedades en línea, actualizable por el equipo de Vértice en cualquier momento.",
       "Solicitudes estructuradas con datos del prospecto, propiedad de interés y forma de contacto.",
       "Sitio que presenta al grupo, el portafolio y el modelo de operación con claridad.",
       "Métricas accesibles en Google Analytics con las propiedades y categorías más consultadas.",
@@ -90,7 +94,7 @@ export const CONTENT = {
         icon: "edit_note",
         title: "Catálogo siempre al día",
         detail:
-          "El equipo de Inmobiliaria edita, publica o retira propiedades por su cuenta desde el panel. Los cambios se reflejan en el sitio al guardar.",
+          "El equipo de Vértice edita, publica o retira propiedades por su cuenta desde el panel. Los cambios se reflejan en el sitio al guardar.",
       },
       {
         icon: "mark_email_read",
@@ -114,7 +118,7 @@ export const CONTENT = {
   },
   features: {
     title: "Qué incluye el portal",
-    meta: "7 puntos",
+    meta: "8 puntos",
     items: [
       {
         icon: "design_services",
@@ -145,6 +149,12 @@ export const CONTENT = {
         title: "Buscador en Inicio",
         detail:
           "El visitante escribe lo que busca desde la portada y aterriza en el catálogo con los filtros precargados.",
+      },
+      {
+        icon: "request_quote",
+        title: "Cotizador en línea + CRM",
+        detail:
+          "El visitante genera un estimado desde el portal y cada cotización entra al CRM como prospecto, lista para que el asesor le dé seguimiento.",
       },
       {
         icon: "call",
@@ -209,7 +219,7 @@ export const CONTENT = {
     titleEmphasis: "inteligencia artificial",
     meta: "Incluido",
     intro:
-      "Un asistente virtual integrado al portal que conversa con el visitante, identifica la categoría y zona de interés, comparte propiedades disponibles y captura los datos de contacto para que un asesor de Inmobiliaria concrete la operación.",
+      "Un asistente virtual integrado al portal que conversa con el visitante, identifica la categoría y zona de interés, comparte propiedades disponibles y captura los datos de contacto para que un asesor de Vértice concrete la operación.",
     features: [
       {
         icon: "support_agent",
@@ -238,7 +248,7 @@ export const CONTENT = {
     ],
   },
   chatHeader: {
-    title: "Asistente Inmobiliaria",
+    title: "Asistente Vértice",
     status: "En línea · responde en segundos",
     badge: "Ejemplo",
     placeholder: "Escriba su mensaje…",
@@ -259,7 +269,7 @@ export const CONTENT = {
     },
     {
       from: "agent",
-      text: "Con gusto. Para que un asesor de Inmobiliaria le comparta las opciones disponibles con ficha técnica y condiciones, ¿me proporciona su nombre, empresa y correo de contacto?",
+      text: "Con gusto. Para que un asesor de Vértice le comparta las opciones disponibles con ficha técnica y condiciones, ¿me proporciona su nombre, empresa y correo de contacto?",
     },
     {
       from: "client",
@@ -275,14 +285,14 @@ export const CONTENT = {
     before: "el agente debe vincularse con una cuenta de",
     or: "o",
     middle:
-      ". El costo mensual de dicha cuenta se estima entre 10 y 30 USD (aproximadamente 180 a 550 MXN) con un tráfico regular de consultas, y corre por parte de Inmobiliaria. La configuración y el entrenamiento del agente están incluidos en la presente cotización.",
+      ". El costo mensual de dicha cuenta se estima entre 10 y 30 USD (aproximadamente 180 a 550 MXN) con un tráfico regular de consultas, y corre por parte de Vértice. La configuración y el entrenamiento del agente están incluidos en la presente cotización.",
   },
   autoadmin: {
     titleLead: "Módulo",
     titleEmphasis: "autoadministrable",
     meta: "Panel propio",
     intro:
-      "Un panel de administración con usuario y contraseña que permite al equipo de Inmobiliaria mantener el portal al día sin depender de un desarrollador. Capacitación inicial incluida.",
+      "Un panel de administración con usuario y contraseña que permite al equipo de Vértice mantener el portal al día sin depender de un desarrollador. Capacitación inicial incluida.",
     features: [
       {
         icon: "real_estate_agent",
@@ -306,7 +316,7 @@ export const CONTENT = {
     training:
       "Capacitación inicial del equipo incluida: una sesión guiada por el panel y manual breve con los procedimientos más usados.",
     migration:
-      "Migración del catálogo existente: el equipo de Inmobiliaria entrega el listado actual (PDF, Excel u otro sistema) y Bravo Publicidad lo carga en el módulo antes de salir a producción.",
+      "Migración del catálogo existente: el equipo de Vértice entrega el listado actual (PDF, Excel u otro sistema) y Bravo Publicidad lo carga en el módulo antes de salir a producción.",
   },
   investment: {
     title: "Inversión",
@@ -327,12 +337,12 @@ export const CONTENT = {
       agente: {
         title: "Agente de ventas conversacional con IA 24/7",
         detail:
-          "Configuración del agente, entrenamiento con categorías y zonas de Inmobiliaria, integración al portal.",
+          "Configuración del agente, entrenamiento con categorías y zonas de Vértice, integración al portal.",
       },
       autoadmin: {
         title: "Módulo sitio web autoadministrable",
         detail:
-          "Panel propio para que el equipo de Inmobiliaria actualice el catálogo de propiedades, los artículos del blog y los textos e imágenes del sitio sin depender de un desarrollador, lo que reduce los costos por actualizaciones y mantenimiento a futuro. Capacitación inicial incluida.",
+          "Panel propio para que el equipo de Vértice actualice el catálogo de propiedades, los artículos del blog y los textos e imágenes del sitio sin depender de un desarrollador, lo que reduce los costos por actualizaciones y mantenimiento a futuro. Capacitación inicial incluida.",
       },
       cotizador: {
         title: "Cotizador en línea + CRM",
