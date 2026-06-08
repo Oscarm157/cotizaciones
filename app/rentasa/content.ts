@@ -4,8 +4,7 @@ export const VALID = "2026-06-15";
 
 export const PRICE_SITIO = 10500;
 export const PRICE_HOSTING = 1500;
-export const PRICE_DOMINIO_MIN = 500;
-export const PRICE_DOMINIO_MAX = 1000;
+export const PRICE_DOMINIO = 1000;
 
 export const CONTENT = {
   locale: "es-MX",
@@ -146,12 +145,11 @@ export const CONTENT = {
     title: "Inversión",
     totalLabel: "Total primer año",
     totalCaption: "MXN · sitio + hosting y dominio del primer año",
-    recurringNote:
-      "Hosting y dominio se renuevan cada año. El rango del dominio depende de la extensión y el nombre elegidos.",
+    recurringNote: "Hosting y dominio se renuevan cada año.",
     depositLabel: "Anticipo · al aprobar",
-    depositCaption: "Sitio web completo, para iniciar",
+    depositCaption: "50% del sitio, para iniciar",
     finalLabel: "Liquidación · al entregar",
-    finalCaption: "Hosting y dominio del primer año, con todo publicado",
+    finalCaption: "50% del sitio + hosting y dominio del primer año",
     pagesLabel: "Las 5 páginas",
     lines: {
       sitio: {
@@ -165,7 +163,7 @@ export const CONTENT = {
       },
       dominio: {
         title: "Dominio",
-        detail: "Registro y renovación anual del dominio a nombre de Rentasa. El costo depende del dominio elegido.",
+        detail: "Registro y renovación anual del dominio a nombre de Rentasa.",
       },
     },
     notes: [
@@ -189,10 +187,6 @@ export const fmtMxn = (n: number | null) => {
   return `$${n.toLocaleString("es-MX", { maximumFractionDigits: 0 })} MXN`;
 };
 
-const fmtNum = (n: number) => n.toLocaleString("es-MX", { maximumFractionDigits: 0 });
-
-export const fmtRange = (min: number, max: number) =>
-  min === max ? fmtMxn(min) : `$${fmtNum(min)} – $${fmtNum(max)} MXN`;
 
 export const fmtDate = (iso: string) => {
   const [y, m, d] = iso.split("-").map(Number);

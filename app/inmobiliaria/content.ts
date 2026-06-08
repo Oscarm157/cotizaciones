@@ -325,9 +325,9 @@ export const CONTENT = {
       "Medición de visitas, capacitación del equipo y migración del catálogo existente incluidas desde el primer día.",
     totalCaption: "MXN · total",
     depositLabel: "Anticipo · al aprobar",
-    depositCaption: "50% para iniciar",
+    depositCaption: "50% del proyecto, para iniciar",
     finalLabel: "Liquidación · al entregar",
-    finalCaption: "50% con todo publicado",
+    finalCaption: "50% del proyecto + hosting del primer año",
     lines: {
       sitio: {
         title: "Sitio web general y portal de propiedades",

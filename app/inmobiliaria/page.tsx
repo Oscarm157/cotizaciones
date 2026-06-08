@@ -19,14 +19,22 @@ import { LiveChat } from "./live-chat";
 
 const t = CONTENT;
 
-const PRICES = [PRICE_SITIO, PRICE_AGENTE, PRICE_AUTOADMIN, PRICE_COTIZADOR, PRICE_HOSTING];
+// El hosting (pago anual) no entra al anticipo: se paga en la liquidacion.
+// Anticipo = 50% del proyecto (sin hosting). Liquidacion = 50% restante + hosting.
+const WORK_PRICES = [PRICE_SITIO, PRICE_AGENTE, PRICE_AUTOADMIN, PRICE_COTIZADOR];
+const PRICES = [...WORK_PRICES, PRICE_HOSTING];
 const HAS_PENDING = PRICES.some((p) => p === null);
+const WORK_MXN: number | null = HAS_PENDING
+  ? null
+  : (WORK_PRICES as number[]).reduce((a, b) => a + b, 0);
 const TOTAL_MXN: number | null = HAS_PENDING
   ? null
   : (PRICES as number[]).reduce((a, b) => a + b, 0);
-const DEPOSIT_MXN: number | null = TOTAL_MXN === null ? null : Math.round(TOTAL_MXN * 0.5);
+const DEPOSIT_MXN: number | null = WORK_MXN === null ? null : Math.round(WORK_MXN * 0.5);
 const FINAL_MXN: number | null =
-  TOTAL_MXN === null || DEPOSIT_MXN === null ? null : TOTAL_MXN - DEPOSIT_MXN;
+  WORK_MXN === null || DEPOSIT_MXN === null || PRICE_HOSTING === null
+    ? null
+    : WORK_MXN - DEPOSIT_MXN + PRICE_HOSTING;
 
 export default function Page() {
   return (

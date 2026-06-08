@@ -7,22 +7,18 @@ import {
   VALID,
   PRICE_SITIO,
   PRICE_HOSTING,
-  PRICE_DOMINIO_MIN,
-  PRICE_DOMINIO_MAX,
+  PRICE_DOMINIO,
   fmtMxn,
-  fmtRange,
   fmtDate,
 } from "./content";
 import { PrintButton } from "./print-button";
 
 const t = CONTENT;
 
-// Anticipo = el sitio. Liquidacion = hosting + dominio del primer ano (pagos anuales).
-const DEPOSIT_MXN = PRICE_SITIO;
-const FINAL_MIN = PRICE_HOSTING + PRICE_DOMINIO_MIN;
-const FINAL_MAX = PRICE_HOSTING + PRICE_DOMINIO_MAX;
-const TOTAL_MIN = DEPOSIT_MXN + FINAL_MIN;
-const TOTAL_MAX = DEPOSIT_MXN + FINAL_MAX;
+// Sitio 50/50. Anticipo = 50% del sitio. Liquidacion = 50% restante del sitio + hosting + dominio del primer ano.
+const DEPOSIT_MXN = Math.round(PRICE_SITIO * 0.5);
+const FINAL_MXN = PRICE_SITIO - DEPOSIT_MXN + PRICE_HOSTING + PRICE_DOMINIO;
+const TOTAL_MXN = PRICE_SITIO + PRICE_HOSTING + PRICE_DOMINIO;
 
 export default function Page() {
   return (
@@ -287,7 +283,7 @@ export default function Page() {
                 icon="language"
                 title={t.investment.lines.dominio.title}
                 detail={t.investment.lines.dominio.detail}
-                price={`${fmtRange(PRICE_DOMINIO_MIN, PRICE_DOMINIO_MAX)} ${t.labels.perYear}`}
+                price={`${fmtMxn(PRICE_DOMINIO)} ${t.labels.perYear}`}
               />
             </div>
 
@@ -302,7 +298,7 @@ export default function Page() {
               </div>
               <div className="text-right shrink-0">
                 <div className="text-3xl font-semibold tabular-nums text-accent-light">
-                  {fmtRange(TOTAL_MIN, TOTAL_MAX)}
+                  {fmtMxn(TOTAL_MXN)}
                 </div>
                 <div className="text-[10px] uppercase tracking-[0.2em] text-white/60">
                   {t.investment.totalCaption} · {t.labels.plusVat}
@@ -328,7 +324,7 @@ export default function Page() {
                   {t.investment.finalLabel}
                 </div>
                 <div className="mt-0.5 text-lg font-semibold tabular-nums text-foreground">
-                  {fmtRange(FINAL_MIN, FINAL_MAX)}{" "}
+                  {fmtMxn(FINAL_MXN)}{" "}
                   <span className="text-[10px] uppercase tracking-[0.2em] text-muted font-normal">
                     {t.labels.plusVat}
                   </span>
