@@ -6,7 +6,6 @@ import {
   ISSUED,
   VALID,
   PRICE_SITIO,
-  PRICE_AGENTE,
   PRICE_AUTOADMIN,
   PRICE_COTIZADOR,
   PRICE_HOSTING,
@@ -15,13 +14,12 @@ import {
 } from "./content";
 import { PrintButton } from "./print-button";
 import { Slideshow } from "./slideshow";
-import { LiveChat } from "./live-chat";
 
 const t = CONTENT;
 
 // El hosting (pago anual) no entra al anticipo: se paga en la liquidacion.
 // Anticipo = 50% del proyecto (sin hosting). Liquidacion = 50% restante + hosting.
-const WORK_PRICES = [PRICE_SITIO, PRICE_AGENTE, PRICE_AUTOADMIN, PRICE_COTIZADOR];
+const WORK_PRICES = [PRICE_SITIO, PRICE_AUTOADMIN, PRICE_COTIZADOR];
 const PRICES = [...WORK_PRICES, PRICE_HOSTING];
 const HAS_PENDING = PRICES.some((p) => p === null);
 const WORK_MXN: number | null = HAS_PENDING
@@ -297,62 +295,6 @@ export default function Page() {
           </ul>
         </section>
 
-        <section className="mt-7">
-          <SectionTitle
-            icon="smart_toy"
-            title={t.agent.titleLead}
-            emphasis={t.agent.titleEmphasis}
-            meta={t.agent.meta}
-          />
-          <p className="text-[12px] text-muted leading-relaxed max-w-2xl mb-3">{t.agent.intro}</p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <ul className="grid grid-cols-1 gap-2">
-              {t.agent.features.map((a) => (
-                <li
-                  key={a.title}
-                  className="rounded-lg bg-primary text-primary-foreground border border-primary/30 p-3 flex gap-3"
-                >
-                  <div className="shrink-0 w-8 h-8 rounded-lg bg-accent/20 text-accent-light flex items-center justify-center">
-                    <span
-                      className="material-symbols-outlined"
-                      style={{ fontSize: 18, fontVariationSettings: "'wght' 500" }}
-                    >
-                      {a.icon}
-                    </span>
-                  </div>
-                  <div className="min-w-0">
-                    <div className="text-[13px] font-semibold leading-tight">{a.title}</div>
-                    <div className="text-[11.5px] text-white/70 mt-0.5 leading-snug">
-                      {a.detail}
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-
-            <LiveChat messages={t.chat} ui={t.chatHeader} />
-            <div className="print-only">
-              <ChatMock />
-            </div>
-          </div>
-
-          <div className="mt-3 rounded-lg bg-accent/10 border border-accent/30 px-3 py-2.5 flex items-start gap-2.5">
-            <span
-              className="material-symbols-outlined text-accent shrink-0 mt-0.5"
-              style={{ fontSize: 18, fontVariationSettings: "'wght' 600" }}
-            >
-              info
-            </span>
-            <div className="text-[11.5px] text-foreground/90 leading-snug">
-              <span className="font-semibold text-primary">{t.requisite.label}</span>{" "}
-              {t.requisite.before} <span className="font-semibold">ChatGPT (OpenAI)</span>{" "}
-              {t.requisite.or} <span className="font-semibold">Gemini (Google)</span>
-              {t.requisite.middle}
-            </div>
-          </div>
-        </section>
-
         <PageFooter label={t.labels.pageOf(3, 6)} />
       </article>
 
@@ -444,12 +386,6 @@ export default function Page() {
                 title={t.investment.lines.sitio.title}
                 detail={t.investment.lines.sitio.detail}
                 price={PRICE_SITIO}
-              />
-              <InvestmentRow
-                icon="support_agent"
-                title={t.investment.lines.agente.title}
-                detail={t.investment.lines.agente.detail}
-                price={PRICE_AGENTE}
               />
               <InvestmentRow
                 icon="request_quote"
@@ -762,64 +698,6 @@ function BeforeAfter() {
         </ul>
       </div>
     </section>
-  );
-}
-
-function ChatMock() {
-  return (
-    <div className="rounded-xl border border-card-border bg-card overflow-hidden flex flex-col">
-      <div className="flex items-center gap-2 px-3 py-2 border-b border-card-border bg-surface-muted/60">
-        <div className="w-6 h-6 rounded-full bg-accent/15 text-accent flex items-center justify-center">
-          <span
-            className="material-symbols-outlined"
-            style={{ fontSize: 14, fontVariationSettings: "'wght' 600" }}
-          >
-            support_agent
-          </span>
-        </div>
-        <div>
-          <div className="text-[11.5px] font-semibold text-foreground leading-none">
-            {t.chatHeader.title}
-          </div>
-          <div className="text-[9.5px] text-muted mt-0.5">{t.chatHeader.status}</div>
-        </div>
-        <div className="ml-auto flex items-center gap-1 text-[9px] uppercase tracking-[0.18em] font-semibold text-accent">
-          <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-          {t.chatHeader.badge}
-        </div>
-      </div>
-
-      <div className="p-3 space-y-2 flex-1">
-        {t.chat.map((m, i) => {
-          const isAgent = m.from === "agent";
-          return (
-            <div key={i} className={`flex ${isAgent ? "justify-start" : "justify-end"}`}>
-              <div
-                className={`max-w-[85%] rounded-xl px-3 py-2 text-[11.5px] leading-snug ${
-                  isAgent
-                    ? "bg-accent text-white rounded-tl-sm"
-                    : "bg-surface-muted text-foreground rounded-tr-sm border border-card-border"
-                }`}
-              >
-                {m.text}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      <div className="flex items-center gap-2 px-3 py-2 border-t border-card-border">
-        <div className="flex-1 text-[11px] text-muted/70 italic">{t.chatHeader.placeholder}</div>
-        <div className="w-7 h-7 rounded-full bg-accent text-white flex items-center justify-center">
-          <span
-            className="material-symbols-outlined"
-            style={{ fontSize: 14, fontVariationSettings: "'wght' 700" }}
-          >
-            send
-          </span>
-        </div>
-      </div>
-    </div>
   );
 }
 

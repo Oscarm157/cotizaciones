@@ -3,7 +3,6 @@ export const ISSUED = "2026-05-25";
 export const VALID = "2026-06-15";
 
 export const PRICE_SITIO: number | null = 17000;
-export const PRICE_AGENTE: number | null = 3000;
 export const PRICE_AUTOADMIN: number | null = 2500;
 export const PRICE_COTIZADOR: number | null = 3000;
 export const PRICE_HOSTING: number | null = 2000;
@@ -61,12 +60,12 @@ export const CONTENT = {
       "Vistas preliminares de las pantallas principales del portal: Inicio, Portal de propiedades, Detalle de propiedad y Contacto.",
   },
   intro: {
-    eyebrow: "Propuesta · Portal inmobiliario + Agente IA + Autoadmin + Cotizador con CRM",
+    eyebrow: "Propuesta · Portal inmobiliario + Autoadmin + Cotizador con CRM",
     titleLead: "Portal inmobiliario",
     titleEmphasis: "profesional",
     titleSuffix: "para",
     paragraph:
-      "Propuesta para construir el portal inmobiliario de Vértice: 10 páginas con catálogo de propiedades filtrable, ficha individual por activo, agente de ventas conversacional con inteligencia artificial que atiende consultas 24 horas, un módulo autoadministrable para que el equipo actualice contenido, catálogo y blog sin depender de un desarrollador, y un cotizador en línea que registra cada prospecto en un CRM.",
+      "Propuesta para construir el portal inmobiliario de Vértice: 10 páginas con catálogo de propiedades filtrable, ficha individual por activo, un módulo autoadministrable para que el equipo actualice contenido, catálogo y blog sin depender de un desarrollador, y un cotizador en línea que registra cada prospecto en un CRM.",
   },
   before: {
     heading: "Hoy",
@@ -214,79 +213,6 @@ export const CONTENT = {
       { icon: "landscape", name: "Reserva territorial", detail: "Terrenos en zonas con potencial de desarrollo." },
     ],
   },
-  agent: {
-    titleLead: "Agente de ventas conversacional con",
-    titleEmphasis: "inteligencia artificial",
-    meta: "Incluido",
-    intro:
-      "Un asistente virtual integrado al portal que conversa con el visitante, identifica la categoría y zona de interés, comparte propiedades disponibles y captura los datos de contacto para que un asesor de Vértice concrete la operación.",
-    features: [
-      {
-        icon: "support_agent",
-        title: "Disponible las 24 horas",
-        detail:
-          "Responde consultas iniciales de forma inmediata, sin importar el horario ni la zona del visitante.",
-      },
-      {
-        icon: "explore",
-        title: "Reconoce tipo de propiedad y zona",
-        detail:
-          "El visitante pregunta por una categoría o ciudad y el agente responde con las propiedades vigentes en el catálogo.",
-      },
-      {
-        icon: "contact_mail",
-        title: "Captura datos del prospecto",
-        detail:
-          "Solicita nombre, empresa o persona, presupuesto aproximado y correo de contacto antes de pasar el lead al asesor.",
-      },
-      {
-        icon: "forward_to_inbox",
-        title: "Notifica al equipo de forma inmediata",
-        detail:
-          "Al registrar un prospecto, envía una notificación al correo de ventas para dar seguimiento oportuno.",
-      },
-    ],
-  },
-  chatHeader: {
-    title: "Asistente Vértice",
-    status: "En línea · responde en segundos",
-    badge: "Ejemplo",
-    placeholder: "Escriba su mensaje…",
-    typing: "escribiendo…",
-  },
-  chat: [
-    {
-      from: "client",
-      text: "Buenas tardes. Busco una nave industrial en Querétaro de aproximadamente 5,000 m². ¿Tienen disponibilidad?",
-    },
-    {
-      from: "agent",
-      text: "Buenas tardes. Sí, tenemos varias opciones en Querétaro dentro de ese rango. ¿La operación sería en venta o renta? ¿Necesita andén de carga o algún tipo de certificación específica?",
-    },
-    {
-      from: "client",
-      text: "Renta, con andén. La operación es de logística ligera, no requerimos certificación especial.",
-    },
-    {
-      from: "agent",
-      text: "Con gusto. Para que un asesor de Vértice le comparta las opciones disponibles con ficha técnica y condiciones, ¿me proporciona su nombre, empresa y correo de contacto?",
-    },
-    {
-      from: "client",
-      text: "Daniel Ortega, Logística Norte, daniel@logisticanorte.mx",
-    },
-    {
-      from: "agent",
-      text: "Gracias, Daniel. Un asesor se pondrá en contacto con usted en las próximas horas con las opciones de Querétaro que cumplen con los requisitos. ¿Puedo ayudarle con algo adicional?",
-    },
-  ] as const,
-  requisite: {
-    label: "Requisito:",
-    before: "el agente debe vincularse con una cuenta de",
-    or: "o",
-    middle:
-      ". El costo mensual de dicha cuenta se estima entre 10 y 30 USD (aproximadamente 180 a 550 MXN) con un tráfico regular de consultas, y corre por parte de Vértice. La configuración y el entrenamiento del agente están incluidos en la presente cotización.",
-  },
   autoadmin: {
     titleLead: "Módulo",
     titleEmphasis: "autoadministrable",
@@ -333,11 +259,6 @@ export const CONTENT = {
         title: "Sitio web general y portal de propiedades",
         detail:
           "Diseño, desarrollo y publicación del portal de 10 páginas. Incluye catálogo con filtros, plantilla reutilizable para ficha individual y formulario de contacto por propiedad.",
-      },
-      agente: {
-        title: "Agente de ventas conversacional con IA 24/7",
-        detail:
-          "Configuración del agente, entrenamiento con categorías y zonas de Vértice, integración al portal.",
       },
       autoadmin: {
         title: "Módulo sitio web autoadministrable",

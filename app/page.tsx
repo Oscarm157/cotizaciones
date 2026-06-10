@@ -4,7 +4,7 @@ const QUOTES = [
   {
     slug: "inmobiliaria",
     title: "Inmobiliaria Vértice",
-    subtitle: "Portal inmobiliario + Agente IA + Autoadmin + Cotizador con CRM",
+    subtitle: "Portal inmobiliario + Autoadmin + Cotizador con CRM",
     folio: "WB-133",
     date: "25 de mayo de 2026",
   },
