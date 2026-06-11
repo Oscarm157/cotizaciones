@@ -269,11 +269,6 @@ export const BRIEF_SCHEMA: Section[] = [
         { value: "need", label: "Necesito hosting" },
         { value: "unsure", label: "No estoy seguro" },
       ] },
-      { id: "emailHosting", type: "radio", label: "¿Necesitas correos con tu dominio?", options: [
-        { value: "yes", label: "Sí, correos @midominio" },
-        { value: "no", label: "No" },
-        { value: "unsure", label: "No estoy seguro" },
-      ] },
     ],
   },
   {
