@@ -237,15 +237,6 @@ export default function Page() {
                   <div className="text-[11px] text-neutral-500">{t.emisor.site}</div>
                 </div>
               </div>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/qr-marabunta.png"
-                alt="QR Marabunta"
-                width={58}
-                height={58}
-                className="w-[58px] h-[58px] rounded-md border"
-                style={{ borderColor: "#EFD7E2" }}
-              />
             </div>
           </footer>
         </div>

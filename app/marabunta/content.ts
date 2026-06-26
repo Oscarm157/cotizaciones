@@ -1,11 +1,11 @@
 export const FOLIO = "MCS-0042";
-export const FECHA = "2026-06-26";
+export const FECHA = "2026-06-22";
 export const VIGENCIA = "15 días naturales";
 
 export const IVA_RATE = 0.16;
-export const TOTAL = 9800; // total final, IVA incluido
-export const SUBTOTAL = Math.round((TOTAL / (1 + IVA_RATE)) * 100) / 100;
-export const IVA = Math.round((TOTAL - SUBTOTAL) * 100) / 100;
+export const SUBTOTAL = 8500;
+export const IVA = Math.round(SUBTOTAL * IVA_RATE * 100) / 100;
+export const TOTAL = SUBTOTAL + IVA;
 export const DEPOSIT = Math.round(TOTAL * 0.5 * 100) / 100;
 
 export const BRAND = {
@@ -57,7 +57,7 @@ export const CONTENT = {
     { label: "Vigencia", value: "15 días naturales a partir de la fecha de emisión." },
     { label: "Nota", value: "Precios en pesos mexicanos (MXN). IVA del 16% incluido en el total." },
   ],
-  amountInWords: "NUEVE MIL OCHOCIENTOS PESOS 00/100 M.N.",
+  amountInWords: "NUEVE MIL OCHOCIENTOS SESENTA PESOS 00/100 M.N.",
 } as const;
 
 export const fmtMxn = (n: number) =>
