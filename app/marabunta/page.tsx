@@ -37,24 +37,34 @@ export default function Page() {
           {/* Encabezado */}
           <header className="flex items-start justify-between gap-6">
             <div>
-              <div className="flex items-baseline gap-2">
-                <span
-                  className="text-[30px] font-extrabold tracking-[-0.03em] leading-none"
-                  style={{
-                    background: BRAND.gradient,
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                  }}
-                >
-                  {t.emisor.brand}
-                </span>
-                <span
-                  className="text-[11px] uppercase tracking-[0.34em] font-semibold"
-                  style={{ color: BRAND.orange }}
-                >
-                  {t.emisor.brandSuffix}
-                </span>
+              <div className="flex items-center gap-3">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/logo%20marabunta.png"
+                  alt="Marabunta Creative Studio"
+                  width={50}
+                  height={50}
+                  className="w-[50px] h-[50px] rounded-xl shadow-sm shrink-0"
+                />
+                <div className="flex items-baseline gap-2">
+                  <span
+                    className="text-[30px] font-extrabold tracking-[-0.03em] leading-none"
+                    style={{
+                      background: BRAND.gradient,
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      backgroundClip: "text",
+                    }}
+                  >
+                    {t.emisor.brand}
+                  </span>
+                  <span
+                    className="text-[11px] uppercase tracking-[0.34em] font-semibold"
+                    style={{ color: BRAND.orange }}
+                  >
+                    {t.emisor.brandSuffix}
+                  </span>
+                </div>
               </div>
               <p className="mt-2 text-[12px] font-semibold" style={{ color: BRAND.ink }}>
                 {t.emisor.legal}
@@ -211,11 +221,21 @@ export default function Page() {
               <div className="text-[12px] font-semibold">{t.cliente.name}</div>
             </div>
             <div className="flex items-end gap-3">
-              <div className="text-right">
-                <div className="text-[12px] font-bold" style={{ color: BRAND.magenta }}>
-                  {t.emisor.brand} <span style={{ color: BRAND.orange }}>·</span> {t.emisor.brandSuffix}
+              <div className="flex items-center gap-2 text-right">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/logo%20marabunta.png"
+                  alt="Marabunta"
+                  width={30}
+                  height={30}
+                  className="w-[30px] h-[30px] rounded-md shrink-0"
+                />
+                <div>
+                  <div className="text-[12px] font-bold" style={{ color: BRAND.magenta }}>
+                    {t.emisor.brand} <span style={{ color: BRAND.orange }}>·</span> {t.emisor.brandSuffix}
+                  </div>
+                  <div className="text-[11px] text-neutral-500">{t.emisor.site}</div>
                 </div>
-                <div className="text-[11px] text-neutral-500">{t.emisor.site}</div>
               </div>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
