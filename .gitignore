@@ -11,3 +11,6 @@ next-env.d.ts
 # PDFs exportados de las cotizaciones y assets sueltos
 public/**/*.pdf
 /qr-code.png
+
+# capturas/artefactos temporales
+tmp*.png
