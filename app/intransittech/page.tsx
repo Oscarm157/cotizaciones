@@ -33,11 +33,11 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
 
       {/* Toolbar — solo pantalla */}
       <div className="no-print sticky top-0 z-20 border-b border-card-border bg-background/80 backdrop-blur">
-        <div className="max-w-[900px] mx-auto px-6 py-3 flex items-center justify-between gap-3">
-          <div className="text-[11px] uppercase tracking-[0.22em] font-semibold text-muted truncate">
+        <div className="max-w-[900px] mx-auto px-3 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between gap-2 sm:gap-3">
+          <div className="text-[10px] sm:text-[11px] uppercase tracking-[0.18em] sm:tracking-[0.22em] font-semibold text-muted truncate min-w-0">
             {t.labels.toolbarLabel(FOLIO, t.client.short)}
           </div>
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             <LangToggle current={lang} ariaLabel={t.langToggle.ariaLabel} />
             <PrintButton label={t.labels.printPdf} />
           </div>
@@ -45,7 +45,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
       </div>
 
       {/* ─────────── PÁGINA 1 · PROPUESTA ─────────── */}
-      <article className="doc-page relative max-w-[900px] mx-auto px-8 sm:px-12 py-8 text-[14px] leading-relaxed">
+      <article className="doc-page relative max-w-[900px] mx-auto px-4 sm:px-8 md:px-12 py-6 sm:py-8 text-[14px] leading-relaxed">
         <PhaseBar active={1} phases={t.phases} />
 
         {/* Encabezado */}
@@ -141,7 +141,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
       </article>
 
       {/* ─────────── PÁGINA 2 · TRANSFORMACIÓN ─────────── */}
-      <article className="doc-page relative max-w-[900px] mx-auto px-8 sm:px-12 py-8 text-[14px] leading-relaxed page-break">
+      <article className="doc-page relative max-w-[900px] mx-auto px-4 sm:px-8 md:px-12 py-6 sm:py-8 text-[14px] leading-relaxed page-break">
         <PhaseBar active={2} phases={t.phases} />
 
         <section className="mt-6">
@@ -183,7 +183,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
       </article>
 
       {/* ─────────── PÁGINA 3 · CONTENIDO ─────────── */}
-      <article className="doc-page relative max-w-[900px] mx-auto px-8 sm:px-12 py-8 text-[14px] leading-relaxed page-break">
+      <article className="doc-page relative max-w-[900px] mx-auto px-4 sm:px-8 md:px-12 py-6 sm:py-8 text-[14px] leading-relaxed page-break">
         <PhaseBar active={3} phases={t.phases} />
 
         {/* Catálogo por categorías */}
@@ -273,7 +273,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
       </article>
 
       {/* ─────────── PÁGINA 4 · INVERSIÓN ─────────── */}
-      <article className="doc-page relative max-w-[900px] mx-auto px-8 sm:px-12 py-8 text-[14px] leading-relaxed page-break">
+      <article className="doc-page relative max-w-[900px] mx-auto px-4 sm:px-8 md:px-12 py-6 sm:py-8 text-[14px] leading-relaxed page-break">
         <PhaseBar active={4} phases={t.phases} />
 
         <section className="mt-6">
@@ -392,12 +392,12 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
           </p>
         </section>
 
-        <footer className="mt-8 pt-5 border-t border-card-border flex items-end justify-between gap-6">
+        <footer className="mt-8 pt-5 border-t border-card-border flex flex-wrap items-end justify-between gap-6">
           <div>
             <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-muted">
               {t.labels.acceptance}
             </div>
-            <div className="mt-8 w-60 border-t border-primary/60" />
+            <div className="mt-8 w-48 sm:w-60 border-t border-primary/60" />
             <div className="mt-1 text-[11.5px] text-muted">
               {t.labels.signatureOf(t.client.short)}
             </div>
@@ -478,16 +478,16 @@ function PhaseBar({
   phases: readonly { num: string; name: string }[];
 }) {
   return (
-    <div className="flex items-center gap-3 w-full">
+    <div className="flex items-center gap-2 sm:gap-3 w-full">
       {phases.map((p, i) => {
         const idx = (i + 1) as 1 | 2 | 3 | 4;
         const done = idx < active;
         const current = idx === active;
         return (
           <Fragment key={p.num}>
-            <div className="flex items-center gap-2 shrink-0">
+            <div className="flex items-center gap-2 shrink-0 min-w-0">
               <div
-                className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-mono font-semibold tabular-nums ${
+                className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-mono font-semibold tabular-nums shrink-0 ${
                   current
                     ? "bg-accent text-white"
                     : done
@@ -499,7 +499,7 @@ function PhaseBar({
               </div>
               <span
                 className={`text-[10.5px] uppercase tracking-[0.18em] font-semibold whitespace-nowrap ${
-                  current ? "text-primary" : done ? "text-accent" : "text-muted"
+                  current ? "inline text-primary" : "hidden sm:inline " + (done ? "text-accent" : "text-muted")
                 }`}
               >
                 {p.name}
@@ -507,7 +507,7 @@ function PhaseBar({
             </div>
             {i < phases.length - 1 && (
               <div
-                className={`h-px flex-1 min-w-[10px] ${
+                className={`h-px flex-1 min-w-[8px] ${
                   done ? "bg-accent/40" : "bg-card-border"
                 }`}
               />
