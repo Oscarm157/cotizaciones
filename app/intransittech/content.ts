@@ -1,8 +1,8 @@
 export type Lang = "es" | "en";
 
 export const FOLIO = "WB-132";
-export const ISSUED = "2026-04-23";
-export const VALID = "2026-05-15";
+export const ISSUED = "2026-07-02";
+export const VALID = "2026-07-31";
 
 export const PRICE_SITIO = 900;
 export const PRICE_AGENTE = 200;
