@@ -113,6 +113,9 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
           </p>
         </section>
 
+        {/* Fase 1 / Fase 2 */}
+        <PhaseRoadmap t={t} />
+
         {/* Antes / Después */}
         <BeforeAfter t={t} />
 
@@ -555,6 +558,82 @@ function SectionTitle({
         </span>
       )}
     </div>
+  );
+}
+
+function PhaseRoadmap({ t }: { t: typeof CONTENT[Lang] }) {
+  const r = t.roadmap;
+  return (
+    <section className="mt-6">
+      <SectionTitle icon="route" title={r.eyebrow} />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        {/* Fase 1 · activa */}
+        <div className="rounded-xl border border-primary bg-primary text-primary-foreground p-4">
+          <div className="flex items-center gap-2 mb-1 flex-wrap">
+            <span className="text-[10px] uppercase tracking-[0.22em] font-semibold text-accent-light whitespace-nowrap">
+              {r.fase1.label}
+            </span>
+            <span className="text-[9px] uppercase tracking-[0.18em] font-semibold text-white bg-accent rounded px-1.5 py-0.5">
+              {r.fase1.tag}
+            </span>
+          </div>
+          <div className="text-[14px] font-semibold leading-tight mb-2.5">{r.fase1.heading}</div>
+          <ul className="space-y-2">
+            {r.fase1.items.map((it) => (
+              <li key={it.title} className="flex gap-2.5">
+                <span
+                  className="material-symbols-outlined text-accent-light shrink-0 mt-0.5"
+                  style={{ fontSize: 16, fontVariationSettings: "'wght' 500" }}
+                >
+                  {it.icon}
+                </span>
+                <div className="min-w-0">
+                  <div className="text-[12px] font-semibold leading-snug">{it.title}</div>
+                  <div className="text-[11px] text-white/70 leading-snug mt-0.5">{it.detail}</div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Fase 2 · roadmap */}
+        <div className="rounded-xl border border-dashed border-card-border bg-surface-muted/60 p-4">
+          <div className="flex items-center gap-2 mb-1 flex-wrap">
+            <span className="text-[10px] uppercase tracking-[0.22em] font-semibold text-muted whitespace-nowrap">
+              {r.fase2.label}
+            </span>
+            <span className="text-[9px] uppercase tracking-[0.18em] font-semibold text-muted border border-card-border rounded px-1.5 py-0.5">
+              {r.fase2.tag}
+            </span>
+          </div>
+          <div className="text-[14px] font-semibold leading-tight text-foreground mb-1.5">
+            {r.fase2.heading}
+          </div>
+          <p className="text-[11.5px] text-muted leading-snug mb-2.5">{r.fase2.description}</p>
+          <ul className="space-y-1.5">
+            {r.fase2.flow.map((f, i) => (
+              <li key={f.text} className="flex items-center gap-2">
+                <span
+                  className="material-symbols-outlined text-muted shrink-0"
+                  style={{ fontSize: 15, fontVariationSettings: "'wght' 500" }}
+                >
+                  {f.icon}
+                </span>
+                <span className="text-[11.5px] text-foreground/80 leading-snug">{f.text}</span>
+                {i < r.fase2.flow.length - 1 && (
+                  <span
+                    className="material-symbols-outlined text-muted/50 ml-auto shrink-0"
+                    style={{ fontSize: 14 }}
+                  >
+                    arrow_downward
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
   );
 }
 

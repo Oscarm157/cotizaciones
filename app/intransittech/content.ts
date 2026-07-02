@@ -57,6 +57,44 @@ export const CONTENT = {
       paragraph:
         "Propuesta para construir un sitio web nuevo que reemplace al actual, acompañado de un agente de ventas con inteligencia artificial que atiende consultas 24 horas, y la versión bilingüe del sitio en español e inglés.",
     },
+    roadmap: {
+      eyebrow: "Cómo funciona en conjunto",
+      fase1: {
+        label: "Fase 1",
+        tag: "Incluida en esta cotización",
+        heading: "Sitio web + agente de ventas IA",
+        items: [
+          {
+            icon: "language",
+            title: "Sitio web",
+            detail: "Presencia completa de la empresa: catálogo por categorías, servicios y datos de contacto.",
+          },
+          {
+            icon: "support_agent",
+            title: "Agente de ventas IA",
+            detail: "Atiende consultas las 24 horas y captura los datos del prospecto.",
+          },
+          {
+            icon: "admin_panel_settings",
+            title: "Panel de administración de leads",
+            detail:
+              "Cortesía al contratar el sitio. Concentra y da seguimiento a cada lead capturado por el agente.",
+          },
+        ],
+      },
+      fase2: {
+        label: "Fase 2",
+        tag: "Próximo paso · sin costo en esta cotización",
+        heading: "Redes sociales",
+        description:
+          "Dan a Intransit Tech presencia activa y credibilidad ante nuevos clientes. Su función principal es atraer leads y enviarlos al sitio, donde el agente los atiende de inmediato.",
+        flow: [
+          { icon: "campaign", text: "Redes sociales atraen leads" },
+          { icon: "bolt", text: "El sitio y el agente IA atienden de inmediato, 24/7" },
+          { icon: "groups", text: "El equipo de ventas recibe leads filtrados y con datos completos" },
+        ],
+      },
+    },
     before: {
       heading: "Hoy",
       items: [
@@ -282,7 +320,7 @@ export const CONTENT = {
         sitio: {
           title: "Sitio web profesional",
           detail:
-            "Diseño, desarrollo y publicación del sitio. Incluye los 7 puntos, las 7 páginas y el catálogo base organizado por categorías.",
+            "Diseño, desarrollo y publicación del sitio. Incluye los 7 puntos, las 7 páginas, el catálogo base organizado por categorías y el panel de administración de leads como cortesía.",
         },
         agente: {
           title: "Agente de ventas con IA",
@@ -363,6 +401,44 @@ export const CONTENT = {
       titleSuffix: "for",
       paragraph:
         "This proposal covers a new website to replace the current one, an AI sales agent that handles inquiries around the clock, and a bilingual Spanish–English version of the site.",
+    },
+    roadmap: {
+      eyebrow: "How it all works together",
+      fase1: {
+        label: "Phase 1",
+        tag: "Included in this quote",
+        heading: "Website + AI sales agent",
+        items: [
+          {
+            icon: "language",
+            title: "Website",
+            detail: "Full company presence: catalog by category, services, and contact details.",
+          },
+          {
+            icon: "support_agent",
+            title: "AI sales agent",
+            detail: "Handles inquiries around the clock and captures prospect details.",
+          },
+          {
+            icon: "admin_panel_settings",
+            title: "Lead management panel",
+            detail:
+              "Included at no extra cost with the website. Centralizes and tracks every lead the agent captures.",
+          },
+        ],
+      },
+      fase2: {
+        label: "Phase 2",
+        tag: "Next step · not priced in this quote",
+        heading: "Social media",
+        description:
+          "Gives Intransit Tech an active presence and credibility with new clients. Its main role is to attract leads and send them to the site, where the agent handles them right away.",
+        flow: [
+          { icon: "campaign", text: "Social media attracts leads" },
+          { icon: "bolt", text: "The site and AI agent respond immediately, 24/7" },
+          { icon: "groups", text: "Sales receives filtered leads with complete data" },
+        ],
+      },
     },
     before: {
       heading: "Today",
@@ -589,7 +665,7 @@ export const CONTENT = {
         sitio: {
           title: "Professional website",
           detail:
-            "Design, development, and launch of the site. Includes all 7 features, the 7 pages, and the base catalog organized by category.",
+            "Design, development, and launch of the site. Includes all 7 features, the 7 pages, the base catalog organized by category, and the lead management panel at no extra cost.",
         },
         agente: {
           title: "AI sales agent",
