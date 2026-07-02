@@ -117,20 +117,19 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
         <BeforeAfter t={t} />
 
         {/* Beneficios en el día a día */}
-        <section className="mt-6">
+        <section className="mt-8">
           <SectionTitle num="01" title={t.benefits.title} meta={t.benefits.meta} />
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {t.benefits.items.map((b) => (
-              <li
-                key={b.title}
-                className="border-t border-primary/15 pt-2.5 flex gap-2.5"
-              >
-                <IconBadge icon={b.icon} />
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
+            {t.benefits.items.map((b, i) => (
+              <li key={b.title} className="flex gap-3.5">
+                <span className="font-mono text-[12px] text-accent tabular-nums pt-0.5 shrink-0">
+                  0{i + 1}
+                </span>
                 <div className="min-w-0">
-                  <div className="text-[13px] font-semibold text-foreground leading-tight">
+                  <div className="text-[14px] font-semibold text-primary leading-tight">
                     {b.title}
                   </div>
-                  <div className="text-[11.5px] text-muted mt-1 leading-snug">{b.detail}</div>
+                  <div className="text-[11.5px] text-muted mt-1 leading-relaxed">{b.detail}</div>
                 </div>
               </li>
             ))}
@@ -146,34 +145,36 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
 
         <section className="mt-6">
           <SectionTitle num="02" title={t.features.title} meta={t.features.meta} />
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
             {t.features.items.map((f) => (
-              <li
-                key={f.title}
-                className="border-t border-primary/15 pt-2.5 flex gap-2.5"
-              >
+              <li key={f.title} className="flex gap-3">
                 <IconBadge icon={f.icon} />
                 <div className="min-w-0">
-                  <div className="text-[13px] font-semibold text-foreground leading-tight">
+                  <div className="text-[13px] font-semibold text-primary leading-tight">
                     {f.title}
                   </div>
-                  <div className="text-[11.5px] text-muted mt-0.5 leading-snug">{f.detail}</div>
+                  <div className="text-[11.5px] text-muted mt-0.5 leading-relaxed">{f.detail}</div>
                 </div>
               </li>
             ))}
           </ul>
         </section>
 
-        <section className="mt-7">
+        <section className="mt-9">
           <SectionTitle num="03" title={t.pages.title} meta={t.pages.meta} />
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {t.pages.items.map((p) => (
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8">
+            {t.pages.items.map((p, i) => (
               <li
                 key={p.name}
-                className="border-t border-primary/15 pt-2.5"
+                className="flex items-baseline gap-3 py-2 border-b border-dashed border-card-border"
               >
-                <div className="text-[13px] font-semibold text-foreground">{p.name}</div>
-                <div className="text-[11.5px] text-muted mt-0.5 leading-snug">{p.detail}</div>
+                <span className="font-mono text-[10px] text-accent tabular-nums shrink-0">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="text-[13px] font-semibold text-primary shrink-0">{p.name}</span>
+                <span className="text-[11px] text-muted leading-snug text-right ml-auto max-w-[62%]">
+                  {p.detail}
+                </span>
               </li>
             ))}
           </ul>
@@ -189,21 +190,21 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
         {/* Catálogo por categorías */}
         <section className="mt-6">
           <SectionTitle num="04" title={t.categories.title} meta={t.categories.meta} />
-          <p className="text-[12px] text-muted leading-relaxed max-w-2xl mb-3">
+          <p className="text-[12px] text-muted leading-relaxed max-w-2xl mb-4">
             {t.categories.intro}
           </p>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             {t.categories.items.map((c) => (
               <li
                 key={c.name}
-                className="border-t border-primary/15 pt-2.5 flex gap-2.5"
+                className="rounded-lg bg-surface-muted/60 px-3.5 py-3 flex gap-3 border-l-2 border-accent/40"
               >
                 <IconBadge icon={c.icon} small />
                 <div className="min-w-0">
-                  <div className="text-[13px] font-semibold text-foreground leading-tight">
+                  <div className="text-[13px] font-semibold text-primary leading-tight">
                     {c.name}
                   </div>
-                  <div className="text-[11.5px] text-muted mt-0.5 leading-snug">{c.detail}</div>
+                  <div className="text-[11px] text-muted mt-0.5 leading-snug">{c.detail}</div>
                 </div>
               </li>
             ))}
@@ -510,22 +511,31 @@ function SectionTitle({
   emphasis?: string;
 }) {
   return (
-    <div className="flex items-baseline gap-3 mb-4 pb-2 border-b border-primary/20">
-      <span className="font-mono text-[10.5px] text-accent tabular-nums shrink-0">{num}</span>
-      <h2 className="text-[17px] font-bold tracking-tight leading-tight text-primary min-w-0">
-        {title}
-        {emphasis && (
-          <>
-            {" "}
-            <em className="italic text-accent">{emphasis}</em>
-          </>
-        )}
-      </h2>
-      {meta && (
-        <span className="ml-auto font-mono text-[9.5px] uppercase tracking-[0.18em] text-muted shrink-0 whitespace-nowrap">
-          {meta}
-        </span>
-      )}
+    <div className="flex items-end gap-4 mb-5">
+      <span
+        className="font-display text-[46px] leading-[0.75] text-accent/20 tabular-nums select-none shrink-0"
+        aria-hidden
+      >
+        {num}
+      </span>
+      <div className="flex-1 min-w-0">
+        <div className="flex items-baseline justify-between gap-3 border-b-2 border-primary pb-1.5">
+          <h2 className="text-[21px] font-bold tracking-tight leading-none text-primary min-w-0">
+            {title}
+            {emphasis && (
+              <>
+                {" "}
+                <em className="italic text-accent">{emphasis}</em>
+              </>
+            )}
+          </h2>
+          {meta && (
+            <span className="font-mono text-[9.5px] uppercase tracking-[0.18em] text-muted shrink-0 whitespace-nowrap">
+              {meta}
+            </span>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
