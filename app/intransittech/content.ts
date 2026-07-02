@@ -268,6 +268,7 @@ export const CONTENT = {
       status: "En línea · responde en segundos",
       badge: "Ejemplo",
       placeholder: "Escriba su mensaje…",
+      typing: "escribiendo…",
     },
     chat: [
       {
@@ -613,6 +614,7 @@ export const CONTENT = {
       status: "Online · replies in seconds",
       badge: "Sample",
       placeholder: "Type your message…",
+      typing: "typing…",
     },
     chat: [
       {

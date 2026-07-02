@@ -16,6 +16,7 @@ import {
 import { PrintButton } from "./print-button";
 import { LangToggle } from "./lang-toggle";
 import { BrowserLangDetector } from "./browser-lang-detector";
+import { ScreenExperience } from "./screen-experience";
 
 type SP = Promise<{ lang?: string }>;
 
@@ -44,6 +45,10 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
         </div>
       </div>
 
+      <ScreenExperience lang={lang} />
+
+      {/* ─────────── Documento estático · solo impresión ─────────── */}
+      <div className="print-only">
       {/* ─────────── PÁGINA 1 · PROPUESTA ─────────── */}
       <article className="doc-page relative max-w-[900px] mx-auto px-8 sm:px-12 py-8 text-[14px] leading-relaxed">
         <PhaseBar active={1} phases={t.phases} />
@@ -416,11 +421,20 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
 
         <PageFooter label={t.labels.pageOf(4, 4)} />
       </article>
+      </div>
 
       <style>{`
         @page { size: Letter; margin: 10mm 12mm; }
+        .print-only { display: none; }
         @media print {
-          .no-print { display: none !important; }
+          .no-print, .screen-only { display: none !important; }
+          .print-only { display: block !important; }
+          [data-reveal] {
+            opacity: 1 !important;
+            transform: none !important;
+            clip-path: none !important;
+            animation: none !important;
+          }
           html, body {
             background: #ffffff !important;
             -webkit-print-color-adjust: exact;
@@ -456,7 +470,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
 
 /* ────────── Helpers locales ────────── */
 
-function IconBadge({ icon, small = false }: { icon: string; small?: boolean }) {
+export function IconBadge({ icon, small = false }: { icon: string; small?: boolean }) {
   const size = small ? "w-8 h-8" : "w-10 h-10";
   const iconSize = small ? 18 : 22;
   return (
@@ -473,7 +487,7 @@ function IconBadge({ icon, small = false }: { icon: string; small?: boolean }) {
   );
 }
 
-function PhaseBar({
+export function PhaseBar({
   active,
   phases,
 }: {
@@ -522,7 +536,7 @@ function PhaseBar({
   );
 }
 
-function SectionTitle({
+export function SectionTitle({
   icon,
   title,
   meta,
@@ -760,7 +774,7 @@ function ChatMock({ t }: { t: typeof CONTENT[Lang] }) {
   );
 }
 
-function InvestmentRow({
+export function InvestmentRow({
   icon,
   title,
   detail,
