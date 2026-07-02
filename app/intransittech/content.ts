@@ -4,9 +4,9 @@ export const FOLIO = "WB-132";
 export const ISSUED = "2026-04-23";
 export const VALID = "2026-05-15";
 
-export const PRICE_SITIO = 800;
+export const PRICE_SITIO = 900;
 export const PRICE_AGENTE = 200;
-export const PRICE_TRANSLATION = 150;
+export const PRICE_TRANSLATION = 200;
 export const USD_TOTAL = PRICE_SITIO + PRICE_AGENTE + PRICE_TRANSLATION;
 export const USD_DEPOSIT = Math.round(USD_TOTAL * 0.5);
 
@@ -282,7 +282,7 @@ export const CONTENT = {
         sitio: {
           title: "Sitio web profesional",
           detail:
-            "Diseño, desarrollo y publicación del sitio. Incluye los 7 puntos, las 7 páginas y el catálogo base organizado por categorías.",
+            "Diseño, desarrollo y publicación del sitio. Incluye los 7 puntos, las 7 páginas, el catálogo base organizado por categorías y el panel de administración para gestionar y dar seguimiento a los leads, con dashboard de indicadores.",
         },
         agente: {
           title: "Agente de ventas con IA",
@@ -589,7 +589,7 @@ export const CONTENT = {
         sitio: {
           title: "Professional website",
           detail:
-            "Design, development, and launch of the site. Includes all 7 features, the 7 pages, and the base catalog organized by category.",
+            "Design, development, and launch of the site. Includes all 7 features, the 7 pages, the base catalog organized by category, and the admin panel to manage and follow up on leads, with a KPI dashboard.",
         },
         agente: {
           title: "AI sales agent",

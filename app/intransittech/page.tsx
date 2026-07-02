@@ -105,7 +105,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
           </div>
           <h1 className="mt-1.5 text-[28px] sm:text-[32px] font-bold leading-[1.08] tracking-[-0.015em] text-primary">
             {t.intro.titleLead}{" "}
-            <em className="italic text-gradient-accent">{t.intro.titleEmphasis}</em>{" "}
+            <em className="italic text-accent">{t.intro.titleEmphasis}</em>{" "}
             {t.intro.titleSuffix} {t.client.short}
           </h1>
           <p className="mt-2 text-[13px] text-muted leading-relaxed max-w-2xl">
@@ -118,12 +118,12 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
 
         {/* Beneficios en el día a día */}
         <section className="mt-6">
-          <SectionTitle icon="auto_awesome" title={t.benefits.title} meta={t.benefits.meta} />
+          <SectionTitle num="01" title={t.benefits.title} meta={t.benefits.meta} />
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {t.benefits.items.map((b) => (
               <li
                 key={b.title}
-                className="rounded-xl bg-card border border-card-border p-3.5 flex gap-3"
+                className="border-t border-primary/15 pt-2.5 flex gap-2.5"
               >
                 <IconBadge icon={b.icon} />
                 <div className="min-w-0">
@@ -145,12 +145,12 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
         <PhaseBar active={2} phases={t.phases} />
 
         <section className="mt-6">
-          <SectionTitle icon="check_circle" title={t.features.title} meta={t.features.meta} />
+          <SectionTitle num="02" title={t.features.title} meta={t.features.meta} />
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             {t.features.items.map((f) => (
               <li
                 key={f.title}
-                className="rounded-xl border border-card-border bg-card p-3 flex gap-3"
+                className="border-t border-primary/15 pt-2.5 flex gap-2.5"
               >
                 <IconBadge icon={f.icon} />
                 <div className="min-w-0">
@@ -165,12 +165,12 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
         </section>
 
         <section className="mt-7">
-          <SectionTitle icon="menu_book" title={t.pages.title} meta={t.pages.meta} />
+          <SectionTitle num="03" title={t.pages.title} meta={t.pages.meta} />
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {t.pages.items.map((p) => (
               <li
                 key={p.name}
-                className="rounded-lg bg-card border border-card-border border-l-4 border-l-accent px-3 py-2.5"
+                className="border-t border-primary/15 pt-2.5"
               >
                 <div className="text-[13px] font-semibold text-foreground">{p.name}</div>
                 <div className="text-[11.5px] text-muted mt-0.5 leading-snug">{p.detail}</div>
@@ -188,7 +188,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
 
         {/* Catálogo por categorías */}
         <section className="mt-6">
-          <SectionTitle icon="category" title={t.categories.title} meta={t.categories.meta} />
+          <SectionTitle num="04" title={t.categories.title} meta={t.categories.meta} />
           <p className="text-[12px] text-muted leading-relaxed max-w-2xl mb-3">
             {t.categories.intro}
           </p>
@@ -196,7 +196,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
             {t.categories.items.map((c) => (
               <li
                 key={c.name}
-                className="rounded-lg bg-card border border-card-border px-3 py-2.5 flex gap-3"
+                className="border-t border-primary/15 pt-2.5 flex gap-2.5"
               >
                 <IconBadge icon={c.icon} small />
                 <div className="min-w-0">
@@ -213,7 +213,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
         {/* Agente de ventas IA */}
         <section className="mt-7">
           <SectionTitle
-            icon="smart_toy"
+            num="05"
             title={t.agent.titleLead}
             emphasis={t.agent.titleEmphasis}
             meta={t.agent.meta}
@@ -223,21 +223,16 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Qué hace · cards en dark */}
-            <ul className="grid grid-cols-1 gap-2">
+            {/* Qué hace · panel dark */}
+            <ul className="rounded-lg bg-primary text-primary-foreground divide-y divide-white/10">
               {t.agent.features.map((a) => (
-                <li
-                  key={a.title}
-                  className="rounded-lg bg-primary text-primary-foreground border border-primary/30 p-3 flex gap-3"
-                >
-                  <div className="shrink-0 w-8 h-8 rounded-lg bg-accent/20 text-accent-light flex items-center justify-center">
-                    <span
-                      className="material-symbols-outlined"
-                      style={{ fontSize: 18, fontVariationSettings: "'wght' 500" }}
-                    >
-                      {a.icon}
-                    </span>
-                  </div>
+                <li key={a.title} className="px-3.5 py-2.5 flex gap-2.5">
+                  <span
+                    className="material-symbols-outlined text-accent-light shrink-0 mt-0.5"
+                    style={{ fontSize: 17, fontVariationSettings: "'wght' 450" }}
+                  >
+                    {a.icon}
+                  </span>
                   <div className="min-w-0">
                     <div className="text-[13px] font-semibold leading-tight">{a.title}</div>
                     <div className="text-[11.5px] text-white/70 mt-0.5 leading-snug">
@@ -253,13 +248,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
           </div>
 
           {/* Nota de integración */}
-          <div className="mt-3 rounded-lg bg-accent/10 border border-accent/30 px-3 py-2.5 flex items-start gap-2.5">
-            <span
-              className="material-symbols-outlined text-accent shrink-0 mt-0.5"
-              style={{ fontSize: 18, fontVariationSettings: "'wght' 600" }}
-            >
-              info
-            </span>
+          <div className="mt-4 border-l-2 border-accent pl-3.5 py-0.5 flex items-start gap-2.5">
             <div className="text-[11.5px] text-foreground/90 leading-snug">
               <span className="font-semibold text-primary">{t.requisite.label}</span>{" "}
               {t.requisite.before} <span className="font-semibold">ChatGPT (OpenAI)</span>{" "}
@@ -277,9 +266,9 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
         <PhaseBar active={4} phases={t.phases} />
 
         <section className="mt-6">
-          <SectionTitle icon="payments" title={t.investment.title} />
+          <SectionTitle num="06" title={t.investment.title} />
 
-          <div className="rounded-xl border border-card-border bg-card overflow-hidden">
+          <div className="border-t-2 border-t-primary border-b border-b-card-border border-x border-x-card-border overflow-hidden">
             {/* Renglones */}
             <div className="divide-y divide-card-border">
               <InvestmentRow
@@ -308,7 +297,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
                     <span className="text-[13px] font-semibold text-foreground">
                       {t.investment.lines.hosting.title}
                     </span>
-                    <span className="text-[9px] uppercase tracking-[0.22em] font-semibold text-white bg-accent rounded px-1.5 py-0.5">
+                    <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-accent border border-accent/50 rounded-sm px-1.5 py-0.5">
                       {t.labels.complimentaryBadge}
                     </span>
                   </div>
@@ -381,7 +370,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
           </ul>
         </section>
 
-        <section className="mt-6 rounded-xl bg-surface-muted border border-card-border p-4">
+        <section className="mt-6 border-l-2 border-accent pl-4 py-1">
           <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-accent mb-1.5">
             {t.nextStep.label}
           </div>
@@ -454,19 +443,13 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
 /* ────────── Helpers locales ────────── */
 
 function IconBadge({ icon, small = false }: { icon: string; small?: boolean }) {
-  const size = small ? "w-8 h-8" : "w-10 h-10";
-  const iconSize = small ? 18 : 22;
   return (
-    <div
-      className={`shrink-0 ${size} rounded-lg bg-accent/10 text-accent flex items-center justify-center`}
+    <span
+      className="material-symbols-outlined shrink-0 text-accent mt-0.5"
+      style={{ fontSize: small ? 17 : 19, fontVariationSettings: "'wght' 450, 'FILL' 0" }}
     >
-      <span
-        className="material-symbols-outlined"
-        style={{ fontSize: iconSize, fontVariationSettings: "'wght' 500, 'FILL' 0" }}
-      >
-        {icon}
-      </span>
-    </div>
+      {icon}
+    </span>
   );
 }
 
@@ -485,21 +468,17 @@ function PhaseBar({
         const current = idx === active;
         return (
           <Fragment key={p.num}>
-            <div className="flex items-center gap-2 shrink-0">
-              <div
-                className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-mono font-semibold tabular-nums ${
-                  current
-                    ? "bg-accent text-white"
-                    : done
-                    ? "bg-accent/20 text-accent"
-                    : "bg-surface-muted text-muted"
+            <div className="flex items-baseline gap-1.5 shrink-0">
+              <span
+                className={`font-mono text-[10px] tabular-nums ${
+                  current ? "text-accent font-semibold" : done ? "text-accent/60" : "text-muted/50"
                 }`}
               >
                 {p.num}
-              </div>
+              </span>
               <span
-                className={`text-[10.5px] uppercase tracking-[0.18em] font-semibold whitespace-nowrap ${
-                  current ? "text-primary" : done ? "text-accent" : "text-muted"
+                className={`text-[10px] uppercase tracking-[0.2em] font-semibold whitespace-nowrap ${
+                  current ? "text-primary" : done ? "text-muted" : "text-muted/50"
                 }`}
               >
                 {p.name}
@@ -508,7 +487,7 @@ function PhaseBar({
             {i < phases.length - 1 && (
               <div
                 className={`h-px flex-1 min-w-[10px] ${
-                  done ? "bg-accent/40" : "bg-card-border"
+                  done ? "bg-accent/30" : "bg-card-border"
                 }`}
               />
             )}
@@ -520,37 +499,30 @@ function PhaseBar({
 }
 
 function SectionTitle({
-  icon,
+  num,
   title,
   meta,
   emphasis,
 }: {
-  icon: string;
+  num: string;
   title: string;
   meta?: string;
   emphasis?: string;
 }) {
   return (
-    <div className="flex items-center justify-between rounded-xl bg-primary text-primary-foreground px-4 py-2.5 mb-4 gap-3">
-      <div className="flex items-center gap-2.5 min-w-0">
-        <span
-          className="material-symbols-outlined text-accent shrink-0"
-          style={{ fontSize: 20, fontVariationSettings: "'wght' 600" }}
-        >
-          {icon}
-        </span>
-        <h2 className="text-[16px] font-bold tracking-tight leading-tight">
-          {title}
-          {emphasis && (
-            <>
-              {" "}
-              <em className="italic text-accent-light font-bold">{emphasis}</em>
-            </>
-          )}
-        </h2>
-      </div>
+    <div className="flex items-baseline gap-3 mb-4 pb-2 border-b border-primary/20">
+      <span className="font-mono text-[10.5px] text-accent tabular-nums shrink-0">{num}</span>
+      <h2 className="text-[17px] font-bold tracking-tight leading-tight text-primary min-w-0">
+        {title}
+        {emphasis && (
+          <>
+            {" "}
+            <em className="italic text-accent">{emphasis}</em>
+          </>
+        )}
+      </h2>
       {meta && (
-        <span className="text-[10px] uppercase tracking-[0.22em] font-semibold text-white/60 shrink-0 whitespace-nowrap">
+        <span className="ml-auto font-mono text-[9.5px] uppercase tracking-[0.18em] text-muted shrink-0 whitespace-nowrap">
           {meta}
         </span>
       )}
