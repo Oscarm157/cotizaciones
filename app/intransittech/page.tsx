@@ -217,26 +217,36 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
               {t.agent.intro}
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Qué hace · panel dark */}
-              <ul className="self-start bg-primary text-primary-foreground divide-y divide-white/10">
-                {t.agent.features.map((a) => (
-                  <li key={a.title} className="px-3.5 py-2.5 flex gap-2.5">
-                    <span
-                      className="material-symbols-outlined text-accent-light shrink-0 mt-0.5"
-                      style={{ fontSize: 17, fontVariationSettings: "'wght' 450" }}
-                    >
-                      {a.icon}
+            <div className="grid grid-cols-1 md:grid-cols-[0.9fr_1.1fr] gap-6 md:gap-8">
+              {/* Flujo · cómo califica al lead */}
+              <ol className="relative">
+                {t.agent.features.map((a, i) => (
+                  <li key={a.title} className="relative flex gap-4 pb-6 last:pb-0">
+                    {i < t.agent.features.length - 1 && (
+                      <span className="absolute left-4 top-9 -bottom-0 w-px bg-accent/30" aria-hidden />
+                    )}
+                    <span className="relative z-10 shrink-0 w-8 h-8 rounded-full bg-primary text-accent-light flex items-center justify-center">
+                      <span
+                        className="material-symbols-outlined"
+                        style={{ fontSize: 17, fontVariationSettings: "'wght' 400, 'FILL' 0" }}
+                      >
+                        {a.icon}
+                      </span>
                     </span>
-                    <div className="min-w-0">
-                      <div className="text-[13px] font-semibold leading-tight">{a.title}</div>
-                      <div className="text-[11.5px] text-white/70 mt-0.5 leading-snug">
-                        {a.detail}
+                    <div className="min-w-0 pt-0.5">
+                      <div className="flex items-baseline gap-2">
+                        <span className="font-mono text-[10px] text-accent tabular-nums">
+                          0{i + 1}
+                        </span>
+                        <span className="text-[13px] font-semibold text-primary leading-tight">
+                          {a.title}
+                        </span>
                       </div>
+                      <p className="text-[11.5px] text-muted mt-1 leading-snug">{a.detail}</p>
                     </div>
                   </li>
                 ))}
-              </ul>
+              </ol>
 
               {/* Mock de chat */}
               <ChatMock t={t} />
