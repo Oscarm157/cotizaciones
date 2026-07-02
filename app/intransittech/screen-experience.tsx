@@ -21,6 +21,10 @@ import { ChatMockLive } from "./chat-mock-live";
 /**
  * Experiencia animada de scroll, solo pantalla (screen-only). El árbol print-only
  * en page.tsx sigue siendo el documento estático que ya funciona.
+ *
+ * Los fondos de sección (hero, banner, categorías, inversión) usan por ahora los
+ * tratamientos CSS ya existentes en globals.css (grid-bg, spotlight-accent) como
+ * placeholder: las 4 imágenes reales (public/intransittech/*.jpg) quedan pendientes.
  */
 export function ScreenExperience({ lang }: { lang: Lang }) {
   const t = CONTENT[lang];
@@ -43,15 +47,10 @@ export function ScreenExperience({ lang }: { lang: Lang }) {
           ref={heroRef}
           className="slide-dark relative min-h-[86vh] flex items-end overflow-hidden"
         >
-          <motion.img
-            src="/intransittech/hero.jpg"
-            alt=""
-            loading="eager"
-            fetchPriority="high"
-            className="absolute inset-0 w-full h-full object-cover"
+          <motion.div
+            className="absolute inset-0 grid-bg spotlight-accent"
             style={{ y: heroBgY }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
           <div className="relative max-w-[900px] mx-auto px-8 sm:px-12 pb-16 pt-32 w-full">
             <Reveal variant="fade" delay={0}>
               <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-accent-light">
@@ -116,13 +115,7 @@ export function ScreenExperience({ lang }: { lang: Lang }) {
       <section data-phase="2" className="relative">
         <Reveal variant="fade" duration={0.8}>
           <div className="slide-dark relative h-[220px] flex items-center justify-center overflow-hidden">
-            <img
-              src="/intransittech/transformacion-banner.jpg"
-              alt=""
-              loading="lazy"
-              className="absolute inset-0 w-full h-full object-cover opacity-70"
-            />
-            <div className="absolute inset-0 bg-background/50" />
+            <div className="absolute inset-0 grid-bg spotlight-accent" />
             <span className="relative text-[11px] uppercase tracking-[0.3em] font-semibold text-accent-light/70">
               {t.phases[1].num} · {t.phases[1].name}
             </span>
@@ -181,12 +174,7 @@ export function ScreenExperience({ lang }: { lang: Lang }) {
           </div>
 
           <section className="relative rounded-2xl overflow-hidden">
-            <img
-              src="/intransittech/contenido-bg.jpg"
-              alt=""
-              loading="lazy"
-              className="absolute inset-0 w-full h-full object-cover opacity-[0.08]"
-            />
+            <div className="absolute inset-0 grid-bg opacity-40" />
             <div className="relative p-1">
               <Reveal>
                 <SectionTitle icon="category" title={t.categories.title} meta={t.categories.meta} />
@@ -288,12 +276,7 @@ export function ScreenExperience({ lang }: { lang: Lang }) {
           </div>
 
           <section className="relative">
-            <img
-              src="/intransittech/inversion-bg.jpg"
-              alt=""
-              loading="lazy"
-              className="absolute inset-0 -z-10 w-full h-full object-cover opacity-[0.06]"
-            />
+            <div className="absolute inset-0 -z-10 grid-bg opacity-[0.15]" />
             <Reveal>
               <SectionTitle icon="payments" title={t.investment.title} />
             </Reveal>
