@@ -46,94 +46,78 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
 
       {/* ─────────── PÁGINA 1 · PROPUESTA ─────────── */}
       <article className="doc-page relative max-w-[900px] mx-auto px-8 sm:px-12 py-8 text-[14px] leading-relaxed">
-        <PhaseBar active={1} phases={t.phases} />
+        {/* Portada · bloque navy a ancho completo */}
+        <div className="cover bleed -mx-8 sm:-mx-12 -mt-8 bg-primary text-primary-foreground px-8 sm:px-12 pt-6 pb-7">
+          <PhaseBar active={1} phases={t.phases} dark />
 
-        {/* Encabezado */}
-        <header className="flex items-start justify-between gap-6 pb-5 border-b border-card-border mt-5">
-          <div>
+          <div className="mt-7 flex items-start justify-between gap-4">
             <div className="flex items-center gap-2">
-              <span className="text-xl font-semibold tracking-tight text-primary">
+              <span className="text-[15px] font-semibold tracking-tight text-white">
                 {t.provider.name}
               </span>
-              <span className="inline-block w-1.5 h-1.5 rounded-full bg-accent" />
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-accent-light" />
             </div>
-            <p className="mt-0.5 text-[12px] text-muted max-w-xs leading-snug">
-              {t.provider.tagline}
-            </p>
+            <div className="text-right shrink-0">
+              <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-accent-light">
+                {t.labels.quote}
+              </div>
+              <div className="mt-0.5 font-mono text-[15px] text-white">
+                {t.labels.quoteNumber} {FOLIO}
+              </div>
+            </div>
           </div>
-          <div className="text-right">
-            <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-accent">
-              {t.labels.quote}
-            </div>
-            <div className="mt-0.5 font-mono text-base text-primary">
-              {t.labels.quoteNumber} {FOLIO}
-            </div>
-            <dl className="mt-1.5 text-[12px] text-muted grid grid-cols-[auto_auto] gap-x-3 gap-y-0.5 justify-end">
-              <dt className="text-right">{t.labels.issued}</dt>
-              <dd className="text-foreground tabular-nums text-right">{fmtDate(ISSUED, lang)}</dd>
-              <dt className="text-right">{t.labels.validUntil}</dt>
-              <dd className="text-foreground tabular-nums text-right">{fmtDate(VALID, lang)}</dd>
-            </dl>
-          </div>
-        </header>
 
-        {/* Partes */}
-        <section className="grid grid-cols-1 sm:grid-cols-2 gap-6 py-5 border-b border-card-border">
-          <div>
-            <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-muted mb-1">
-              {t.labels.from}
-            </div>
-            <div className="text-[13px] text-foreground font-semibold">{t.provider.name}</div>
-            <div className="text-[12px] text-muted">
-              {t.provider.roleLabel} · {t.provider.lead}
-            </div>
-            <div className="text-[12px] text-muted">{t.provider.email}</div>
-          </div>
-          <div>
-            <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-muted mb-1">
-              {t.labels.preparedFor}
-            </div>
-            <div className="text-[13px] text-foreground font-semibold">{t.client.name}</div>
-            <div className="text-[12px] text-muted">{t.client.descriptor}</div>
-          </div>
-        </section>
-
-        {/* Intro */}
-        <section className="pt-6">
-          <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-accent">
+          <div className="mt-6 text-[10px] uppercase tracking-[0.24em] font-semibold text-accent-light">
             {t.intro.eyebrow}
           </div>
-          <h1 className="mt-1.5 text-[28px] sm:text-[32px] font-bold leading-[1.08] tracking-[-0.015em] text-primary">
+          <h1 className="mt-2.5 text-[38px] sm:text-[46px] font-bold leading-[1.02] tracking-[-0.015em] text-white max-w-3xl">
             {t.intro.titleLead}{" "}
-            <em className="italic text-accent">{t.intro.titleEmphasis}</em>{" "}
+            <em className="italic text-accent-light">{t.intro.titleEmphasis}</em>{" "}
             {t.intro.titleSuffix} {t.client.short}
           </h1>
-          <p className="mt-2 text-[13px] text-muted leading-relaxed max-w-2xl">
+          <p className="mt-3.5 text-[13px] text-white/70 leading-relaxed max-w-2xl">
             {t.intro.paragraph}
           </p>
-        </section>
+
+          <div className="mt-6 pt-5 border-t border-white/15 grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-3">
+            <CoverMeta
+              label={t.labels.from}
+              value={t.provider.name}
+              sub={`${t.provider.roleLabel} · ${t.provider.lead}`}
+            />
+            <CoverMeta
+              label={t.labels.preparedFor}
+              value={t.client.name}
+              sub={t.client.descriptor}
+            />
+            <CoverMeta label={t.labels.issued} value={fmtDate(ISSUED, lang)} />
+            <CoverMeta label={t.labels.validUntil} value={fmtDate(VALID, lang)} />
+          </div>
+        </div>
 
         {/* Antes / Después */}
         <BeforeAfter t={t} />
 
         {/* Beneficios en el día a día */}
-        <section className="mt-8">
-          <SectionTitle num="01" title={t.benefits.title} meta={t.benefits.meta} />
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
-            {t.benefits.items.map((b, i) => (
-              <li key={b.title} className="flex gap-3.5">
-                <span className="font-mono text-[12px] text-accent tabular-nums pt-0.5 shrink-0">
-                  0{i + 1}
-                </span>
-                <div className="min-w-0">
-                  <div className="text-[14px] font-semibold text-primary leading-tight">
-                    {b.title}
+        <section className="mt-8 bleed -mx-8 sm:-mx-12">
+          <SectionBand num="01" title={t.benefits.title} meta={t.benefits.meta} tone="navy" />
+          <div className="bg-surface-muted/40 px-8 sm:px-12 py-7">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
+              {t.benefits.items.map((b, i) => (
+                <li key={b.title} className="flex gap-3.5">
+                  <span className="font-mono text-[12px] text-accent tabular-nums pt-0.5 shrink-0">
+                    0{i + 1}
+                  </span>
+                  <div className="min-w-0">
+                    <div className="text-[14px] font-semibold text-primary leading-tight">
+                      {b.title}
+                    </div>
+                    <div className="text-[11.5px] text-muted mt-1 leading-relaxed">{b.detail}</div>
                   </div>
-                  <div className="text-[11.5px] text-muted mt-1 leading-relaxed">{b.detail}</div>
-                </div>
-              </li>
-            ))}
-          </ul>
+                </li>
+              ))}
+            </ul>
+          </div>
         </section>
 
         <PageFooter label={t.labels.pageOf(1, 4)} />
@@ -143,41 +127,45 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
       <article className="doc-page relative max-w-[900px] mx-auto px-8 sm:px-12 py-8 text-[14px] leading-relaxed page-break">
         <PhaseBar active={2} phases={t.phases} />
 
-        <section className="mt-6">
-          <SectionTitle num="02" title={t.features.title} meta={t.features.meta} />
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
-            {t.features.items.map((f) => (
-              <li key={f.title} className="flex gap-3">
-                <IconBadge icon={f.icon} />
-                <div className="min-w-0">
-                  <div className="text-[13px] font-semibold text-primary leading-tight">
-                    {f.title}
+        <section className="mt-6 bleed -mx-8 sm:-mx-12">
+          <SectionBand num="02" title={t.features.title} meta={t.features.meta} tone="accent" />
+          <div className="px-8 sm:px-12 py-7">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
+              {t.features.items.map((f) => (
+                <li key={f.title} className="flex gap-3">
+                  <IconBadge icon={f.icon} />
+                  <div className="min-w-0">
+                    <div className="text-[13px] font-semibold text-primary leading-tight">
+                      {f.title}
+                    </div>
+                    <div className="text-[11.5px] text-muted mt-0.5 leading-relaxed">{f.detail}</div>
                   </div>
-                  <div className="text-[11.5px] text-muted mt-0.5 leading-relaxed">{f.detail}</div>
-                </div>
-              </li>
-            ))}
-          </ul>
+                </li>
+              ))}
+            </ul>
+          </div>
         </section>
 
-        <section className="mt-9">
-          <SectionTitle num="03" title={t.pages.title} meta={t.pages.meta} />
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8">
-            {t.pages.items.map((p, i) => (
-              <li
-                key={p.name}
-                className="flex items-baseline gap-3 py-2 border-b border-dashed border-card-border"
-              >
-                <span className="font-mono text-[10px] text-accent tabular-nums shrink-0">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span className="text-[13px] font-semibold text-primary shrink-0">{p.name}</span>
-                <span className="text-[11px] text-muted leading-snug text-right ml-auto max-w-[62%]">
-                  {p.detail}
-                </span>
-              </li>
-            ))}
-          </ul>
+        <section className="mt-8 bleed -mx-8 sm:-mx-12">
+          <SectionBand num="03" title={t.pages.title} meta={t.pages.meta} tone="navy" />
+          <div className="bg-surface-muted/40 px-8 sm:px-12 py-6">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8">
+              {t.pages.items.map((p, i) => (
+                <li
+                  key={p.name}
+                  className="flex items-baseline gap-3 py-2 border-b border-dashed border-card-border"
+                >
+                  <span className="font-mono text-[10px] text-accent tabular-nums shrink-0">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="text-[13px] font-semibold text-primary shrink-0">{p.name}</span>
+                  <span className="text-[11px] text-muted leading-snug text-right ml-auto max-w-[62%]">
+                    {p.detail}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </section>
 
         <PageFooter label={t.labels.pageOf(2, 4)} />
@@ -188,73 +176,72 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
         <PhaseBar active={3} phases={t.phases} />
 
         {/* Catálogo por categorías */}
-        <section className="mt-6">
-          <SectionTitle num="04" title={t.categories.title} meta={t.categories.meta} />
-          <p className="text-[12px] text-muted leading-relaxed max-w-2xl mb-4">
-            {t.categories.intro}
-          </p>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-            {t.categories.items.map((c) => (
-              <li
-                key={c.name}
-                className="rounded-lg bg-surface-muted/60 px-3.5 py-3 flex gap-3 border-l-2 border-accent/40"
-              >
-                <IconBadge icon={c.icon} small />
-                <div className="min-w-0">
-                  <div className="text-[13px] font-semibold text-primary leading-tight">
+        <section className="mt-6 bleed -mx-8 sm:-mx-12">
+          <SectionBand num="04" title={t.categories.title} meta={t.categories.meta} tone="accent" />
+          <div className="px-8 sm:px-12 py-7">
+            <p className="text-[12px] text-muted leading-relaxed max-w-2xl mb-5">
+              {t.categories.intro}
+            </p>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-12">
+              {t.categories.items.map((c) => (
+                <li key={c.name} className="py-3 border-t border-card-border">
+                  <div className="text-[13.5px] font-semibold text-primary leading-tight">
                     {c.name}
                   </div>
-                  <div className="text-[11px] text-muted mt-0.5 leading-snug">{c.detail}</div>
-                </div>
-              </li>
-            ))}
-          </ul>
+                  <div className="text-[11px] text-muted mt-1 leading-snug">{c.detail}</div>
+                </li>
+              ))}
+            </ul>
+          </div>
         </section>
 
         {/* Agente de ventas IA */}
-        <section className="mt-7">
-          <SectionTitle
+        <section className="mt-7 bleed -mx-8 sm:-mx-12">
+          <SectionBand
             num="05"
             title={t.agent.titleLead}
             emphasis={t.agent.titleEmphasis}
             meta={t.agent.meta}
+            tone="navy"
           />
-          <p className="text-[12px] text-muted leading-relaxed max-w-2xl mb-3">
-            {t.agent.intro}
-          </p>
+          <div className="bg-surface-muted/40 px-8 sm:px-12 py-7">
+            <p className="text-[12px] text-muted leading-relaxed max-w-2xl mb-3">
+              {t.agent.intro}
+            </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Qué hace · panel dark */}
-            <ul className="rounded-lg bg-primary text-primary-foreground divide-y divide-white/10">
-              {t.agent.features.map((a) => (
-                <li key={a.title} className="px-3.5 py-2.5 flex gap-2.5">
-                  <span
-                    className="material-symbols-outlined text-accent-light shrink-0 mt-0.5"
-                    style={{ fontSize: 17, fontVariationSettings: "'wght' 450" }}
-                  >
-                    {a.icon}
-                  </span>
-                  <div className="min-w-0">
-                    <div className="text-[13px] font-semibold leading-tight">{a.title}</div>
-                    <div className="text-[11.5px] text-white/70 mt-0.5 leading-snug">
-                      {a.detail}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Qué hace · panel dark */}
+              <ul className="bg-primary text-primary-foreground divide-y divide-white/10">
+                {t.agent.features.map((a) => (
+                  <li key={a.title} className="px-3.5 py-2.5 flex gap-2.5">
+                    <span
+                      className="material-symbols-outlined text-accent-light shrink-0 mt-0.5"
+                      style={{ fontSize: 17, fontVariationSettings: "'wght' 450" }}
+                    >
+                      {a.icon}
+                    </span>
+                    <div className="min-w-0">
+                      <div className="text-[13px] font-semibold leading-tight">{a.title}</div>
+                      <div className="text-[11.5px] text-white/70 mt-0.5 leading-snug">
+                        {a.detail}
+                      </div>
                     </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
+                  </li>
+                ))}
+              </ul>
 
-            {/* Mock de chat */}
-            <ChatMock t={t} />
-          </div>
+              {/* Mock de chat */}
+              <ChatMock t={t} />
+            </div>
 
-          {/* Nota de integración */}
-          <div className="mt-4 border-l-2 border-accent pl-3.5 py-0.5 flex items-start gap-2.5">
-            <div className="text-[11.5px] text-foreground/90 leading-snug">
-              <span className="font-semibold text-primary">{t.requisite.label}</span>{" "}
-              {t.requisite.before} <span className="font-semibold">ChatGPT (OpenAI)</span>{" "}
-              {t.requisite.or} <span className="font-semibold">Gemini (Google)</span>
-              {t.requisite.middle}
+            {/* Nota de integración */}
+            <div className="mt-4 border-l-2 border-accent pl-3.5 py-0.5 flex items-start gap-2.5">
+              <div className="text-[11.5px] text-foreground/90 leading-snug">
+                <span className="font-semibold text-primary">{t.requisite.label}</span>{" "}
+                {t.requisite.before} <span className="font-semibold">ChatGPT (OpenAI)</span>{" "}
+                {t.requisite.or} <span className="font-semibold">Gemini (Google)</span>
+                {t.requisite.middle}
+              </div>
             </div>
           </div>
         </section>
@@ -266,9 +253,9 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
       <article className="doc-page relative max-w-[900px] mx-auto px-8 sm:px-12 py-8 text-[14px] leading-relaxed page-break">
         <PhaseBar active={4} phases={t.phases} />
 
-        <section className="mt-6">
-          <SectionTitle num="06" title={t.investment.title} />
-
+        <section className="mt-6 bleed -mx-8 sm:-mx-12">
+          <SectionBand num="06" title={t.investment.title} tone="accent" />
+          <div className="px-8 sm:px-12 py-7">
           <div className="border-t-2 border-t-primary border-b border-b-card-border border-x border-x-card-border overflow-hidden">
             {/* Renglones */}
             <div className="divide-y divide-card-border">
@@ -369,6 +356,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
             ))}
             <li>• {t.investment.validityNote(fmtDate(VALID, lang))}</li>
           </ul>
+          </div>
         </section>
 
         <section className="mt-6 border-l-2 border-accent pl-4 py-1">
@@ -431,6 +419,11 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
             break-before: auto !important;
             page-break-before: auto !important;
           }
+          /* Full-bleed en pantalla se neutraliza en print: el doc-page ya no
+             tiene padding lateral, así que la banda ocupa el ancho imprimible
+             con su padding interno intacto. */
+          .bleed { margin-left: 0 !important; margin-right: 0 !important; }
+          .cover { margin-top: 0 !important; }
           article section, article ul li, article header, article footer {
             break-inside: avoid;
             page-break-inside: avoid;
@@ -457,9 +450,11 @@ function IconBadge({ icon, small = false }: { icon: string; small?: boolean }) {
 function PhaseBar({
   active,
   phases,
+  dark = false,
 }: {
   active: 1 | 2 | 3 | 4;
   phases: readonly { num: string; name: string }[];
+  dark?: boolean;
 }) {
   return (
     <div className="flex items-center gap-3 w-full">
@@ -467,34 +462,105 @@ function PhaseBar({
         const idx = (i + 1) as 1 | 2 | 3 | 4;
         const done = idx < active;
         const current = idx === active;
+        const numClass = dark
+          ? current
+            ? "text-accent-light font-semibold"
+            : done
+              ? "text-accent-light/60"
+              : "text-white/35"
+          : current
+            ? "text-accent font-semibold"
+            : done
+              ? "text-accent/60"
+              : "text-muted/50";
+        const nameClass = dark
+          ? current
+            ? "text-white"
+            : done
+              ? "text-white/60"
+              : "text-white/35"
+          : current
+            ? "text-primary"
+            : done
+              ? "text-muted"
+              : "text-muted/50";
+        const lineClass = dark
+          ? done
+            ? "bg-accent-light/40"
+            : "bg-white/15"
+          : done
+            ? "bg-accent/30"
+            : "bg-card-border";
         return (
           <Fragment key={p.num}>
             <div className="flex items-baseline gap-1.5 shrink-0">
+              <span className={`font-mono text-[10px] tabular-nums ${numClass}`}>{p.num}</span>
               <span
-                className={`font-mono text-[10px] tabular-nums ${
-                  current ? "text-accent font-semibold" : done ? "text-accent/60" : "text-muted/50"
-                }`}
-              >
-                {p.num}
-              </span>
-              <span
-                className={`text-[10px] uppercase tracking-[0.2em] font-semibold whitespace-nowrap ${
-                  current ? "text-primary" : done ? "text-muted" : "text-muted/50"
-                }`}
+                className={`text-[10px] uppercase tracking-[0.2em] font-semibold whitespace-nowrap ${nameClass}`}
               >
                 {p.name}
               </span>
             </div>
             {i < phases.length - 1 && (
-              <div
-                className={`h-px flex-1 min-w-[10px] ${
-                  done ? "bg-accent/30" : "bg-card-border"
-                }`}
-              />
+              <div className={`h-px flex-1 min-w-[10px] ${lineClass}`} />
             )}
           </Fragment>
         );
       })}
+    </div>
+  );
+}
+
+function SectionBand({
+  num,
+  title,
+  meta,
+  emphasis,
+  tone = "navy",
+}: {
+  num: string;
+  title: string;
+  meta?: string;
+  emphasis?: string;
+  tone?: "navy" | "accent";
+}) {
+  const bg = tone === "accent" ? "bg-accent" : "bg-primary";
+  return (
+    <div className={`${bg} text-white px-8 sm:px-12 py-5 flex items-center gap-5`}>
+      <span
+        className="font-display text-[54px] leading-[0.7] text-white/20 tabular-nums select-none shrink-0"
+        aria-hidden
+      >
+        {num}
+      </span>
+      <div className="flex-1 min-w-0 flex items-baseline justify-between gap-4">
+        <h2 className="text-[23px] font-bold tracking-tight leading-none min-w-0">
+          {title}
+          {emphasis && (
+            <>
+              {" "}
+              <em className="italic text-white/85">{emphasis}</em>
+            </>
+          )}
+        </h2>
+        {meta && (
+          <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/55 shrink-0 whitespace-nowrap">
+            {meta}
+          </span>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function CoverMeta({ label, value, sub }: { label: string; value: string; sub?: string }) {
+  return (
+    <div className="min-w-0">
+      <div className="text-[9px] uppercase tracking-[0.2em] font-semibold text-white/45">
+        {label}
+      </div>
+      <div className="mt-1 text-[12px] font-semibold text-white leading-snug">{value}</div>
+      {sub && <div className="text-[11px] text-white/55 leading-snug">{sub}</div>}
     </div>
   );
 }
@@ -544,7 +610,7 @@ function BeforeAfter({ t }: { t: typeof CONTENT[Lang] }) {
   return (
     <section className="mt-6 grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-3 items-stretch">
       {/* Antes */}
-      <div className="rounded-xl border border-card-border bg-surface-muted/70 p-4">
+      <div className="border border-card-border bg-surface-muted/70 p-4">
         <div className="flex items-center gap-2 mb-2">
           <span
             className="material-symbols-outlined text-muted"
@@ -577,7 +643,7 @@ function BeforeAfter({ t }: { t: typeof CONTENT[Lang] }) {
       </div>
 
       {/* Después · dark */}
-      <div className="rounded-xl border border-primary bg-primary text-primary-foreground p-4">
+      <div className="border border-primary bg-primary text-primary-foreground p-4">
         <div className="flex items-center gap-2 mb-2">
           <span
             className="material-symbols-outlined text-accent-light"
