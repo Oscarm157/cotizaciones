@@ -213,41 +213,12 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
             tone="navy"
           />
           <div className="bg-surface-muted/40 px-8 sm:px-12 py-7">
-            <p className="text-[12px] text-muted leading-relaxed max-w-2xl mb-3">
+            <p className="text-[12px] text-muted leading-relaxed max-w-2xl mb-5">
               {t.agent.intro}
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-[0.9fr_1.1fr] gap-6 md:gap-8">
-              {/* Flujo · cómo califica al lead */}
-              <ol className="relative flex flex-col justify-between h-full min-h-[340px]">
-                {/* línea continua de fondo */}
-                <span className="absolute left-4 top-4 bottom-4 w-px bg-accent/25" aria-hidden />
-                {t.agent.features.map((a, i) => (
-                  <li key={a.title} className="relative flex gap-4">
-                    <span className="relative z-10 shrink-0 w-8 h-8 rounded-full bg-primary text-accent-light flex items-center justify-center">
-                      <span
-                        className="material-symbols-outlined"
-                        style={{ fontSize: 17, fontVariationSettings: "'wght' 400, 'FILL' 0" }}
-                      >
-                        {a.icon}
-                      </span>
-                    </span>
-                    <div className="min-w-0 pt-0.5">
-                      <div className="flex items-baseline gap-2">
-                        <span className="font-mono text-[10px] text-accent tabular-nums">
-                          0{i + 1}
-                        </span>
-                        <span className="text-[13px] font-semibold text-primary leading-tight">
-                          {a.title}
-                        </span>
-                      </div>
-                      <p className="text-[11.5px] text-muted mt-1 leading-snug">{a.detail}</p>
-                    </div>
-                  </li>
-                ))}
-              </ol>
-
-              {/* Mock de chat */}
+            {/* Chat anotado · cada capacidad anclada al mensaje que la demuestra */}
+            <div className="max-w-3xl mx-auto">
               <ChatMock t={t} />
             </div>
 
@@ -641,55 +612,98 @@ function BeforeAfter({ t }: { t: typeof CONTENT[Lang] }) {
   );
 }
 
-function ChatMock({ t }: { t: typeof CONTENT[Lang] }) {
+function Annotation({ num, icon, title }: { num: number; icon: string; title: string }) {
   return (
-    <div className="rounded-xl border border-card-border bg-card overflow-hidden flex flex-col">
-      {/* Header del chat */}
-      <div className="flex items-center gap-2 px-3 py-2 border-b border-card-border bg-surface-muted/60">
-        <div className="w-6 h-6 rounded-full bg-accent/15 text-accent flex items-center justify-center">
+    <div className="flex items-center gap-2 shrink-0">
+      <span
+        className="hidden sm:inline material-symbols-outlined text-accent/45 shrink-0"
+        style={{ fontSize: 18, fontVariationSettings: "'wght' 400" }}
+        aria-hidden
+      >
+        chevron_left
+      </span>
+      <span className="w-6 h-6 rounded-full bg-primary text-accent-light flex items-center justify-center shrink-0">
+        <span
+          className="material-symbols-outlined"
+          style={{ fontSize: 13, fontVariationSettings: "'wght' 400, 'FILL' 0" }}
+        >
+          {icon}
+        </span>
+      </span>
+      <div className="min-w-0 leading-tight">
+        <span className="font-mono text-[10px] text-accent tabular-nums">
+          {String(num).padStart(2, "0")}
+        </span>
+        <div className="text-[11.5px] font-semibold text-primary leading-tight">{title}</div>
+      </div>
+    </div>
+  );
+}
+
+function ChatMock({ t }: { t: typeof CONTENT[Lang] }) {
+  const f = t.agent.features;
+  const noteByIdx: Record<number, { num: number; icon: string; title: string }> = {
+    1: { num: 2, icon: f[1].icon, title: f[1].title },
+    3: { num: 3, icon: f[2].icon, title: f[2].title },
+    5: { num: 4, icon: f[3].icon, title: f[3].title },
+  };
+  return (
+    <div className="rounded-xl border border-card-border bg-card overflow-hidden">
+      {/* Header del chat · capacidad 01 anclada al estado */}
+      <div className="flex items-center gap-3 px-4 py-3 border-b border-card-border bg-surface-muted/60">
+        <div className="w-7 h-7 rounded-full bg-accent/15 text-accent flex items-center justify-center shrink-0">
           <span
             className="material-symbols-outlined"
-            style={{ fontSize: 14, fontVariationSettings: "'wght' 600" }}
+            style={{ fontSize: 16, fontVariationSettings: "'wght' 600" }}
           >
             support_agent
           </span>
         </div>
-        <div>
-          <div className="text-[11.5px] font-semibold text-foreground leading-none">
-            {t.chatHeader.title}
+        <div className="min-w-0">
+          <div className="flex items-center gap-2">
+            <span className="text-[13px] font-semibold text-foreground leading-none">
+              {t.chatHeader.title}
+            </span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted/70">
+              {t.chatHeader.badge}
+            </span>
           </div>
-          <div className="text-[10px] text-muted mt-0.5">{t.chatHeader.status}</div>
+          <div className="text-[10px] text-muted mt-1">{t.chatHeader.status}</div>
         </div>
-        <div className="ml-auto flex items-center gap-1 text-[10px] uppercase tracking-[0.18em] font-semibold text-accent">
-          <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-          {t.chatHeader.badge}
+        <div className="ml-auto">
+          <Annotation num={1} icon={f[0].icon} title={f[0].title} />
         </div>
       </div>
 
-      {/* Mensajes */}
-      <div className="p-3 space-y-2 flex-1">
+      {/* Mensajes · cada respuesta del agente lleva su anotación */}
+      <div className="px-4 py-4 space-y-3">
         {t.chat.map((m, i) => {
           const isAgent = m.from === "agent";
+          if (!isAgent) {
+            return (
+              <div key={i} className="flex justify-end">
+                <div className="max-w-[80%] sm:max-w-[62%] rounded-xl px-3 py-2 text-[11.5px] leading-snug bg-surface-muted text-foreground rounded-tr-sm border border-card-border">
+                  {m.text}
+                </div>
+              </div>
+            );
+          }
+          const note = noteByIdx[i];
           return (
-            <div key={i} className={`flex ${isAgent ? "justify-start" : "justify-end"}`}>
-              <div
-                className={`max-w-[85%] rounded-xl px-3 py-2 text-[11.5px] leading-snug ${
-                  isAgent
-                    ? "bg-accent text-white rounded-tl-sm"
-                    : "bg-surface-muted text-foreground rounded-tr-sm border border-card-border"
-                }`}
-              >
+            <div key={i} className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
+              <div className="max-w-[80%] sm:max-w-[58%] rounded-xl px-3 py-2 text-[11.5px] leading-snug bg-accent text-white rounded-tl-sm">
                 {m.text}
               </div>
+              {note && <Annotation num={note.num} icon={note.icon} title={note.title} />}
             </div>
           );
         })}
       </div>
 
       {/* Input simulado */}
-      <div className="flex items-center gap-2 px-3 py-2 border-t border-card-border">
+      <div className="flex items-center gap-2 px-4 py-2.5 border-t border-card-border">
         <div className="flex-1 text-[11.5px] text-muted/70 italic">{t.chatHeader.placeholder}</div>
-        <div className="w-7 h-7 rounded-full bg-accent text-white flex items-center justify-center">
+        <div className="w-7 h-7 rounded-full bg-accent text-white flex items-center justify-center shrink-0">
           <span
             className="material-symbols-outlined"
             style={{ fontSize: 14, fontVariationSettings: "'wght' 700" }}
