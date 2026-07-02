@@ -3,7 +3,7 @@ import Link from "next/link";
 import { isAdmin } from "./auth";
 import { logout } from "./actions";
 import { sql } from "@/lib/db";
-import { listClients } from "@/lib/brief/clients";
+import { listClients, QUOTES } from "@/lib/brief/clients";
 
 export const dynamic = "force-dynamic";
 
@@ -67,6 +67,28 @@ export default async function AdminPage() {
           </div>
           <span className="text-sm font-semibold">Abrir →</span>
         </Link>
+
+        <div className="mt-10 text-[10px] uppercase tracking-[0.22em] font-semibold text-muted mb-3">
+          Cotizaciones
+        </div>
+        <ul className="flex flex-col gap-2">
+          {QUOTES.map((q) => (
+            <li key={q.slug}>
+              <Link
+                href={`/${q.slug}`}
+                className="flex items-center justify-between rounded-xl bg-card border border-card-border px-5 py-4 hover:border-accent/50 transition"
+              >
+                <div>
+                  <div className="text-base font-semibold text-primary">{q.client}</div>
+                  <div className="text-[12px] text-muted">{q.folio}</div>
+                </div>
+                <div className="text-[11px] uppercase tracking-[0.18em] font-semibold text-accent">
+                  Ver →
+                </div>
+              </Link>
+            </li>
+          ))}
+        </ul>
 
         <div className="mt-10 text-[10px] uppercase tracking-[0.22em] font-semibold text-muted mb-3">
           Briefs enviados
