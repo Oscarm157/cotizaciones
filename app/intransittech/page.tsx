@@ -219,12 +219,11 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
 
             <div className="grid grid-cols-1 md:grid-cols-[0.9fr_1.1fr] gap-6 md:gap-8">
               {/* Flujo · cómo califica al lead */}
-              <ol className="relative">
+              <ol className="relative flex flex-col justify-between h-full min-h-[340px]">
+                {/* línea continua de fondo */}
+                <span className="absolute left-4 top-4 bottom-4 w-px bg-accent/25" aria-hidden />
                 {t.agent.features.map((a, i) => (
-                  <li key={a.title} className="relative flex gap-4 pb-6 last:pb-0">
-                    {i < t.agent.features.length - 1 && (
-                      <span className="absolute left-4 top-9 -bottom-0 w-px bg-accent/30" aria-hidden />
-                    )}
+                  <li key={a.title} className="relative flex gap-4">
                     <span className="relative z-10 shrink-0 w-8 h-8 rounded-full bg-primary text-accent-light flex items-center justify-center">
                       <span
                         className="material-symbols-outlined"
