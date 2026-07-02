@@ -298,7 +298,6 @@ export const CONTENT = {
           title: "Hosting del sitio por 1 año",
           detail:
             "Es el servicio que mantiene el sitio publicado y accesible en internet las 24 horas. Incluido durante los primeros 12 meses; la renovación a partir del segundo año se gestiona con Bravo Publicidad bajo tarifa anual.",
-          hostingWord: "hosting",
         },
       },
       notes: [
@@ -604,8 +603,7 @@ export const CONTENT = {
         hosting: {
           title: "One year of hosting",
           detail:
-            "is what keeps the site online and reachable 24/7. Included for the first 12 months; starting in year two, renewal is handled by Bravo Publicidad at an annual rate.",
-          hostingWord: "Hosting",
+            "Keeps the site online and reachable 24/7. Included for the first 12 months; starting in year two, renewal is handled by Bravo Publicidad at an annual rate.",
         },
       },
       notes: [

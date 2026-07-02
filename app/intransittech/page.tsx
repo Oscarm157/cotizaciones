@@ -34,7 +34,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
       {/* Toolbar — solo pantalla */}
       <div className="no-print sticky top-0 z-20 border-b border-card-border bg-background/80 backdrop-blur">
         <div className="max-w-[900px] mx-auto px-6 py-3 flex items-center justify-between gap-3">
-          <div className="text-[11px] uppercase tracking-[0.22em] font-semibold text-muted truncate">
+          <div className="text-[11.5px] uppercase tracking-[0.22em] font-semibold text-muted truncate">
             {t.labels.toolbarLabel(FOLIO, t.client.short)}
           </div>
           <div className="flex items-center gap-2 shrink-0">
@@ -45,7 +45,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
       </div>
 
       {/* ─────────── PÁGINA 1 · PROPUESTA ─────────── */}
-      <article className="doc-page relative max-w-[900px] mx-auto px-8 sm:px-12 py-8 text-[14px] leading-relaxed">
+      <article className="doc-page relative max-w-[900px] mx-auto px-8 sm:px-12 py-8 text-[13px] leading-relaxed">
         {/* Portada · bloque navy a ancho completo */}
         <div className="cover bleed -mx-8 sm:-mx-12 -mt-8 bg-primary text-primary-foreground px-8 sm:px-12 pt-6 pb-7">
           <PhaseBar active={1} phases={t.phases} dark />
@@ -105,11 +105,11 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
               {t.benefits.items.map((b, i) => (
                 <li key={b.title} className="flex gap-3.5">
-                  <span className="font-mono text-[12px] text-accent tabular-nums pt-0.5 shrink-0">
+                  <span className="font-mono text-[10px] text-accent tabular-nums pt-1 shrink-0">
                     0{i + 1}
                   </span>
                   <div className="min-w-0">
-                    <div className="text-[14px] font-semibold text-primary leading-tight">
+                    <div className="text-[13px] font-semibold text-primary leading-tight">
                       {b.title}
                     </div>
                     <div className="text-[11.5px] text-muted mt-1 leading-relaxed">{b.detail}</div>
@@ -124,7 +124,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
       </article>
 
       {/* ─────────── PÁGINA 2 · TRANSFORMACIÓN ─────────── */}
-      <article className="doc-page relative max-w-[900px] mx-auto px-8 sm:px-12 py-8 text-[14px] leading-relaxed page-break">
+      <article className="doc-page relative max-w-[900px] mx-auto px-8 sm:px-12 py-8 text-[13px] leading-relaxed page-break">
         <PhaseBar active={2} phases={t.phases} />
 
         <section className="mt-6 bleed -mx-8 sm:-mx-12">
@@ -159,7 +159,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <span className="text-[13px] font-semibold text-primary shrink-0">{p.name}</span>
-                  <span className="text-[11px] text-muted leading-snug text-right ml-auto max-w-[62%]">
+                  <span className="text-[11.5px] text-muted leading-snug text-right ml-auto max-w-[62%]">
                     {p.detail}
                   </span>
                 </li>
@@ -172,7 +172,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
       </article>
 
       {/* ─────────── PÁGINA 3 · CONTENIDO ─────────── */}
-      <article className="doc-page relative max-w-[900px] mx-auto px-8 sm:px-12 py-8 text-[14px] leading-relaxed page-break">
+      <article className="doc-page relative max-w-[900px] mx-auto px-8 sm:px-12 py-8 text-[13px] leading-relaxed page-break">
         <PhaseBar active={3} phases={t.phases} />
 
         {/* Catálogo por categorías */}
@@ -184,11 +184,19 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
             </p>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-12">
               {t.categories.items.map((c) => (
-                <li key={c.name} className="py-3 border-t border-card-border">
-                  <div className="text-[13.5px] font-semibold text-primary leading-tight">
-                    {c.name}
+                <li key={c.name} className="flex gap-3.5 py-3 border-t border-card-border">
+                  <span
+                    className="material-symbols-outlined text-accent shrink-0 mt-px"
+                    style={{ fontSize: 21, fontVariationSettings: "'wght' 300, 'FILL' 0" }}
+                  >
+                    {c.icon}
+                  </span>
+                  <div className="min-w-0">
+                    <div className="text-[13px] font-semibold text-primary leading-tight">
+                      {c.name}
+                    </div>
+                    <div className="text-[11.5px] text-muted mt-1 leading-snug">{c.detail}</div>
                   </div>
-                  <div className="text-[11px] text-muted mt-1 leading-snug">{c.detail}</div>
                 </li>
               ))}
             </ul>
@@ -211,7 +219,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Qué hace · panel dark */}
-              <ul className="bg-primary text-primary-foreground divide-y divide-white/10">
+              <ul className="self-start bg-primary text-primary-foreground divide-y divide-white/10">
                 {t.agent.features.map((a) => (
                   <li key={a.title} className="px-3.5 py-2.5 flex gap-2.5">
                     <span
@@ -250,7 +258,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
       </article>
 
       {/* ─────────── PÁGINA 4 · INVERSIÓN ─────────── */}
-      <article className="doc-page relative max-w-[900px] mx-auto px-8 sm:px-12 py-8 text-[14px] leading-relaxed page-break">
+      <article className="doc-page relative max-w-[900px] mx-auto px-8 sm:px-12 py-8 text-[13px] leading-relaxed page-break">
         <PhaseBar active={4} phases={t.phases} />
 
         <section className="mt-6 bleed -mx-8 sm:-mx-12">
@@ -285,14 +293,11 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
                     <span className="text-[13px] font-semibold text-foreground">
                       {t.investment.lines.hosting.title}
                     </span>
-                    <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-accent border border-accent/50 rounded-sm px-1.5 py-0.5">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent border border-accent/50 rounded-sm px-1.5 py-0.5">
                       {t.labels.complimentaryBadge}
                     </span>
                   </div>
                   <div className="text-[11.5px] text-muted mt-0.5 leading-snug max-w-md">
-                    <span className="font-semibold text-foreground">
-                      {t.investment.lines.hosting.hostingWord}
-                    </span>{" "}
                     {t.investment.lines.hosting.detail}
                   </div>
                 </div>
@@ -335,7 +340,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
                   {fmtUsd(USD_DEPOSIT)}{" "}
                   <span className="text-[10px] text-muted font-normal">USD</span>
                 </div>
-                <div className="text-[11px] text-muted">{t.investment.depositCaption}</div>
+                <div className="text-[11.5px] text-muted">{t.investment.depositCaption}</div>
               </div>
               <div className="p-4">
                 <div className="text-[10px] uppercase tracking-[0.22em] font-semibold text-muted">
@@ -345,7 +350,7 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
                   {fmtUsd(USD_TOTAL - USD_DEPOSIT)}{" "}
                   <span className="text-[10px] text-muted font-normal">USD</span>
                 </div>
-                <div className="text-[11px] text-muted">{t.investment.finalCaption}</div>
+                <div className="text-[11.5px] text-muted">{t.investment.finalCaption}</div>
               </div>
             </div>
           </div>
@@ -556,52 +561,11 @@ function SectionBand({
 function CoverMeta({ label, value, sub }: { label: string; value: string; sub?: string }) {
   return (
     <div className="min-w-0">
-      <div className="text-[9px] uppercase tracking-[0.2em] font-semibold text-white/45">
+      <div className="text-[10px] uppercase tracking-[0.2em] font-semibold text-white/45">
         {label}
       </div>
       <div className="mt-1 text-[12px] font-semibold text-white leading-snug">{value}</div>
-      {sub && <div className="text-[11px] text-white/55 leading-snug">{sub}</div>}
-    </div>
-  );
-}
-
-function SectionTitle({
-  num,
-  title,
-  meta,
-  emphasis,
-}: {
-  num: string;
-  title: string;
-  meta?: string;
-  emphasis?: string;
-}) {
-  return (
-    <div className="flex items-end gap-4 mb-5">
-      <span
-        className="font-display text-[46px] leading-[0.75] text-accent/20 tabular-nums select-none shrink-0"
-        aria-hidden
-      >
-        {num}
-      </span>
-      <div className="flex-1 min-w-0">
-        <div className="flex items-baseline justify-between gap-3 border-b-2 border-primary pb-1.5">
-          <h2 className="text-[21px] font-bold tracking-tight leading-none text-primary min-w-0">
-            {title}
-            {emphasis && (
-              <>
-                {" "}
-                <em className="italic text-accent">{emphasis}</em>
-              </>
-            )}
-          </h2>
-          {meta && (
-            <span className="font-mono text-[9.5px] uppercase tracking-[0.18em] text-muted shrink-0 whitespace-nowrap">
-              {meta}
-            </span>
-          )}
-        </div>
-      </div>
+      {sub && <div className="text-[11.5px] text-white/55 leading-snug">{sub}</div>}
     </div>
   );
 }
@@ -685,9 +649,9 @@ function ChatMock({ t }: { t: typeof CONTENT[Lang] }) {
           <div className="text-[11.5px] font-semibold text-foreground leading-none">
             {t.chatHeader.title}
           </div>
-          <div className="text-[9.5px] text-muted mt-0.5">{t.chatHeader.status}</div>
+          <div className="text-[10px] text-muted mt-0.5">{t.chatHeader.status}</div>
         </div>
-        <div className="ml-auto flex items-center gap-1 text-[9px] uppercase tracking-[0.18em] font-semibold text-accent">
+        <div className="ml-auto flex items-center gap-1 text-[10px] uppercase tracking-[0.18em] font-semibold text-accent">
           <span className="w-1.5 h-1.5 rounded-full bg-accent" />
           {t.chatHeader.badge}
         </div>
@@ -715,7 +679,7 @@ function ChatMock({ t }: { t: typeof CONTENT[Lang] }) {
 
       {/* Input simulado */}
       <div className="flex items-center gap-2 px-3 py-2 border-t border-card-border">
-        <div className="flex-1 text-[11px] text-muted/70 italic">{t.chatHeader.placeholder}</div>
+        <div className="flex-1 text-[11.5px] text-muted/70 italic">{t.chatHeader.placeholder}</div>
         <div className="w-7 h-7 rounded-full bg-accent text-white flex items-center justify-center">
           <span
             className="material-symbols-outlined"
