@@ -217,10 +217,8 @@ export default async function Page({ searchParams }: { searchParams: SP }) {
               {t.agent.intro}
             </p>
 
-            {/* Chat anotado · cada capacidad anclada al mensaje que la demuestra */}
-            <div className="max-w-3xl mx-auto">
-              <ChatMock t={t} />
-            </div>
+            {/* Chat anotado · capacidades afuera, ancladas a su mensaje */}
+            <ChatMock t={t} />
 
             {/* Nota de integración */}
             <div className="mt-4 border-l-2 border-accent pl-3.5 py-0.5 flex items-start gap-2.5">
@@ -614,7 +612,7 @@ function BeforeAfter({ t }: { t: typeof CONTENT[Lang] }) {
 
 function Annotation({ num, icon, title }: { num: number; icon: string; title: string }) {
   return (
-    <div className="flex items-center gap-2 shrink-0">
+    <div className="flex items-center gap-2 min-w-0">
       <span
         className="hidden sm:inline material-symbols-outlined text-accent/45 shrink-0"
         style={{ fontSize: 18, fontVariationSettings: "'wght' 400" }}
@@ -648,9 +646,15 @@ function ChatMock({ t }: { t: typeof CONTENT[Lang] }) {
     5: { num: 4, icon: f[3].icon, title: f[3].title },
   };
   return (
-    <div className="rounded-xl border border-card-border bg-card overflow-hidden">
-      {/* Header del chat · capacidad 01 anclada al estado */}
-      <div className="flex items-center gap-3 px-4 py-3 border-b border-card-border bg-surface-muted/60">
+    <div className="relative grid grid-cols-1 gap-y-1.5 sm:grid-cols-[1fr_200px] sm:gap-x-5 sm:gap-y-0">
+      {/* Fondo tipo card SOLO detrás de la columna del chat (col 1) */}
+      <div
+        className="hidden sm:block absolute inset-y-0 left-0 right-[220px] rounded-xl border border-card-border bg-card -z-10"
+        aria-hidden
+      />
+
+      {/* Header (col 1) */}
+      <div className="flex items-center gap-3 px-4 py-3 border-b border-card-border bg-surface-muted/60 sm:rounded-t-xl">
         <div className="w-7 h-7 rounded-full bg-accent/15 text-accent flex items-center justify-center shrink-0">
           <span
             className="material-symbols-outlined"
@@ -670,38 +674,42 @@ function ChatMock({ t }: { t: typeof CONTENT[Lang] }) {
           </div>
           <div className="text-[10px] text-muted mt-1">{t.chatHeader.status}</div>
         </div>
-        <div className="ml-auto">
-          <Annotation num={1} icon={f[0].icon} title={f[0].title} />
-        </div>
+      </div>
+      {/* Anotación 01 del header (col 2 · afuera) */}
+      <div className="flex items-center mb-1 sm:mb-0">
+        <Annotation num={1} icon={f[0].icon} title={f[0].title} />
       </div>
 
-      {/* Mensajes · cada respuesta del agente lleva su anotación */}
-      <div className="px-4 py-4 space-y-3">
-        {t.chat.map((m, i) => {
-          const isAgent = m.from === "agent";
-          if (!isAgent) {
-            return (
-              <div key={i} className="flex justify-end">
-                <div className="max-w-[80%] sm:max-w-[62%] rounded-xl px-3 py-2 text-[11.5px] leading-snug bg-surface-muted text-foreground rounded-tr-sm border border-card-border">
-                  {m.text}
-                </div>
-              </div>
-            );
-          }
-          const note = noteByIdx[i];
-          return (
-            <div key={i} className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
-              <div className="max-w-[80%] sm:max-w-[58%] rounded-xl px-3 py-2 text-[11.5px] leading-snug bg-accent text-white rounded-tl-sm">
+      {/* Mensajes (col 1) + su anotación (col 2 · afuera) */}
+      {t.chat.map((m, i) => {
+        const isAgent = m.from === "agent";
+        const note = noteByIdx[i];
+        return (
+          <Fragment key={i}>
+            <div className={`px-4 py-1.5 flex ${isAgent ? "justify-start" : "justify-end"}`}>
+              <div
+                className={`max-w-[88%] rounded-xl px-3 py-2 text-[11.5px] leading-snug ${
+                  isAgent
+                    ? "bg-accent text-white rounded-tl-sm"
+                    : "bg-surface-muted text-foreground rounded-tr-sm border border-card-border"
+                }`}
+              >
                 {m.text}
               </div>
-              {note && <Annotation num={note.num} icon={note.icon} title={note.title} />}
             </div>
-          );
-        })}
-      </div>
+            {note ? (
+              <div className="flex items-center mb-1.5 sm:mb-0">
+                <Annotation num={note.num} icon={note.icon} title={note.title} />
+              </div>
+            ) : (
+              <div className="hidden sm:block" />
+            )}
+          </Fragment>
+        );
+      })}
 
-      {/* Input simulado */}
-      <div className="flex items-center gap-2 px-4 py-2.5 border-t border-card-border">
+      {/* Input simulado (col 1) */}
+      <div className="flex items-center gap-2 px-4 py-2.5 border-t border-card-border sm:rounded-b-xl">
         <div className="flex-1 text-[11.5px] text-muted/70 italic">{t.chatHeader.placeholder}</div>
         <div className="w-7 h-7 rounded-full bg-accent text-white flex items-center justify-center shrink-0">
           <span
@@ -712,6 +720,7 @@ function ChatMock({ t }: { t: typeof CONTENT[Lang] }) {
           </span>
         </div>
       </div>
+      <div className="hidden sm:block" />
     </div>
   );
 }
