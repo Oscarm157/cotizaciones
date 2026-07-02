@@ -14,4 +14,3 @@ public/**/*.pdf
 
 # capturas/artefactos temporales
 tmp*.png
-.baseline/
