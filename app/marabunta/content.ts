@@ -3,7 +3,7 @@ export const FECHA = "2026-06-22";
 export const VIGENCIA = "15 días naturales";
 
 export const IVA_RATE = 0.16;
-export const SUBTOTAL = 8500;
+export const SUBTOTAL = 9200;
 export const IVA = Math.round(SUBTOTAL * IVA_RATE * 100) / 100;
 export const TOTAL = SUBTOTAL + IVA;
 export const DEPOSIT = Math.round(TOTAL * 0.5 * 100) / 100;
